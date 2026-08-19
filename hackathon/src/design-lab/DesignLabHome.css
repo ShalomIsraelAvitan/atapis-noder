@@ -1,0 +1,325 @@
+.dlh-page {
+  width: min(1280px, 100% - 48px);
+  margin: 0 auto;
+  padding-block: 40px 24px;
+  color: var(--text-primary);
+}
+
+.dlh-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.dlh-eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.dlh-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.dlh-sub {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.dlh-live-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--glass-bg-light);
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.dlh-live-metric {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 11.5px;
+}
+
+.dlh-live-demo {
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #1a1200;
+  background: #ffd166;
+}
+
+/* --- Cards ------------------------------------------------------------- */
+.dlh-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.dlh-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--bg-secondary);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: dlh-enter var(--dl-dur-slow) var(--dl-ease-out) forwards;
+  animation-delay: calc(var(--dlh-i, 0) * 60ms);
+  transition: border-color var(--dl-dur-fast) var(--dl-ease-out),
+    transform var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+@keyframes dlh-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dlh-card:hover {
+    border-color: color-mix(in srgb, var(--text-primary) 30%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+.dlh-card-preview {
+  display: block;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dlh-preview-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dlh-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px 20px;
+  flex: 1;
+}
+
+.dlh-card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dlh-card-title-row h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.dlh-3d-tag {
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.dlh-card-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.dlh-card-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dlh-card-traits li {
+  padding: 3px 9px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: var(--glass-bg-light);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.dlh-card-meta {
+  display: flex;
+  gap: 22px;
+  margin: 0;
+  padding-top: 4px;
+}
+
+.dlh-card-meta dt {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+}
+
+.dlh-card-meta dd {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dlh-open-btn {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bg-primary);
+  background: var(--text-primary);
+  text-decoration: none;
+  transition: transform var(--dl-dur-press) var(--dl-ease-out), opacity var(--dl-dur-fast) ease;
+}
+
+.dlh-open-btn:hover {
+  opacity: 0.88;
+  color: var(--bg-primary);
+}
+
+.dlh-open-btn:active {
+  transform: scale(0.97);
+}
+
+/* --- Comparison table ---------------------------------------------------- */
+.dlh-compare {
+  margin-top: 44px;
+}
+
+.dlh-compare h2 {
+  font-size: 1.25rem;
+  margin: 0 0 14px;
+}
+
+.dlh-compare-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.dlh-compare-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dlh-compare-table th,
+.dlh-compare-table td {
+  padding: 12px 14px;
+  text-align: start;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dlh-compare-table th {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: var(--glass-bg-light);
+  white-space: nowrap;
+}
+
+.dlh-compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dlh-compare-table ul {
+  margin: 0;
+  padding-inline-start: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dlh-compare-table a {
+  color: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .dlh-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .dlh-page {
+    width: calc(100% - 28px);
+    padding-block: 24px 16px;
+  }
+
+  .dlh-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* --- Comparison Center banner (full-site concepts entry point) -------------- */
+.dlh-compare-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-inline-start: 3px solid #c9a24b;
+  border-radius: 12px;
+  background: rgba(201, 162, 75, 0.06);
+  color: #ececf1;
+  text-decoration: none;
+  transition: background var(--dl-dur-fast, 180ms) ease;
+}
+
+.dlh-compare-banner:hover { background: rgba(201, 162, 75, 0.12); color: #fff; }
+
+.dlh-compare-eyebrow {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #c9a24b;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  white-space: nowrap;
+}
+
+.dlh-compare-title { font-size: 14px; font-weight: 600; flex: 1; min-width: 220px; }
+
+.dlh-compare-cta { font-size: 16px; color: #c9a24b; }

@@ -1,0 +1,214 @@
+/* Minimal Command — quiet, typography-led. Color appears only where risk lives. */
+
+.c-minimal {
+  --cx-bg: #0b0b0c;
+  --cx-surface: #131315;
+  --cx-line: rgba(255, 255, 255, 0.09);
+  --cx-text: #f2f2f4;
+  --cx-dim: #86868e;
+  --cx-accent: #d3d3da; /* neutral accent — color is reserved for risk */
+  --cx-radius: 14px;
+  --cx-pad: 18px;
+}
+
+/* --- Nav ------------------------------------------------------------------ */
+.mn-nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  width: min(1240px, 100% - 56px);
+  margin: 0 auto;
+  padding: 18px 0 14px;
+  border-bottom: 1px solid var(--cx-line);
+}
+
+.mn-brand {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+}
+
+.mn-nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+
+.mn-nav-link {
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--cx-dim);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+.mn-nav-link:hover { color: var(--cx-text); }
+.mn-nav-link.is-active { color: var(--cx-text); border-bottom-color: var(--cx-text); }
+
+/* --- Page scaffolding -------------------------------------------------------- */
+.mn-page {
+  width: min(1240px, 100% - 56px);
+  margin: 0 auto;
+  padding-block: 30px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.mn-title { margin: 0; font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: -0.02em; }
+.mn-muted { color: var(--cx-dim); font-size: 12.5px; }
+.mn-section-title { margin: 0 0 10px; font-size: 1.05rem; letter-spacing: -0.01em; }
+
+.mn-card {
+  padding: var(--cx-pad);
+  border: 1px solid var(--cx-line);
+  border-radius: var(--cx-radius);
+  background: var(--cx-surface);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mn-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+
+.mn-kv { display: flex; flex-direction: column; gap: 8px; margin: 0; }
+.mn-kv div { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+.mn-kv dt { color: var(--cx-dim); }
+.mn-kv dd { margin: 0; font-weight: 600; }
+
+.mn-cta {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 8px 18px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cx-bg);
+  background: var(--cx-text);
+  text-decoration: none;
+  transition: opacity var(--dl-dur-fast) ease, transform var(--dl-dur-press) var(--dl-ease-out);
+}
+
+.mn-cta:hover { opacity: 0.86; color: var(--cx-bg); }
+.mn-cta:active { transform: scale(0.97); }
+
+/* --- Dashboard ------------------------------------------------------------------ */
+.mn-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.mn-hero .dm-sysmode-value { font-size: clamp(2.8rem, 6vw, 4.6rem); }
+.mn-hero-risks { padding-bottom: 6px; }
+
+.mn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mn-span2 { grid-column: span 2; }
+
+/* soft entrance */
+.mn-grid > * {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: mn-in var(--dl-dur-slow) var(--dl-ease-out) forwards;
+}
+
+.mn-grid > *:nth-child(2) { animation-delay: 50ms; }
+.mn-grid > *:nth-child(3) { animation-delay: 100ms; }
+.mn-grid > *:nth-child(4) { animation-delay: 150ms; }
+.mn-grid > *:nth-child(5) { animation-delay: 200ms; }
+.mn-grid > *:nth-child(6) { animation-delay: 250ms; }
+.mn-grid > *:nth-child(7) { animation-delay: 300ms; }
+
+@keyframes mn-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Camera ------------------------------------------------------------------------ */
+.mn-camera-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.mn-camera-mode .dm-sysmode-value { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+
+.mn-camera-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(280px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.mn-camera-main { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+.mn-camera-main .dl-feed {
+  border: 1px solid var(--cx-line);
+  border-radius: var(--cx-radius);
+  background: #030304;
+}
+
+.mn-source-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+.mn-source-tabs { display: inline-flex; gap: 2px; padding: 3px; border-radius: 9px; background: rgba(255, 255, 255, 0.05); }
+
+.mn-source-tabs button {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--cx-dim);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dl-dur-fast) var(--dl-ease-out), color var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+.mn-source-tabs button.is-active { background: var(--cx-text); color: var(--cx-bg); }
+
+.mn-camera-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+/* --- Investigation --------------------------------------------------------------------- */
+.mn-invest-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.mn-invest-sub { max-width: 60ch; margin: 6px 0 0; }
+.mn-invest-stats { display: flex; gap: 16px; font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--cx-dim); }
+
+.mn-invest-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.mn-invest-list { max-height: 560px; overflow-y: auto; }
+
+/* --- Decision header (calm, spans the grid width) ------------------------------------------ */
+.mn-decision { margin-bottom: 4px; }
+
+/* --- About -------------------------------------------------------------------------------- */
+.mn-about { max-width: 860px; gap: 34px; padding-block: 44px 20px; }
+.mn-about .dm-about-title { font-size: clamp(2rem, 4.4vw, 3.2rem); }
+.mn-about-arch { margin-block: 4px; }
+
+/* --- Settings / Admin ------------------------------------------------------------------------ */
+.mn-settings { max-width: 760px; gap: 28px; }
+.mn-admin { gap: 18px; }
+.mn-admin-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr); gap: 24px; align-items: start; }
+.mn-admin-side { display: flex; flex-direction: column; gap: 12px; min-width: 0; position: sticky; top: 88px; }
+
+/* --- Responsive -------------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .mn-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mn-span2 { grid-column: span 2; }
+  .mn-camera-grid { grid-template-columns: 1fr; }
+  .mn-invest-grid { grid-template-columns: 1fr; }
+  .mn-admin-layout { grid-template-columns: 1fr; }
+  .mn-admin-side { position: static; }
+}
+
+@media (max-width: 767px) {
+  .mn-nav { width: calc(100% - 28px); gap: 14px; flex-wrap: wrap; }
+  .mn-page { width: calc(100% - 28px); padding-block: 20px 10px; }
+  .mn-grid { grid-template-columns: 1fr; }
+  .mn-span2 { grid-column: span 1; }
+}

@@ -1,0 +1,95 @@
+﻿
+=== A - static source checks ===
+PASS  42 - every grid-template-areas row declares the same column count
+PASS  43 - every named grid area is a contiguous rectangle (no L shapes)
+PASS  45 - approved font sizes unchanged
+PASS  45b - nothing goes below the screen's existing 8.5px floor
+PASS  45c - all type added in Phase A1 sits at 10.5px or above  -- 38 declarations checked
+PASS  46 - no scale, zoom or font-size reset
+PASS  39 - shared TargetsTable/TracksTable carry no A1 changes at all
+PASS  39b - the OPS screen renders its own reduced tables instead
+PASS  37 - radar targets table is ID / Distance / Radial dir / Closing / Risk only  -- 5 columns
+PASS  38 - camera tracks table is Track / Behaviour / Weapon / Risk only  -- 4 columns
+PASS  01 - A0 engine is connected to the dashboard through the orchestration hook
+PASS  01b - the view composes panels and never derives alert state itself
+PASS  50 - no file outside industrial-ops imports the command-centre modules
+PASS  50b - no other concept references industrial-ops
+
+=== B - logic checks ===
+PASS  02 - the same condition over 20 polls stays one alert  -- got 1
+PASS  04 - live declares exactly AREA-01
+PASS  06 - demo declares several areas, all marked isDemo  -- 3 areas
+PASS  21 - lifecycle counts match the data
+PASS  21b - choosing a lifecycle tab does not zero the other counts
+PASS  22 - RESOLVED never appears inside ALL ACTIVE
+PASS  23 - cleared and resolved alerts do not drive area severity  -- got ALERT
+PASS  23b - an INFO alert never promotes an area to ALERT  -- got SAFE
+PASS  23c - DANGER areas sort to the top  -- top=DEMO-AREA-02
+PASS  36 - a controller message gets no invented areaId and stays unassigned
+PASS  36b - declared sources still resolve to the declared area
+PASS  35 - controller messages never become Operational Alerts
+PASS  47 - every demo alert is marked isDemo with a scenario id
+PASS  11/12/13 - no pair risk, no Matched/Associated/Confirmed, no percentages
+
+=== C - browser checks ===
+PASS  04b - live renders exactly one area row  -- 1 rows
+PASS  05 - SINGLE-AREA DEPLOYMENT is stated in live  -- פריסת אזור יחיד
+PASS  08 - radar alerts show RDR-01  -- RDR-01
+PASS  34 - the radar tab states the link is down
+PASS  34b - and says the empty plot is not new data
+PASS  27 - the radar tab mounts zero camera feeds
+PASS  30 - camera down renders an explicit unavailable state  -- מצלמה לא זמינה
+PASS  30b - it did NOT switch to radar by itself
+PASS  31 - OPEN RADAR is offered as an explicit action  -- נסה שוב | OPEN RADAR
+PASS  31b - and only that click moves to radar
+PASS  26 - ALL CAMERAS loads zero streams
+PASS  26b - ALL CAMERAS lists the declared cameras  -- 2 rows
+PASS  03 - the search filter survives a reload in the same tab  -- got "RDR"
+PASS  03b - state is stored under the versioned key
+PASS  33 - no stored alert carries a camera id as its source  -- 0 leaked
+PASS  32b - stored camera alerts keep cameraSourceKnown false
+PASS  48 - the status strip never says "updated now"
+PASS  20 - Alt+n is suppressed while the operator is typing  -- http://localhost:5174/concepts/industrial/dashboard
+PASS  20b - Alt+2 still navigates (Alt+1..9 preserved)  -- http://localhost:5174/concepts/industrial/camera/1
+PASS  20c - Alt+1 returns to OPS
+PASS  06b - demo renders several areas  -- 3 rows
+PASS  06c - SINGLE-AREA DEPLOYMENT is not claimed in a multi-area demo
+PASS  07 - no camera alert shows CAM-01/CAM-02 as its source  -- מערכת | מקור המצלמה אינו מזוהה | DEMO-RDR-03 | מקור המצלמה אינו מזוהה | מקור המצלמה אינו מזוהה | DEMO-RDR-01 | DEMO-RDR-04 | מקור המצלמה אינו מזוהה | מקור המצלמה אינו מזוהה | DEMO-RDR-04
+PASS  32 - unknown camera source is stated explicitly  -- מערכת | מקור המצלמה אינו מזוהה | DEMO-RDR-03 | מקור המצלמה אינו מזוהה | מקור המצלמה אינו מזוהה | DEMO-RDR-01 | DEMO-RDR-04 | מקור המצלמה אינו מזוהה | מקור המצלמה אינו מזוהה | DEMO-RDR-04
+PASS  09 - camera and radar alerts are separate rows  -- 5 camera / 4 radar
+PASS  09b - no row mixes a camera source id with a radar source id
+PASS  49 - every row that shows a lifecycle also shows SESSION-LOCAL  -- 10 rows
+PASS  10 - other evidence in the area is labelled NOT ASSOCIATED
+PASS  11b - the rendered page shows no pair/combined risk vocabulary
+PASS  14 - Fused Risk is shown with its backend attribution
+PASS  16 - a new DANGER raises a visible notice
+PASS  15 - and does NOT move the selection  -- אזור נבחרMain Gate (demo) · DEMO-AREA-01·התראה נבחרתDEMO-AREA-01|radar|target|DEMO-RDR-01:target:1#1
+PASS  17 - only the explicit action changes the selection  -- אזור נבחרNorth Tower (demo) · DEMO-AREA-02·התראה נבחרתDEMO-AREA-02|system|mode|DANGER#1
+PASS  18 - ArrowDown moves focus
+PASS  18b - moving focus does not change the selection
+PASS  18c - Space selects the focused row
+PASS  19 - "/" focuses the search field
+PASS  19b - "/" typed inside the field is text, not a shortcut  -- a/b
+PASS  40 - the session log switches to SELECTED AREA
+PASS  40b - and back to ALL AREAS
+PASS  24 - an empty result renders NO ACTIVE ALERTS
+PASS  24b - and every configured area stays visible
+PASS  25 - exactly one feed component is mounted on the camera tab  -- 1 mounted
+PASS  25b - and never more than one live stream element
+PASS  28 - switching cameras replaces the feed rather than adding one  -- 1 mounted
+PASS  26c - ALL CAMERAS mounts no feed component at all
+PASS  27b - moving to radar unmounts the feed component
+PASS  29 - a hidden tab unmounts the feed component instead of hiding it
+PASS  44 - every identifier is isolated with dir="ltr"  -- 0 unisolated
+PASS  41 - no horizontal overflow @1920x1080  -- 0px
+PASS  41 - no horizontal overflow @1600x900  -- 0px
+PASS  41 - no horizontal overflow @1440x900  -- 0px
+PASS  41 - no horizontal overflow @1366x768  -- 0px
+PASS  41 - no horizontal overflow @1280x720  -- 0px
+PASS  41 - no horizontal overflow @1024x768  -- 0px
+PASS  41 - no horizontal overflow @768x1024  -- 0px
+PASS  41 - no horizontal overflow @390x844  -- 0px
+PASS  41b - worst-case horizontal overflow across all viewports  -- 0px
+PASS  OPS console is clean (hardware-absent noise excluded)
+
+ALL PASS  --  87 passed, 0 failed

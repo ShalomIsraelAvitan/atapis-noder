@@ -1,0 +1,194 @@
+/* Comparison Center — static, self-contained. Neutral dark chrome so each
+   concept's accent carries the identity. No animations beyond hover/focus. */
+
+.cc-root {
+  min-height: 100vh;
+  background: #0a0a0d;
+  color: #ececf1;
+  padding: 32px clamp(16px, 4vw, 48px) 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.cc-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cc-eyebrow {
+  margin: 0 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: #8b8b96;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.cc-head h1 { margin: 0; font-size: clamp(1.6rem, 3.2vw, 2.4rem); letter-spacing: -0.02em; }
+
+.cc-sub { margin: 8px 0 0; max-width: 62ch; color: #a3a3ae; font-size: 14px; line-height: 1.6; }
+
+.cc-head-actions { display: flex; gap: 10px; align-items: center; }
+
+.cc-lang,
+.cc-back {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: #d3d3da;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--dl-dur-fast, 180ms) ease;
+}
+
+.cc-lang:hover,
+.cc-back:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+
+/* --- Concept cards ------------------------------------------------------------ */
+.cc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.cc-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid var(--cc-accent);
+  border-radius: 14px;
+  background: #101014;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.cc-card-preview { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+
+.cc-wire { display: block; width: 100%; height: auto; }
+
+.cc-card-body { display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 18px; flex: 1; }
+
+.cc-card-name { margin: 0; font-size: 16px; letter-spacing: 0.04em; color: var(--cc-accent); }
+
+.cc-card-desc { margin: 0; font-size: 13px; line-height: 1.55; color: #b9b9c2; }
+
+.cc-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; margin: 0; }
+
+.cc-meta dt {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8b8b96;
+  margin-bottom: 2px;
+}
+
+.cc-meta dd { margin: 0; font-size: 12px; line-height: 1.45; }
+
+.cc-stars { color: var(--cc-accent); font-size: 10px; letter-spacing: 2px; }
+.cc-stars-off { color: rgba(255, 255, 255, 0.15); }
+
+.cc-proscons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+.cc-proscons h4 {
+  margin: 0 0 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8b8b96;
+}
+
+.cc-proscons ul { margin: 0; padding-inline-start: 16px; display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: #b9b9c2; }
+
+.cc-recommended { margin: 0; font-size: 12.5px; color: #d3d3da; }
+
+.cc-open {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--cc-accent);
+  color: #101014;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity var(--dl-dur-fast, 180ms) ease;
+}
+
+.cc-open:hover { opacity: 0.85; color: #101014; }
+
+/* --- Per-page comparison -------------------------------------------------------- */
+.cc-pages { display: flex; flex-direction: column; gap: 14px; }
+
+.cc-pages h2 { margin: 12px 0 0; font-size: 1.25rem; }
+
+.cc-page-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.cc-page-tab {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: #b9b9c2;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dl-dur-fast, 180ms) ease, color var(--dl-dur-fast, 180ms) ease;
+}
+
+.cc-page-tab:hover { color: #fff; background: rgba(255, 255, 255, 0.07); }
+.cc-page-tab.is-active { background: #ececf1; color: #101014; border-color: transparent; }
+
+.cc-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.cc-page-cell {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: #101014;
+}
+
+.cc-page-cell figcaption {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--cc-accent);
+}
+
+.cc-page-open {
+  align-self: flex-start;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #d3d3da;
+  text-decoration: none;
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  transition: background var(--dl-dur-fast, 180ms) ease;
+}
+
+.cc-page-open:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+
+.cc-note { margin: 4px 0 0; font-size: 12px; color: #8b8b96; max-width: 70ch; }
+
+@media (max-width: 767px) {
+  .cc-root { padding: 20px 14px 48px; }
+  .cc-meta { grid-template-columns: 1fr 1fr; }
+  .cc-proscons { grid-template-columns: 1fr; }
+}

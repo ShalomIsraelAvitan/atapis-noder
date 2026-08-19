@@ -1,0 +1,56 @@
+﻿[login] ok as admin
+
+--- honesty: live, one camera track + one radar target ---
+PASS  live/dashboard: shows CP-nn marked Unverified
+PASS  live/camera/1: shows CP-nn marked Unverified
+PASS  live/dashboard: no FC-nn and no association %
+PASS  live/dashboard: no camera<->radar link element
+PASS  live/camera/1: no FC-nn and no association %
+PASS  live/camera/1: no camera<->radar link element
+PASS  live/history: no FC-nn and no association %
+PASS  live/history: no camera<->radar link element
+PASS  live/about: no FC-nn and no association %
+PASS  live/about: no camera<->radar link element
+PASS  live/settings: no FC-nn and no association %
+PASS  live/settings: no camera<->radar link element
+PASS  live/admin: no FC-nn and no association %
+PASS  live/admin: no camera<->radar link element
+
+--- honesty: live, quiet perimeter ---
+PASS  live-quiet/dashboard: empty state, no pair id
+PASS  live-quiet/camera/1: empty state, no pair id
+
+--- honesty: demo mode ---
+PASS  demo/dashboard: shows FC-nn with association %
+PASS  demo/dashboard: DemoModeBadge adjacent to the pair id
+PASS  demo/camera/1: shows FC-nn with association %
+PASS  demo/camera/1: DemoModeBadge adjacent to the pair id
+
+--- phase 1.1 corrections ---
+PASS  settings: no raw config keys outside the Engineering block
+PASS  demo/dashboard: exactly two demo indicators visible  — found 2
+PASS  demo/camera/1: exactly two demo indicators visible  — found 2
+PASS  dashboard @1366x768: no fixed element covers content
+PASS  dashboard @1920x1080: no fixed element covers content
+PASS  history @1366x768: no fixed element covers content
+PASS  history @1920x1080: no fixed element covers content
+PASS  about @1920x1080: no fixed element covers content
+PASS  settings @1366x768: no fixed element covers content
+
+--- screenshots (12) ---
+shot: command_1920x1080_comfort_live.png
+shot: investigation_1920x1080_comfort_live.png
+shot: system_1920x1080_comfort_live.png
+shot: settings_1920x1080_comfort_live.png
+shot: access_1920x1080_comfort_live.png
+shot: command_1366x768_comfort_live.png
+shot: investigation_1366x768_comfort_live.png
+shot: settings_1366x768_comfort_live.png
+shot: command_1366x768_compact_live.png
+shot: investigation_1366x768_compact_live.png
+shot: command_1920x1080_comfort_demo.png
+shot: optics_1920x1080_comfort_demo.png
+PASS  screenshots: no console errors, no page overflow
+montage -> fusion-prime-phase1-1-montage.png
+
+=== 30/30 checks passed ===

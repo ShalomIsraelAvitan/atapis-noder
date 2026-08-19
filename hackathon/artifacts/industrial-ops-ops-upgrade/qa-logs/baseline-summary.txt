@@ -1,0 +1,17 @@
+﻿BASELINE (captured 2026-07-29, before any code change)
+======================================================
+build                : green (only pre-existing >500kB three.js chunk warning)
+lint (src/concepts + src/design-lab) : 4 errors, 0 warnings
+   src/concepts/data/useArduinoSensor.js        react-hooks/set-state-in-effect
+   src/concepts/data/useDetections.js           react-hooks/set-state-in-effect
+   src/concepts/data/useInvestigationViewModel.js  react-hooks/purity
+   src/concepts/data/useSettingsViewModel.js    react-hooks/set-state-in-effect
+   (note: 
+pm run lint reports ~400 errors repo-wide because eslint also walks
+    python/venv, .venv and python/dist bundles. Those are not project source and
+    are excluded from this gate.)
+phase-h-qa           : 92 passed / 1 failed
+   the single failure is pre-existing: a stale fetch-abort log on /design-lab
+   originating in Admin.jsx, unrelated to this task
+phase-prime-verify   : 30/30
+phase-prime-noregress: 20/20 (no regressions)

@@ -1,0 +1,356 @@
+/* Sentinel 3D — abstract digital twin with floating HUD panels. */
+
+.s3-page {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  background: #06080c;
+  box-shadow: 0 0 0 100vmax #06080c;
+  clip-path: inset(0 -100vmax);
+}
+
+.s3-stage {
+  position: relative;
+  flex: 1;
+  min-height: max(520px, calc(100vh - 160px));
+}
+
+.s3-stage canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.s3-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8fa3c8;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+
+.s3-disclaimer {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  color: #45577a;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.s3-tone-safe { color: var(--dl-safe); }
+.s3-tone-alert { color: var(--dl-alert); }
+.s3-tone-danger { color: var(--dl-danger); }
+
+/* --- HUD panels -------------------------------------------------------------- */
+.s3-hud {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(8, 12, 20, 0.78);
+  border: 1px solid rgba(120, 150, 210, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #d7e0f2;
+  max-width: min(360px, calc(100% - 32px));
+  opacity: 0;
+  transform: translateY(6px);
+  animation: s3-hud-in var(--dl-dur-slow) var(--dl-ease-out) forwards;
+}
+
+@keyframes s3-hud-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.s3-hud-state { top: 16px; inset-inline-start: 16px; animation-delay: 40ms; }
+.s3-hud-camera { top: 16px; inset-inline-end: 16px; width: min(340px, 38vw); animation-delay: 100ms; }
+.s3-hud-targets { bottom: 34px; inset-inline-start: 16px; animation-delay: 160ms; }
+.s3-hud-alerts { bottom: 34px; inset-inline-end: 16px; animation-delay: 220ms; }
+
+.s3-hud-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.s3-hud-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #8fa3c8;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.s3-risk {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.s3-risk-num {
+  font-size: 30px;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.s3-risk-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #8fa3c8;
+}
+
+.s3-hud-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 4px 18px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  color: #aab8d6;
+}
+
+.s3-hud-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11px;
+  color: #8fa3c8;
+}
+
+/* camera HUD */
+.s3-hud-camera {
+  padding: 8px;
+  gap: 8px;
+}
+
+.s3-hud-camera .dl-feed {
+  border-radius: 8px;
+  aspect-ratio: 16 / 9;
+}
+
+.s3-hud-camera-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.s3-source-tabs {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.s3-source-tabs button,
+.s3-view-toggle button {
+  padding: 4px 10px;
+  border: 1px solid rgba(120, 150, 210, 0.25);
+  border-radius: 6px;
+  background: transparent;
+  color: #aab8d6;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  cursor: pointer;
+  transition: background var(--dl-dur-fast) var(--dl-ease-out), color var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+.s3-source-tabs button.is-active,
+.s3-view-toggle button.is-active {
+  background: #d7e0f2;
+  color: #0a1120;
+  border-color: transparent;
+}
+
+.s3-view-toggle button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.s3-collapse {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1px solid rgba(120, 150, 210, 0.25);
+  background: transparent;
+  color: #aab8d6;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.s3-hud-camera.is-collapsed {
+  width: auto;
+}
+
+/* targets HUD */
+.s3-view-toggle {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.s3-target-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.s3-target-list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #d7e0f2;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+.s3-target-list button:hover {
+  background: rgba(120, 150, 210, 0.12);
+}
+
+.s3-target-list button.is-active {
+  border-color: rgba(120, 150, 210, 0.4);
+  background: rgba(120, 150, 210, 0.14);
+}
+
+.s3-target-chip {
+  font-weight: 700;
+}
+
+.s3-target-dir {
+  color: #8fa3c8;
+}
+
+.s3-selected {
+  margin: 0;
+  font-size: 10.5px;
+  color: #8fa3c8;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.s3-empty {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #61729a;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+/* alerts HUD */
+.s3-hud-alerts ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 11px;
+  max-width: 300px;
+}
+
+.s3-hud-alerts li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: #aab8d6;
+}
+
+.s3-alert-time {
+  flex: 0 0 auto;
+  font-size: 9.5px;
+  color: #61729a;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.s3-alert--danger { color: var(--dl-danger); }
+.s3-alert--alert { color: var(--dl-alert); }
+
+/* --- 2D fallback --------------------------------------------------------------- */
+.s3-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+}
+
+.s3-fallback-note {
+  margin: 0;
+  font-size: 12px;
+  color: #8fa3c8;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.s3-fallback-svg {
+  width: min(560px, 90%);
+  height: auto;
+  border: 1px solid rgba(120, 150, 210, 0.18);
+  border-radius: 12px;
+}
+
+/* --- Responsive ------------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .s3-hud-camera {
+    width: min(300px, 44vw);
+  }
+}
+
+@media (max-width: 767px) {
+  .s3-stage {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* On narrow screens HUD panels stack in flow instead of floating */
+  .s3-stage canvas,
+  .s3-fallback {
+    position: relative;
+    min-height: 300px;
+  }
+
+  .s3-hud {
+    position: static;
+    width: 100% !important;
+    max-width: none;
+    margin: 8px 0 0;
+  }
+
+  .s3-disclaimer {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin: 6px 0;
+  }
+}

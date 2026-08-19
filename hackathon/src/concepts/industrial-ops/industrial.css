@@ -1,0 +1,2168 @@
+/* Industrial Ops — tactical telemetry product. Dark CRT substrate, hazard red,
+   mono type, hard 90° grid with visible 1px compartment lines. */
+
+.c-industrial {
+  --cx-bg: #0a0a0a;
+  --cx-surface: #101010;
+  --cx-line: #262626;
+  --cx-text: #eaeaea;
+  --cx-dim: #a5a2a2;
+  --cx-accent: #e61919;
+  --cx-radius: 0px; /* mechanical rigidity */
+  --cx-pad: 12px;
+  --cx-font-ui: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
+
+  /* Phase A1.1 — the command centre's vertical budget, in one place.
+     These control SPACING and HEIGHT only. No type size depends on them, and
+     nothing here scales, zooms or reflows a panel's content. */
+  --io2-panel-pad-y: 9px;   /* vertical padding inside a panel  (was 12px) */
+  --io2-panel-gap: 8px;     /* panel title -> content, and between blocks */
+  --io2-band-pad-y: 8px;    /* the decision band's two compartments */
+
+  font-variant-numeric: tabular-nums;
+}
+
+.c-industrial .dm-table-scroll,
+.c-industrial .dm-settings-block,
+.c-industrial .dm-userform,
+.c-industrial .dm-stat,
+.c-industrial .dm-dialog { border-radius: 0; }
+
+.c-industrial .dm-btn { border-radius: 0; font-family: inherit; letter-spacing: 0.08em; font-size: 11px; }
+.c-industrial .dm-why-item,
+.c-industrial .dm-event { border-radius: 0; }
+
+/* Risk factors panel: the shared 10px/9px dim-gray metrics are unreadable on
+   this concept's near-black substrate — bump size and contrast, keep mono. */
+.c-industrial .dm-why-meta { font-size: 15px; color: #b8b8b8; }
+.c-industrial .dm-why-contrib dt { font-size: 15px; color: #9a9a9a; }
+.c-industrial .dm-why-contrib dd { font-size: 14px; color: var(--cx-text); }
+.c-industrial .dm-why-na { font-size: 12px !important; color: #9a9a9a; }
+.c-industrial .dm-role,
+.c-industrial .dm-planned-tag,
+.c-industrial .dm-chart-scope,
+.c-industrial .dm-about-flow-step { border-radius: 0; }
+
+/* --- Frame: rail + main -------------------------------------------------------- */
+.io2-frame {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 1px;
+  background: var(--cx-line);
+  border-block: 1px solid var(--cx-line);
+  min-height: 0;
+}
+
+.io2-rail {
+  background: var(--cx-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  min-height: 100vh; /* legacy navbar is hidden on /concepts — no offset to subtract */
+}
+/*שורת ניווט חלק עליון*/
+.io2-rail-brand { display: flex; flex-direction: column; gap: 2px; padding: 0 16px; }
+.io2-rail-sys { font-size: 15px; font-weight: 800; letter-spacing: 0.22em; }
+.io2-rail-unit { font-size: 10px; letter-spacing: 0.16em; color: var(--cx-dim); }
+
+.io2-rail-nav { display: flex; flex-direction: column; }
+
+/*שורת ניווט - חלקים עיברית*/
+.io2-rail-link {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 16px;
+  color: var(--cx-dim);
+  text-decoration: none;
+  font-size: 17px;
+  border-inline-start: 2px solid transparent;
+  transition: background 120ms linear, color 120ms linear;
+}
+
+.io2-rail-link:hover { background: #161616; color: var(--cx-text); }
+
+.io2-rail-link:focus-visible {
+  outline: 2px solid var(--cx-text);
+  outline-offset: -2px;
+  background: #161616;
+  color: var(--cx-text);
+}
+
+.io2-rail-link.is-active {
+  background: #161616;
+  color: var(--cx-text);
+  border-inline-start-color: var(--cx-accent);
+}
+
+.io2-rail-code { font-size: 17px; font-weight: 700; letter-spacing: 0.14em; width: 30px; }
+.io2-rail-label { flex: 1; }
+/*שורת ניווט - קיצורי דרך במעבר בין העמודים*/
+.io2-rail-link kbd {
+  font-size: 20px;
+  color: var(--cx-dim);
+  border: 1px solid var(--cx-line);
+  padding: 1px 5px;
+  background: var(--cx-bg);
+}
+
+.io2-rail-foot { margin: auto 16px 0; font-size: 10px; letter-spacing: 0.14em; color: #8a8a8a; }
+
+.io2-main { background: var(--cx-bg); min-width: 0; }
+
+/* --- Pages ------------------------------------------------------------------------ */
+.io2-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 14px;
+}
+
+/* Reserve the pinned operational bar's height so it never covers a panel. */
+.io2-dashboard { padding-bottom: 52px; }
+
+/* --- Status strip -------------------------------------------------------------------- */
+/* One measured row: mode, then decision / camera / radar / transport clusters.
+   Cells are content-sized and the last one absorbs the slack, so the bar has no
+   dead right-hand gap. Clusters are separated by a wider rule, not by colour. */
+.io2-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--cx-line);
+  border: 1px solid var(--cx-line);
+}
+
+.io2-strip-mode,
+.io2-strip-cell {
+  background: var(--cx-surface);
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.io2-strip-mode { flex-direction: row; align-items: center; gap: 12px; min-width: 170px; flex: 0 0 auto; }
+
+/* Cluster boundary: a 3px rule instead of the default 1px hairline. */
+.io2-strip-cell--gstart { margin-inline-start: 2px; }
+
+/* Cells share the row instead of leaving a dead gap at the end; when the bar has
+   to wrap, each row still fills its width rather than stranding one cell. */
+.io2-strip-cell { flex: 1 1 auto; }
+
+/* Raised from 8.5px in Phase A3.1. These are the labels that say which number is
+   which — CAM RISK against RDR RISK — and micro-type on the one row nobody has
+   time to study was the wrong economy. */
+.io2-strip-label { font-size: 10px; letter-spacing: 0.18em; color: var(--cx-dim); }
+.io2-strip-value { font-size: 15px; font-weight: 700; display: flex; align-items: baseline; gap: 6px; }
+/* Secondary metric inside a cell (data age). Deliberately not micro-type. */
+.io2-strip-sub { font-size: 11px; font-weight: 400; color: var(--cx-dim); letter-spacing: 0.04em; }
+.io2-strip-modeval { font-size: 21px; font-weight: 800; letter-spacing: 0.06em; }
+.io2-strip-modeval--sm { font-size: 14px; }
+
+/* Phase A3 — the sound control.
+   It sits INSIDE .io2-strip-mode, not beside it: the ≤1500px rule below turns
+   the strip into a seven-column grid whose two rows only come out even because
+   there are exactly twelve children. A thirteenth would add a row, and the
+   height budget closed in A1.1 has nothing to give. Inside the mode cluster it
+   also costs no height at all — the 21px mode readout already sets that line. */
+.io2-sound {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid var(--cx-line);
+  background: var(--cx-bg);
+  color: var(--cx-dim);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.io2-sound:hover { color: var(--cx-text); border-color: var(--cx-dim); }
+.io2-sound:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+/* Colour reinforces the word, it never carries the state on its own. */
+.io2-sound--ready .io2-sound-val { color: var(--dl-safe); }
+.io2-sound--blocked .io2-sound-val { color: var(--dl-alert); }
+.io2-sound--error .io2-sound-val { color: var(--cx-accent); }
+/* Muted uses the inverted chip the rest of the console uses for an active
+   toggle, so "the operator has switched something on" reads the same way here. */
+.io2-sound--muted { background: var(--cx-text); border-color: var(--cx-text); }
+.io2-sound--muted .io2-sound-val,
+.io2-sound--muted .io2-strip-label { color: var(--cx-bg); }
+.io2-sound--muted:hover { color: var(--cx-bg); }
+
+.io2-strip--alert .io2-strip-mode { background: #241a05; }
+.io2-strip--alert .io2-strip-modeval { color: var(--dl-alert); }
+.io2-strip--danger .io2-strip-mode {
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 12px, rgba(230, 25, 25, 0.16) 12px 24px),
+    #230808;
+}
+.io2-strip--danger .io2-strip-modeval { color: var(--cx-accent); }
+
+/* --- Decision band: system decision | source evidence ---------------------------------- */
+/* Two compartments, never one sentence. The left half is what the system decided;
+   the right half is what each sensor said, one row per sensor. */
+.io2-decision {
+  display: grid;
+  /* The decision is short and fixed-shape; the evidence rows are long, so they
+     get the wider half. */
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 1px;
+  background: var(--cx-line);
+  border: 1px solid var(--cx-line);
+  border-top: none;
+}
+
+.io2-sd,
+.io2-se {
+  background: var(--cx-surface);
+  padding: var(--io2-band-pad-y) var(--cx-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Same treatment as .io2-panel-title: every [ BRACKETED ] header reads alike. */
+.io2-block-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--cx-dim);
+}
+
+.io2-sd-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.io2-sd-mode { font-size: 21px; font-weight: 800; letter-spacing: 0.06em; }
+
+.io2-sd-risk { display: inline-flex; align-items: baseline; gap: 7px; }
+.io2-sd-risk-label { font-size: 11px; letter-spacing: 0.16em; color: var(--cx-dim); }
+.io2-sd-risk-val { font-size: 21px; font-weight: 800; }
+/* Provenance sits with the number: this value is the backend's, not a UI blend. */
+.io2-sd-risk-src { font-size: 11px; letter-spacing: 0.1em; color: var(--cx-dim); }
+
+.io2-sd-cause { margin: 0; display: flex; align-items: baseline; gap: 9px; min-width: 0; }
+.io2-sd-cause-src {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 2px 6px;
+  border: 1px solid var(--cx-line);
+  color: var(--cx-dim);
+}
+.io2-src-camera { border-color: #3d5a80; color: #9dc0e8; }
+.io2-src-radar { border-color: #6b4a1f; color: #e8bd7a; }
+.io2-sd-cause-text { font-size: 15px; min-width: 0; }
+
+.io2-sd-meta {
+  margin: auto 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--cx-dim);
+  letter-spacing: 0.06em;
+}
+.io2-sd-meta .io2-val { color: var(--cx-text); }
+.io2-sd-age { color: var(--cx-dim) !important; }
+.io2-sd-sep { color: var(--cx-line); }
+
+/* Threat-tone severity rail, same 2px convention as .dm-alert rows and the
+   active rail link — not a decorative card accent. */
+.io2-sd { border-inline-start: 2px solid var(--dl-safe); }
+.io2-sd--alert { border-inline-start-color: var(--dl-alert); }
+.io2-sd--danger { border-inline-start-color: var(--cx-accent); }
+
+/* --- Source evidence rows --- */
+.io2-se { gap: 6px; }
+
+.io2-ev-row { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.io2-ev-source {
+  flex: 0 0 74px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--cx-dim);
+}
+.io2-ev-body { min-width: 0; flex: 1; }
+.io2-ev-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; font-size: 13px; }
+.io2-ev-id { font-weight: 700; color: var(--cx-text); }
+.io2-ev-id--demo { color: #ffd166; }
+.io2-ev-sep { color: var(--cx-line); }
+.io2-ev-empty { font-size: 13px; color: var(--cx-dim); }
+.io2-ev-basis { color: var(--cx-dim); }
+
+.io2-val { font-variant-numeric: tabular-nums; }
+
+/* --- Operational action bar (Phase A2) --------------------------------------------------- */
+/* One band under the decision block, carrying the actions for the selected
+   alert. It is here and not inside the alert rows so that selecting a row never
+   changes that row's height — a list that grows under the cursor is a list an
+   operator cannot aim at, and A1.1 already spent the screen's height budget.
+
+   Height is a RANGE, not a number: 44px is what a wide desktop needs, and the
+   bar is allowed to grow to 60px when Hebrew, English or comfort density need
+   the room. It never solves a space problem by shrinking its own type. */
+.io2-actionbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 44px;
+  max-height: 60px;
+  overflow: hidden;
+  padding: 6px var(--cx-pad);
+  background: var(--cx-surface);
+  border: 1px solid var(--cx-line);
+  border-top: none;
+}
+
+.io2-ab-title {
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--cx-dim);
+}
+
+.io2-ab-identity {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--cx-text);
+}
+
+/* The id encodes area, source, kind and instance, so it is long by design. It
+   truncates VISUALLY only: the title carries the whole value, Copy Alert ID
+   copies the whole value, and the model is never shortened. */
+.io2-ab-id {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--cx-dim);
+}
+
+.io2-ab-sev { font-weight: 700; letter-spacing: 0.1em; }
+.io2-ab-sev--danger { color: var(--cx-accent); }
+.io2-ab-sev--alert { color: #ffb020; }
+.io2-ab-sev--info { color: var(--cx-dim); }
+
+.io2-ab-area { font-weight: 700; }
+
+.io2-ab-life {
+  padding: 1px 6px;
+  border: 1px solid var(--cx-line);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.io2-ab-life--new { color: var(--cx-text); border-color: var(--cx-text); }
+.io2-ab-life--acknowledged,
+.io2-ab-life--in_review { color: #ffb020; border-color: #ffb020; }
+.io2-ab-life--resolved { color: var(--cx-dim); }
+
+/* The condition axis, styled differently from the lifecycle chip on purpose:
+   the two are independent and an operator must never read one as the other. */
+.io2-ab-cond {
+  padding: 1px 6px;
+  border: 1px dashed var(--cx-line);
+  letter-spacing: 0.08em;
+}
+.io2-ab-cond.is-active { color: var(--cx-accent); border-color: var(--cx-accent); }
+.io2-ab-cond.is-cleared { color: var(--cx-dim); }
+
+.io2-ab-src,
+.io2-ab-owner { color: var(--cx-dim); }
+
+.io2-ab-outside {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.io2-ab-outside-tag {
+  padding: 1px 6px;
+  border: 1px solid #ffb020;
+  color: #ffb020;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.io2-ab-show,
+.io2-ab-btn {
+  font-family: var(--cx-font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 6px 12px;
+  background: var(--cx-bg);
+  color: var(--cx-text);
+  border: 1px solid var(--cx-line);
+  cursor: pointer;
+}
+
+.io2-ab-show:hover,
+.io2-ab-btn:hover { border-color: var(--cx-text); }
+.io2-ab-show:focus-visible,
+.io2-ab-btn:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+
+/* Resolve is the one that ends the operator's workflow, so it reads as the
+   consequential action rather than as one more grey button. */
+.io2-ab-btn--resolve { border-color: var(--cx-accent); color: var(--cx-accent); }
+.io2-ab-btn--reopen { border-color: #ffb020; color: #ffb020; }
+
+/* Phase A3.2 §67. OPTICAL and NOTES are not steps in handling an alert — one is
+   navigation, the other is history — so they read one level quieter than the
+   lifecycle buttons beside them. Quieter is done with COLOUR ONLY: the size, the
+   padding, the weight, the tracking and the font are identical to the primary
+   buttons, because §67 also says not to shrink the type. */
+.io2-ab-btn--secondary {
+  color: var(--cx-dim);
+  border-style: dashed;
+}
+.io2-ab-btn--secondary:hover { color: var(--cx-text); }
+
+/* A disabled OPTICAL must look unavailable at a glance and stay legible: it is
+   the button whose whole job right now is to say "not for this alert". */
+.io2-ab-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.io2-ab-btn:disabled:hover { border-color: var(--cx-line); }
+
+/* The tooltip carrier around a disabled button (see SelectedAlertActions.jsx).
+   Presentational only — it has no role and nothing can activate it. `contents`
+   would remove it from the box tree and take the hover target with it, so it is
+   an inline-flex that wraps the button exactly. */
+.io2-ab-btnwrap { display: inline-flex; }
+
+/* Visually hidden, still announced. Used for text that must reach assistive
+   technology without being allowed to change a fixed-height layout. */
+.io2-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.io2-ab-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: auto;
+  flex: 0 0 auto;
+}
+
+.io2-ab-local {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--cx-dim);
+  white-space: nowrap;
+}
+
+.io2-ab-empty { margin: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.io2-ab-empty-title { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--cx-text); }
+.io2-ab-empty-hint { font-size: 11px; color: var(--cx-dim); }
+
+/* --- Selected alert region, inside the alerts panel (Phase A3.1.1) ------------------------ */
+/* The operational action bar's replacement. Same controls, same single-render
+   rule, same vocabulary — but sitting inside the panel it acts on instead of
+   spanning the page above the grid.
+
+   Its height is FIXED, not merely bounded, and that is the one thing about this
+   box that is not negotiable. Sitting directly above the list, anything that
+   changed its height would move every row underneath it - and the things that
+   would change it are exactly the things that happen while an operator is
+   working: a longer alert id wrapping to another line, an owner chip appearing
+   after START REVIEW, the OUTSIDE CURRENT FILTER notice arriving the moment a
+   RESOLVE pushes the alert out of the current filter. All three would move the
+   list out from under the cursor at the worst possible moment. The full-width
+   bar this replaces solved the same problem the same way (44-60px, overflow
+   hidden); this is that rule, one level in.
+
+   The height is spent from the bottom up: the buttons are pinned to the floor of
+   the box, so whatever else happens they stay where they were. The identity is
+   the part allowed to clip, and it clips gracefully - the id already truncates
+   to an ellipsis with its whole value in the title, in aria-label and in Copy
+   Alert ID, and every other chip on that line is also on the selected row two
+   lines below.
+
+   No type here is smaller than in the bar it replaces: every size is inherited
+   from the .io2-ab-* scale. */
+.io2-sel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* Sized from the measured worst case across 1920/1366, Hebrew and English,
+     compact and comfort, with an alert selected, an owner assigned and the
+     OUTSIDE CURRENT FILTER notice showing — plus a margin. Nothing is clipped
+     in any of those; the clip is a guarantee, not a working assumption. */
+  height: 164px;
+  overflow: hidden;
+  padding: 7px 9px;
+  background: var(--cx-bg);
+  border: 1px solid var(--cx-line);
+  border-inline-start: 2px solid var(--cx-line);
+}
+
+/* Nothing is selected: same box, same height, no controls. */
+.io2-sel-actions--empty {
+  justify-content: center;
+  border-inline-start-color: var(--cx-line);
+}
+
+.io2-sel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.io2-sel-title {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--cx-dim);
+}
+
+/* In a 3/12 column the identity wraps rather than truncating the panel. The id
+   still truncates visually — it encodes area, source, kind and instance, and the
+   whole value stays in the title, in aria-label and in Copy Alert ID. */
+.io2-sel-identity { gap: 6px; row-gap: 5px; overflow: hidden; min-height: 0; }
+.io2-sel-actions .io2-ab-id { max-width: 100%; }
+
+/* The action buttons sit on their own row, left-aligned and pinned to the floor
+   of the fixed box: `margin-inline-start: auto` is what pushed them to the far
+   end of a full-width bar, and inside a narrow panel that would strand them
+   against the edge. `margin-top: auto` is what guarantees they never move. */
+.io2-sel-buttons {
+  margin-inline-start: 0;
+  margin-top: auto;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  flex: 0 0 auto;
+}
+
+.io2-sel-actions .io2-ab-outside { flex: 0 0 auto; flex-wrap: wrap; row-gap: 5px; }
+
+/* --- NEW DANGER compact indicator (Phase A3.1.1) ------------------------------------------ */
+/* Replaces the full-width red band. It has to be seen from a step back without
+   owning the screen, so it is a chip on the panel header: accent border, accent
+   text and an accent dot. It never reserves height — with no unseen DANGER the
+   button is not rendered at all — and it never pulses: this screen's motion rule
+   is one short entrance, never a permanent animation an operator learns to
+   ignore. Its appearing IS the event. */
+.io2-new-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 3px 9px;
+  font-family: var(--cx-font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--cx-accent);
+  background: var(--cx-bg);
+  border: 1px solid var(--cx-accent);
+  cursor: pointer;
+}
+
+.io2-new-danger:hover { background: var(--cx-accent); color: var(--cx-bg); }
+.io2-new-danger:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 2px; }
+
+.io2-new-danger-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cx-accent);
+  flex: 0 0 auto;
+}
+.io2-new-danger:hover .io2-new-danger-dot { background: var(--cx-bg); }
+
+.io2-new-danger-sep { opacity: 0.5; }
+.io2-new-danger-count { font-variant-numeric: tabular-nums; }
+
+/* The panel header row that carries it.
+
+   The reserved height is the point. In a 3/12 column the English chip does not
+   fit beside the title and wraps to a second line; without a reservation the
+   header would grow by that line the moment a DANGER arrived, pushing the whole
+   alert list down under the operator's cursor — the screen moving on its own,
+   which is the one thing this console does not do. So the room is kept whether
+   the chip is there or not, and its arrival changes what the header says and
+   nothing about where anything is. */
+.io2-alerts-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  row-gap: 6px;
+  flex-wrap: wrap;
+  min-height: 50px;
+}
+
+/* --- Confirmation dialogs (Phase A2) ----------------------------------------------------- */
+/* Native <dialog>: the platform supplies the top layer, the inert background and
+   Escape, so there is no hand-rolled focus trap to keep correct, and the
+   existing shortcut guard already ignores keys fired inside a <dialog>. */
+.io2-dialog {
+  padding: 0;
+  border: 1px solid var(--cx-line);
+  background: var(--cx-surface);
+  color: var(--cx-text);
+  font-family: var(--cx-font-ui);
+  max-width: min(560px, calc(100vw - 32px));
+  width: 100%;
+}
+
+.io2-dialog::backdrop { background: rgba(0, 0, 0, 0.72); }
+
+.io2-dialog-body { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+
+.io2-dialog-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--cx-dim);
+}
+
+.io2-dialog-identity {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--cx-line);
+  font-size: 12px;
+}
+.io2-dialog-identity .io2-ab-id { max-width: 100%; white-space: normal; overflow: visible; }
+
+/* Resolving while the condition still holds is legitimate — false alarms exist —
+   but it must never read as "the threat is gone". */
+.io2-dialog-warn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--cx-accent);
+  background: rgba(230, 25, 25, 0.1);
+  font-size: 12px;
+}
+.io2-dialog-warn strong { color: var(--cx-accent); letter-spacing: 0.1em; }
+
+.io2-dialog-field { display: flex; flex-direction: column; gap: 5px; }
+
+.io2-dialog-label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--cx-dim);
+}
+.io2-dialog-req { color: var(--cx-accent); }
+.io2-dialog-opt { color: var(--cx-dim); }
+.io2-dialog-count { margin-inline-start: auto; }
+
+.io2-dialog-select,
+.io2-dialog-note {
+  font-family: var(--cx-font-ui);
+  font-size: 13px;
+  padding: 8px 10px;
+  background: var(--cx-bg);
+  color: var(--cx-text);
+  border: 1px solid var(--cx-line);
+  border-radius: 0;
+}
+.io2-dialog-note { resize: vertical; }
+.io2-dialog-select:focus-visible,
+.io2-dialog-note:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+
+.io2-dialog-prev {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 12px;
+  margin: 0;
+  font-size: 12px;
+}
+.io2-dialog-prev dt { color: var(--cx-dim); letter-spacing: 0.08em; }
+.io2-dialog-prev dd { margin: 0; color: var(--cx-text); }
+
+.io2-dialog-target { margin: 0; font-size: 12px; color: var(--cx-text); }
+.io2-dialog-target strong { color: #ffb020; letter-spacing: 0.1em; }
+
+.io2-dialog-local { margin: 0; font-size: 11px; color: var(--cx-dim); }
+
+.io2-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+.io2-dialog-cancel,
+.io2-dialog-confirm {
+  font-family: var(--cx-font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 8px 16px;
+  background: var(--cx-bg);
+  color: var(--cx-text);
+  border: 1px solid var(--cx-line);
+  cursor: pointer;
+}
+.io2-dialog-confirm { border-color: var(--cx-accent); color: var(--cx-accent); }
+.io2-dialog-confirm:disabled { opacity: 0.4; cursor: not-allowed; border-color: var(--cx-line); color: var(--cx-dim); }
+.io2-dialog-cancel:focus-visible,
+.io2-dialog-confirm:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+
+/* --- Alert context menu (Phase A2) ------------------------------------------------------- */
+/* Fixed, so it costs the document no height. 90 clears the pinned bar (82) and
+   the preview switcher (80/81) and stays under the shared dialog backdrop. */
+.io2-ctxmenu {
+  position: fixed;
+  z-index: 90;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  background: var(--cx-surface);
+  border: 1px solid var(--cx-text);
+}
+
+.io2-ctxmenu-head {
+  margin: 0 0 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--cx-dim);
+  border-bottom: 1px solid var(--cx-line);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.io2-ctxmenu-item {
+  font-family: var(--cx-font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: start;
+  padding: 8px 10px;
+  background: transparent;
+  color: var(--cx-text);
+  border: none;
+  cursor: pointer;
+}
+.io2-ctxmenu-item:hover { background: #1a1a1a; }
+.io2-ctxmenu-item:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+.io2-ctxmenu-item--copy { color: var(--cx-dim); border-top: 1px solid var(--cx-line); }
+
+/* Operator entries in the session log: a distinct source, never dressed up as a
+   sensor event or as something the server recorded. */
+.c-industrial .io2-log-scroll .dm-alert--k-operator { border-inline-start-color: #4da3ff; }
+.c-industrial .io2-log-scroll .dm-alert--k-operator .dm-alert-src { color: #4da3ff; }
+
+/* --- Panels + grids ---------------------------------------------------------------------- */
+/* Command-centre order, rebuilt in Phase A3.1 around six panels instead of nine.
+   The top band answers the three questions an operator asks on entry — where,
+   what am I looking at, what needs handling — so Areas, Visual Feed and
+   Operational Alerts own it outright. The second band is the analysis pair, and
+   the log runs the full width because its rows are sentences, not figures.
+   Every area is a contiguous rectangle and every row spans all twelve columns.
+
+   Phase A3.1.1 rebalanced the top band from 3/5/4 to 3/6/3. A3.1 had grown the
+   area board from two columns to three — worth keeping — but paid for it out of
+   the feed, which fell from 844px to 703px. The feed is the one panel where
+   width buys information rather than comfort, so the column came back from the
+   alerts list instead: the alert rows are sentences that wrap, and a narrower
+   column costs them a line, not a fact. */
+/* Phase A3.2 §4/§13/§16/§18 rebuilt the bands without touching the 3/6/3 split.
+   Two things moved and one thing followed:
+
+   RISK / TIME came out of band 2 and into the central column, directly under the
+   VISUAL FEED. That column had a large empty run below the media, and risk over
+   time is the reading an operator takes WHILE watching the feed — it belongs in
+   the same eye path, not two panels away.
+
+   AREAS and ALERTS now span both of the top bands. That is what gives the area
+   list a tall panel to fill (§5) and costs nothing, because the central column
+   was already that tall.
+
+   SESSION LOG took the half-width cell Risk/Time vacated, so it is no longer a
+   12-column strip across the bottom holding a few rows and a lot of black. */
+.io2-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas:
+    'areas areas areas feed feed feed feed feed feed alerts alerts alerts'
+    'areas areas areas timeline timeline timeline timeline timeline timeline alerts alerts alerts'
+    'factors factors factors factors factors factors log log log log log log';
+  gap: 1px;
+  background: var(--cx-line);
+  border: 1px solid var(--cx-line);
+  border-top: none;
+}
+
+.io2-a-areas { grid-area: areas; }
+.io2-a-feed { grid-area: feed; }
+.io2-a-alerts { grid-area: alerts; }
+/* The feed is the one panel where more pixels mean more information rather than
+   more comfort, so A3.1 spends the space the removed tables freed on it. The SVG
+   keeps its aspect ratio. */
+/* Held level with the camera cap above (520px at 1080p) so switching tabs
+   changes what is in the panel, not how tall the panel is. */
+.io2-a-feed .dm-radarplot { max-height: 48vh; }
+.io2-a-factors { grid-area: factors; }
+.io2-a-timeline { grid-area: timeline; }
+.io2-a-log { grid-area: log; }
+
+/* Panel subcaption: states the panel's data source and scope. Sized on the
+   approved secondary scale, never micro-type. */
+.io2-panel-note {
+  margin: -4px 0 0;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: var(--cx-dim);
+}
+
+.io2-panel {
+  background: var(--cx-surface);
+  /* Horizontal padding is unchanged; only the vertical run is tightened, so no
+     line box, letter-spacing or wrap point moves. */
+  padding: var(--io2-panel-pad-y) var(--cx-pad);
+  display: flex;
+  flex-direction: column;
+  gap: var(--io2-panel-gap);
+  min-width: 0;
+}
+/*דף דשבורד - כותרות לכלל הערכים כגון 
+RISK FACTORS*/
+/* Phase A3.1 readability pass. Every size below either grew or stayed the same;
+   nothing on this screen got smaller. The rule was one or two points at a time,
+   applied to what an operator reads under pressure — panel titles, severities,
+   area names, alert lines, log messages — and not to decoration. */
+.io2-panel-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--cx-dim);
+}
+/*לעמדה האופטית*/
+.io2-quicklink {
+  margin-top: auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cx-text);
+  text-decoration: none;
+}
+
+.io2-quicklink:hover { color: var(--cx-accent); }
+
+.io2-camera-grid,
+.io2-invest-grid,
+.io2-settings-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 1px;
+  background: var(--cx-line);
+  border: 1px solid var(--cx-line);
+  border-top: none;
+}
+
+.io2-invest-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.io2-settings-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; }
+
+/* Full-width variant of the settings body, for a tab that is one wide read-out
+   rather than a form and a values table (Phase A3.1 — System Health). */
+.io2-settings-wide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  background: var(--cx-line);
+  border: 1px solid var(--cx-line);
+  border-top: none;
+}
+
+/* --- System health tab (Phase A3.1) ---------------------------------------- */
+.io2-health-tab { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.io2-health-data { font-weight: 700; }
+.io2-health-data--live { color: var(--cx-safe, #34c76f); }
+.io2-health-data--demo { color: #ffd166; }
+.io2-health-data--alert { color: var(--cx-alert, #ffa53d); }
+.io2-health-data--danger { color: var(--cx-danger, #ff4d4f); }
+
+/* Coverage is a judgement about the perimeter, not about the data link, so it
+   sits apart from the subsystem rows rather than reading as one more of them. */
+.io2-health-coverage {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--cx-line);
+  border-inline-start-width: 3px;
+  font-size: 13px;
+}
+.io2-health-coverage-label { font-size: 11px; letter-spacing: 0.18em; color: var(--cx-dim); }
+.io2-health-coverage-state { font-weight: 700; letter-spacing: 0.1em; }
+.io2-health-coverage-faults { color: var(--cx-dim); font-size: 12px; }
+.io2-health-coverage--safe { border-inline-start-color: var(--cx-safe, #34c76f); }
+.io2-health-coverage--alert { border-inline-start-color: var(--cx-alert, #ffa53d); }
+.io2-health-coverage--danger { border-inline-start-color: var(--cx-danger, #ff4d4f); }
+.io2-health-coverage--safe .io2-health-coverage-state { color: var(--cx-safe, #34c76f); }
+.io2-health-coverage--alert .io2-health-coverage-state { color: var(--cx-alert, #ffa53d); }
+.io2-health-coverage--danger .io2-health-coverage-state { color: var(--cx-danger, #ff4d4f); }
+
+.io2-camera-grid .dl-feed { border: 1px solid var(--cx-line); }
+
+/* --- Source switch / tabs -------------------------------------------------------------------- */
+.io2-source-switch,
+.io2-tabs { display: inline-flex; gap: 1px; background: var(--cx-line); border: 1px solid var(--cx-line); }
+/*כפתורים בכותרות על כלל העמודים*/
+.io2-source-switch button,
+.io2-tabs button {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-dim);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: background 120ms linear, color 120ms linear;
+}
+
+.io2-source-switch button.is-active,
+.io2-tabs button.is-active { background: var(--cx-text); color: var(--cx-bg); }
+
+.io2-tabs { align-self: center; margin-inline-start: auto; }
+
+/* --- Operational bottom bar ------------------------------------------------------------------- */
+/* Static readout. Red is reserved for DANGER / weapon / real failure — a healthy
+   live link is not an alarm, so LIVE is not red. */
+.io2-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 1px;
+  border: 1px solid var(--cx-line);
+  border-top: none;
+  background: var(--cx-line);
+  min-width: 0;
+  /* Pinned to the viewport bottom so it stays readable through the whole scroll,
+     and above the design-preview switcher so it can never be covered. The page
+     reserves its height below, so it never hides a panel. */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 82;
+}
+
+/* The bar itself is dir="ltr" (technical readout), so logical insets would
+   resolve against the readout instead of the page. Clear the rail using the
+   scope's own direction. */
+.c-industrial[dir='rtl'] .io2-bar { right: 200px; }
+.c-industrial[dir='ltr'] .io2-bar { left: 200px; }
+
+.io2-bar-tag {
+  flex: 0 0 auto;
+  padding: 6px 14px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  display: flex;
+  align-items: center;
+  background: var(--cx-surface);
+  color: var(--cx-text);
+}
+
+.io2-bar-tag--live { background: #10281a; color: var(--dl-safe); }
+.io2-bar-tag--demo { background: #1c1c1c; color: var(--cx-dim); }
+.io2-bar-tag--alert { background: #241a05; color: var(--dl-alert); }
+.io2-bar-tag--danger { background: #230808; color: var(--cx-accent); }
+
+/* Link + coverage, stated together so neither can be mistaken for the other. */
+.io2-bar-sys {
+  flex: 0 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: var(--cx-surface);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.io2-bar-sys--safe { color: var(--dl-safe); }
+.io2-bar-sys--alert { color: var(--dl-alert); }
+.io2-bar-sys--danger { color: var(--cx-accent); }
+
+.io2-bar-noevt { color: var(--cx-dim); }
+
+.io2-bar-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px;
+  background: var(--cx-surface);
+  font-size: 13px;
+}
+
+.io2-bar-time { flex: 0 0 auto; color: var(--cx-dim); font-variant-numeric: tabular-nums; }
+.io2-bar-src { flex: 0 0 auto; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--cx-dim); }
+.io2-bar-sev { flex: 0 0 auto; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+.io2-bar-sev--info { color: var(--cx-dim); }
+.io2-bar-sev--alert { color: var(--dl-alert); }
+.io2-bar-sev--danger { color: var(--cx-accent); }
+.io2-bar-msg { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.io2-bar-more {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: var(--cx-surface);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cx-dim);
+}
+
+/* --- Radar plot annotations ------------------------------------------------------------------- */
+/* SVG text inherits the document direction, which reorders "-3 m" into "3- m" in
+   a Hebrew page. Isolate every plot/chart label as its own LTR run. */
+.c-industrial .dm-radarplot text,
+.c-industrial .dm-chart-svg text {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.c-industrial .dm-rp-tick { font-size: 10px; fill: var(--cx-dim); }
+.c-industrial .dm-rp-label { font-size: 11px; fill: var(--cx-text); }
+.c-industrial .dm-rp-sensorlabel {
+  font-size: 10px;
+  fill: var(--cx-dim);
+  letter-spacing: 0.14em;
+}
+.c-industrial .dm-rp-cornertag { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; }
+.c-industrial .dm-rp-cornertag--demo { fill: var(--cx-dim); }
+.c-industrial .dm-rp-cornertag--alert { fill: var(--dl-alert); }
+.c-industrial .dm-rp-cornertag--danger { fill: var(--cx-accent); }
+
+/* --- Functional motion: short, sharp, never a permanent pulse --------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .io2-strip-mode { animation: io2-modeflash 300ms ease-out; }
+  .c-industrial .io2-log-scroll .dm-alert:first-child { animation: io2-rowin 160ms ease-out; }
+  /* One entrance, then still. The chip arriving is the event; a chip that keeps
+     flashing is one an operator stops seeing. */
+  .io2-new-danger { animation: io2-modeflash 300ms ease-out; }
+}
+
+@keyframes io2-modeflash {
+  from { background-color: rgba(255, 255, 255, 0.16); }
+  to { background-color: transparent; }
+}
+
+@keyframes io2-rowin {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* --- Density: spacing only, never type ---------------------------------------------------------- */
+.c-industrial[data-density='comfort'] {
+  --cx-pad: 16px;
+  --io2-panel-pad-y: 12px;
+  --io2-band-pad-y: 10px;
+}
+.c-industrial[data-density='comfort'] .io2-strip-mode,
+.c-industrial[data-density='comfort'] .io2-strip-cell { padding: 10px 16px; }
+.c-industrial[data-density='comfort'] .io2-rf-item { padding: 8px 10px; }
+.c-industrial[data-density='comfort'] .dm-health-row,
+.c-industrial[data-density='comfort'] .dm-health-head { padding: 7px 11px; }
+.c-industrial[data-density='comfort'] .io2-panel { gap: 10px; }
+
+/* --- About (spec document) --------------------------------------------------------------------------- */
+.io2-about { gap: 14px; }
+
+.io2-about-head {
+  border: 1px solid var(--cx-line);
+  background: var(--cx-surface);
+  padding: 22px 20px;
+}
+
+.io2-about-doc { margin: 0 0 12px; font-size: 9.5px; letter-spacing: 0.2em; color: var(--cx-dim); }/*דף מפרט -מעל הכותרת הראשית*/
+.io2-about-title { margin: 0 0 8px; font-size: clamp(1.3rem, 3vw, 2.1rem); letter-spacing: 0.02em; line-height: 1.1; }
+.io2-about-tag { margin: 0; font-size: 13px; color: var(--cx-text); }
+.io2-about-note { margin: 6px 0 0; font-size: 10.5px; color: var(--cx-dim); letter-spacing: 0.06em; }
+
+.io2-about-body {
+  border: 1px solid var(--cx-line);
+  border-top: none;
+  background: var(--cx-surface);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+/*דף מפרט - נקודות תיאור*/
+.io2-about-section h2 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  letter-spacing: 0.14em;
+  border-bottom: 1px solid var(--cx-line);
+  padding-bottom: 6px;
+}
+/*תיאור המערכת*/
+.io2-about-num { color: var(--cx-accent); margin-inline-end: 8px; }
+.io2-about-section p { margin: 0; font-size: 16px; line-height: 1.7; color: color-mix(in srgb, var(--cx-text) 85%, var(--cx-dim)); max-width: 78ch; }
+
+.io2-key { color: var(--cx-dim); }
+
+/* --- Design-preview switcher: separated from the operational bar --------------------------------------- */
+/* The switcher is a design tool, not part of the system. It is collapsible so it
+   can never overlap the operational bottom bar; collapsing reclaims the 78px
+   gutter that concepts-base.css reserves for it (scoped, base file untouched). */
+/* concepts-base.css bleeds the background with box-shadow + clip-path. clip-path
+   turns the scope into the containing block for fixed/sticky descendants, which
+   is what stopped the operational bar from pinning to the viewport. Industrial
+   paints its own full-bleed background instead, so the bar can pin. */
+.c-industrial {
+  clip-path: none;
+  box-shadow: none;
+  background: var(--cx-bg);
+  overflow-x: clip;
+}
+
+/* Reserve room for the preview controls, which float ABOVE the pinned
+   operational bar rather than on top of it. */
+.c-industrial { padding-bottom: 72px; }
+.c-industrial.io2-cs-collapsed { padding-bottom: 58px; }
+
+.io2-cs-toggle {
+  position: fixed;
+  inset-block-end: 58px;
+  inset-inline-end: 14px;
+  z-index: 81;
+  padding: 7px 12px;
+  border: 1px solid var(--cx-line);
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-dim);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: color 120ms linear, border-color 120ms linear;
+}
+
+.io2-cs-toggle:hover { color: var(--cx-text); border-color: var(--cx-text); }
+.io2-cs-toggle:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 2px; }
+
+/* Keep the switcher clear of the toggle button, and above the operational bar. */
+.c-industrial .cs-bar { max-width: calc(100vw - 150px); bottom: 58px; }
+
+/* --- Risk factors ---------------------------------------------------------------------------- */
+.io2-rf { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.io2-rf-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+
+.io2-rf-item {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 6px 8px;
+  background: #141414;
+  border-inline-start: 2px solid var(--cx-line);
+  min-width: 0;
+}
+
+.io2-rf-item--info { border-inline-start-color: #4a4a4a; }
+.io2-rf-item--alert { border-inline-start-color: var(--dl-alert); }
+.io2-rf-item--danger { border-inline-start-color: var(--cx-accent); }
+.io2-rf-item.is-stale { opacity: 0.55; }
+
+.io2-rf-src {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 1px 5px;
+  border: 1px solid var(--cx-line);
+  color: var(--cx-dim);
+}
+
+.io2-rf-text { flex: 1; min-width: 0; font-size: 14px; }
+.io2-rf-meta { flex: 0 0 auto; display: inline-flex; align-items: baseline; gap: 8px; }
+.io2-rf-risk { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.io2-rf-age { font-size: 12px; color: var(--cx-dim); font-variant-numeric: tabular-nums; }
+.io2-rf-empty { margin: 0; font-size: 14px; color: var(--cx-dim); }
+
+.io2-rf-more {
+  align-self: flex-start;
+  padding: 3px 9px;
+  border: 1px solid var(--cx-line);
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-dim);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+.io2-rf-more:hover { color: var(--cx-text); border-color: var(--cx-text); }
+.io2-rf-more:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 2px; }
+
+/* Per-source summary pinned to the bottom of the panel — three independent
+   numbers side by side, so none of them can read as a blend of the others. */
+.io2-rf-sum {
+  margin: auto 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--cx-line);
+  border: 1px solid var(--cx-line);
+}
+.io2-rf-sum > div { background: var(--cx-surface); padding: 8px 10px; min-width: 0; }
+.io2-rf-sum dt { font-size: 11px; letter-spacing: 0.12em; color: var(--cx-dim); }
+.io2-rf-sum dd { margin: 3px 0 0; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.io2-rf-sub { font-size: 12px; font-weight: 400; color: var(--cx-dim); }
+
+/* --- Session log: a fixed viewport over a growing feed ---------------------------------------- */
+/* Phase A3.1.1 made this height FIXED rather than capped, and the difference is
+   the whole point of §33-§34.
+
+   With `max-height` the log was a box that grew a row at a time until it hit the
+   cap. Every operator action wrote a session-log entry, so every Acknowledge and
+   every Resolve made the document taller and moved everything below it — the
+   operator's own work rearranging the screen under them. With a fixed height the
+   log is a window: new entries change what is INSIDE it and never what is around
+   it, and the page height is the same after fifty actions as after one.
+
+   The cost is honest and accepted: early in a session the window is partly
+   empty. That is what a log looks like before it has anything in it, and it is
+   worth far less than a screen that stops moving. */
+.io2-log-scroll {
+  /* 200px, not more: a fixed window costs its full height on every page whether
+     it is full or empty, and Phase A1.1's guarantee that this screen scrolls
+     less than it used to is still a guarantee. Six rows is a working window;
+     the seventh is one wheel click away, and the page stays shorter than A1.1
+     left it even with the enlarged feed above. */
+  height: 200px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  min-height: 0;
+}
+.io2-log-scroll:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+
+/* Tables: keep both fully visible instead of trapping them in twin scrollers. */
+.c-industrial .io2-grid .dm-table-scroll { max-height: 260px; }
+.c-industrial .io2-grid .dm-table-scroll:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+
+/* --- System health table ---------------------------------------------------------------------- */
+.dm-health-table { display: flex; flex-direction: column; gap: 1px; background: var(--cx-line); border: 1px solid var(--cx-line); }
+
+.dm-health-head,
+.dm-health-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: 8px;
+  padding: 5px 9px;
+  background: var(--cx-surface);
+  align-items: baseline;
+}
+
+.dm-health-head { color: var(--cx-dim); font-size: 11px; letter-spacing: 0.14em; font-weight: 700; }
+.dm-health-row { font-size: 14px; }
+.dm-health-row > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dm-health-name { color: var(--cx-dim); }
+.dm-health-state { font-weight: 700; }
+.dm-health-mode,
+.dm-health-value,
+.dm-health-updated { color: var(--cx-dim); font-variant-numeric: tabular-nums; }
+
+/* Only a real live link is green. */
+.dm-health--safe .dm-health-state { color: var(--dl-safe); }
+.dm-health--alert .dm-health-state { color: var(--dl-alert); }
+.dm-health--danger .dm-health-state { color: var(--cx-accent); }
+.dm-health--muted .dm-health-state { color: var(--cx-dim); }
+
+/* Synthetic data gets a neutral chip, never a status colour. */
+.dm-health-mode.is-synthetic {
+  color: var(--cx-text);
+  border: 1px solid var(--cx-line);
+  padding: 0 5px;
+  justify-self: start;
+}
+
+.dm-health-err { background: var(--cx-surface); font-size: 12px; color: var(--dl-alert); }
+.dm-health-err > summary {
+  padding: 5px 9px;
+  cursor: pointer;
+  list-style: revert;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dm-health-err > summary:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+.dm-health-err span { letter-spacing: 0.12em; color: var(--cx-dim); }
+.dm-health-err-full {
+  margin: 0;
+  padding: 6px 9px 8px;
+  border-top: 1px solid var(--cx-line);
+  color: var(--cx-dim);
+  font-size: 11.5px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Claims derived from an uncalibrated reference (image-space gate point, or the
+   radar's own cone) carry this marker wherever they appear. */
+.io2-uncal {
+  display: inline-block;
+  margin-inline-start: 6px;
+  padding: 1px 5px;
+  border: 1px solid var(--dl-alert);
+  color: var(--dl-alert);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+/* --- Session log rows ------------------------------------------------------------------------- */
+.c-industrial .io2-log-scroll .dm-alert {
+  display: grid;
+  grid-template-columns: 66px 74px minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+}
+.c-industrial .io2-log-scroll .dm-alert-time { font-size: 12.5px; }
+.c-industrial .io2-log-scroll .dm-alert-msg { font-size: 14px; }
+.c-industrial .dm-alert-src {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cx-dim);
+}
+/* Mode transitions are the entries an operator scans for. */
+.c-industrial .dm-alert--k-mode { background: rgba(255, 255, 255, 0.045); }
+.c-industrial .dm-alert--k-mode.dm-alert--alert { background: rgba(245, 166, 35, 0.1); }
+.c-industrial .dm-alert--k-mode.dm-alert--danger { background: rgba(230, 25, 25, 0.13); }
+
+/* --- Risk / time: line colour follows the threat state ---------------------------------------- */
+.c-industrial .io2-panel--timeline.is-safe .dm-chart-line { stroke: var(--dl-safe); }
+.c-industrial .io2-panel--timeline.is-safe .dm-chart-area { fill: color-mix(in srgb, var(--dl-safe) 12%, transparent); }
+.c-industrial .io2-panel--timeline.is-safe .dm-chart-dot { fill: var(--dl-safe); }
+.c-industrial .io2-panel--timeline.is-alert .dm-chart-line { stroke: var(--dl-alert); }
+.c-industrial .io2-panel--timeline.is-alert .dm-chart-area { fill: color-mix(in srgb, var(--dl-alert) 12%, transparent); }
+.c-industrial .io2-panel--timeline.is-alert .dm-chart-dot { fill: var(--dl-alert); }
+.c-industrial .io2-panel--timeline.is-danger .dm-chart-line { stroke: var(--cx-accent); }
+.c-industrial .io2-panel--timeline.is-danger .dm-chart-area { fill: color-mix(in srgb, var(--cx-accent) 12%, transparent); }
+.c-industrial .io2-panel--timeline.is-danger .dm-chart-dot { fill: var(--cx-accent); }
+/* Axis and threshold captions need to survive on the near-black substrate.
+   The halo separates the caption from the dashed line underneath, so
+   "ALERT  ≥  40" cannot be misread as one number. */
+.c-industrial .dm-chart-tick { font-size: 11px; fill: var(--cx-dim); }
+.c-industrial .dm-chart-ref-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  paint-order: stroke fill;
+  stroke: var(--cx-surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+/* --- Command centre: Areas / Alerts / Visual Feed (Phase A1) --------------------------------------------- */
+/* Type here sits on the approved secondary scale already used by this screen:
+   15px block titles, 13px body, 11px meta, 10.5px table heads. Nothing existing
+   was reduced, and no new text goes below 10.5px. */
+
+.io2-empty { margin: 0; font-size: 13px; color: var(--cx-dim); }
+
+/* Areas ---------------------------------------------------------------------- */
+/* Phase A3.2 §5-§7: the list uses the panel's whole height.
+   `.io2-panel` is already a flex column, so the chain that carries the panel's
+   height down to the scroller is: panel -> .io2-areas -> .io2-area-list, each
+   allowed to grow and each allowed to shrink below its content (min-height: 0).
+   Without that last part a flex item refuses to go under its content height and
+   the overflow lands on the page instead of inside the list. */
+.io2-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Compact, at the head of the panel. Real-time filtering, no submit control. */
+.io2-area-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.io2-area-search-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--cx-dim);
+  white-space: nowrap;
+}
+
+.io2-area-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 8px;
+  font-family: inherit;
+  /* Same 13px body size the rest of this panel uses. Nothing shrinks (§75). */
+  font-size: 13px;
+  color: var(--cx-text);
+  background: var(--cx-bg);
+  border: 1px solid var(--cx-line);
+}
+
+.io2-area-search-input:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+
+.io2-area-search-state,
+.io2-area-search-kept {
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--cx-dim);
+}
+
+/* The selection survived the filter; this says so rather than looking like a
+   bug. Accented, because it explains an absence the operator can see. */
+.io2-area-search-kept {
+  padding: 4px 7px;
+  color: var(--cx-accent);
+  border: 1px dashed var(--cx-accent);
+}
+
+.io2-area-empty { flex: 0 0 auto; }
+
+.io2-area-deploy {
+  margin: 0;
+  padding: 5px 8px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--cx-dim);
+  border: 1px dashed var(--cx-line);
+}
+
+/* Phase A3.2 §6/§7. The 300px cap that used to be here (and the 260px/170px
+   caps in the breakpoints below) forced a scrollbar with a large empty black
+   panel underneath it: the list stopped at a number, the panel did not.
+   `flex: 1 1 0` makes the list take exactly the height the panel has left, so
+   rows keep going down while there is room, and `overflow-y: auto` only ever
+   engages once the areas genuinely outgrow the panel — internal scroll, never
+   page scroll (§7).
+
+   The basis is `auto`, NOT 0, and that distinction is the whole rule:
+
+     - in the multi-column grids the panel is stretched to a row height it did
+       not choose, so there is real free space and `flex-grow` hands all of it to
+       the list — the full-height behaviour §6 asks for;
+     - in the single-column layout (<=1200px) the row is auto-height, so the
+       panel is sized BY its content. With a 0 basis the list's hypothetical
+       height would also be 0, the row would size to the search box alone, and
+       the list would collapse to nothing. With `auto` it contributes its real
+       content height and the panel grows to hold it.
+
+   `min-height: 0` is what still lets it shrink and scroll when the content
+   genuinely exceeds a stretched panel; without it the overflow would escape onto
+   the page, which is the page scroll §7 forbids. */
+.io2-area-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  /* The upper bound §7 needs, and the reason it is a calc rather than a number.
+     Every grid row on this screen is auto-height, so a panel whose content is
+     the tallest thing in its band DRIVES that band. With enough areas the list
+     would therefore grow the panel, the panel would grow the row, and the
+     scrolling would land on the PAGE — which is exactly what §7 says must not
+     happen ("internal scroll, not page scroll, to move between areas").
+     Capping the list against the viewport stops that: it is not the small fixed
+     cap §6 removed, because it is larger than the panel ever is in practice and
+     never engages with the declared areas — it only takes effect once the list
+     would otherwise run off the screen, which is precisely when the scrollbar is
+     the correct answer. */
+  max-height: calc(100vh - 240px);
+}
+
+.io2-area-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 11px 12px;
+  border: none;
+  /* Severity stripe, not decoration: it encodes DANGER/ALERT/SAFE and is
+     redundant with the severity printed in the row, so colour is never the only
+     carrier. Kept thin so it reads as a status edge rather than a tab. */
+  border-inline-start: 2px solid var(--cx-line);
+  border-radius: 0;
+  background: var(--cx-surface-2, rgba(255, 255, 255, 0.02));
+  color: var(--cx-text);
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.io2-area-row:hover { background: rgba(255, 255, 255, 0.05); }
+.io2-area-row:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+.io2-area-row.is-selected { background: rgba(255, 255, 255, 0.08); }
+.io2-area-row--danger { border-inline-start-color: var(--cx-danger, #ff4d4f); }
+.io2-area-row--alert { border-inline-start-color: var(--cx-alert, #ffa53d); }
+.io2-area-row--safe { border-inline-start-color: var(--cx-safe, #34c76f); }
+
+.io2-area-head { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; min-width: 0; }
+.io2-area-sev { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; }
+.io2-area-sev--danger { color: var(--cx-danger, #ff4d4f); }
+.io2-area-sev--alert { color: var(--cx-alert, #ffa53d); }
+.io2-area-sev--safe { color: var(--cx-safe, #34c76f); }
+.io2-area-name { font-size: 15px; font-weight: 700; }
+.io2-area-head .io2-val { font-size: 12px; color: var(--cx-dim); }
+
+.io2-area-meta { display: flex; align-items: baseline; gap: 12px; font-size: 12px; color: var(--cx-dim); }
+.io2-area-new { color: var(--cx-alert, #ffa53d); font-weight: 700; }
+
+.io2-area-sensors { display: flex; flex-wrap: wrap; gap: 5px; }
+.io2-area-chip {
+  display: inline-flex;
+  gap: 5px;
+  padding: 3px 7px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--cx-line);
+}
+.io2-area-chip-id { font-weight: 700; }
+.io2-area-chip--ok .io2-area-chip-state { color: var(--cx-safe, #34c76f); }
+.io2-area-chip--down .io2-area-chip-state { color: var(--cx-danger, #ff4d4f); }
+/* Synthetic sources are never green: MOCK must not read as a working sensor. */
+.io2-area-chip--mock .io2-area-chip-state { color: var(--cx-dim); }
+
+/* Filters -------------------------------------------------------------------- */
+.io2-filters { display: flex; flex-direction: column; gap: 6px; }
+
+.io2-filter-tabs { display: flex; flex-wrap: wrap; gap: 1px; background: var(--cx-line); border: 1px solid var(--cx-line); }
+.io2-filter-tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 9px;
+  border: none;
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-dim);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.io2-filter-tab:hover { color: var(--cx-text); }
+.io2-filter-tab.is-active { background: var(--cx-text); color: var(--cx-bg); }
+.io2-filter-tab:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+.io2-filter-count { font-size: 11px; font-variant-numeric: tabular-nums; }
+
+.io2-filter-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+/* Label beside the control, not above it: stacked labels cost a full extra row
+   of height in this narrow column, and that height is worth more to the alert
+   list than to the filter strip. */
+.io2-filter-field, .io2-filter-search { display: flex; flex-direction: row; align-items: center; gap: 5px; min-width: 0; }
+.io2-filter-search { flex: 1 1 200px; }
+.io2-filter-search input { flex: 1 1 auto; min-width: 0; }
+.io2-filter-legend { font-size: 11px; letter-spacing: 0.12em; color: var(--cx-dim); }
+.io2-filter-field select,
+.io2-filter-search input {
+  padding: 4px 7px;
+  border: 1px solid var(--cx-line);
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-text);
+  font-family: inherit;
+  font-size: 12px;
+  min-width: 0;
+}
+.io2-filter-field select:focus-visible,
+.io2-filter-search input:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -1px; }
+.io2-filter-reset {
+  padding: 5px 9px;
+  border: 1px solid var(--cx-line);
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-text);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.io2-filter-reset:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+
+/* Operational alerts ---------------------------------------------------------- */
+/* The one scroll region in the top band. Nothing around it scrolls, so there is
+   no container fighting it for the wheel. */
+/* Phase A1.1 target: 5-6 rows at 1920x1080 (was ~9). The row itself is
+   unchanged — same three lines, same type, same fields — there are simply fewer
+   of them on screen at once and the rest are one scroll away. This height is
+   also what lets the top operational band clear the fold. */
+/* Raised in Phase A3.1 from 368px. The rows are taller now, and English rows
+   wrap to two lines where Hebrew fits one — at the old cap that showed three
+   alerts, under the approved four. The window follows the rows rather than the
+   rows being squeezed back to fit the window. */
+.io2-alerts-scroll { overflow-y: auto; max-height: 408px; min-height: 0; }
+.io2-alerts-scroll:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+
+.io2-alert-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+
+.io2-alert-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 11px;
+  /* Same severity stripe as the area rows; the severity word is printed on the
+     row itself, so this reinforces rather than replaces it. */
+  border-inline-start: 2px solid var(--cx-line);
+  background: var(--cx-surface-2, rgba(255, 255, 255, 0.02));
+  cursor: pointer;
+}
+.io2-alert-row:hover { background: rgba(255, 255, 255, 0.05); }
+.io2-alert-row:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+/* Selection and focus are different states and must look different: an operator
+   arrowing through the list has not changed what the panels are showing. */
+.io2-alert-row.is-selected { background: rgba(255, 255, 255, 0.09); box-shadow: inset 0 0 0 1px var(--cx-line); }
+.io2-alert-row--danger { border-inline-start-color: var(--cx-danger, #ff4d4f); }
+.io2-alert-row--alert { border-inline-start-color: var(--cx-alert, #ffa53d); }
+.io2-alert-row--info { border-inline-start-color: var(--cx-dim); }
+.io2-alert-row.is-cleared { opacity: 0.72; }
+
+/* At 3/12 the rows are narrower, so they wrap more. Wrapping is the approved
+   answer (§26/§59: never shrink type to fit) — but a long unbroken token, and
+   the alert id in particular, must break rather than push a scrollbar onto the
+   row. `overflow-wrap: anywhere` breaks only where nothing else will fit, so
+   ordinary words still wrap at their spaces. */
+.io2-alert-row { overflow-wrap: anywhere; }
+.io2-alert-line1 { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: 14px; }
+.io2-alert-sev { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; }
+.io2-alert-sev--danger { color: var(--cx-danger, #ff4d4f); }
+.io2-alert-sev--alert { color: var(--cx-alert, #ffa53d); }
+.io2-alert-sev--info { color: var(--cx-dim); }
+.io2-alert-area { font-weight: 700; }
+.io2-alert-msg { min-width: 0; }
+
+.io2-alert-line2 { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--cx-dim); }
+.io2-alert-sep { color: var(--cx-line); }
+.io2-alert-src { letter-spacing: 0.08em; }
+.io2-alert-life { font-weight: 700; letter-spacing: 0.08em; }
+.io2-alert-life--new { color: var(--cx-alert, #ffa53d); }
+.io2-alert-life--in_review { color: var(--cx-text); }
+.io2-alert-life--resolved { color: var(--cx-dim); }
+.io2-alert-owner { color: var(--cx-text); }
+.io2-alert-cleared { letter-spacing: 0.08em; }
+
+.io2-alert-line3 { display: flex; gap: 8px; flex-wrap: wrap; font-size: 11px; letter-spacing: 0.08em; }
+/* Stated on every row that shows a lifecycle. None of this reached a server. */
+.io2-alert-local { font-size: 11px; letter-spacing: 0.06em; opacity: 0.8; }
+.io2-alert-other { color: var(--cx-alert, #ffa53d); }
+/* Compact demo marker: the full badge on every row halved how many alerts fit. */
+.io2-alert-demo {
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ffd166;
+  border: 1px solid #ffd166;
+}
+
+.io2-alerts-empty { display: flex; flex-direction: column; gap: 4px; padding: 14px 4px; }
+.io2-empty-title { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: 0.14em; color: var(--cx-text); }
+.io2-empty-note { margin: 0; font-size: 13px; color: var(--cx-dim); }
+
+/* Visual feed ----------------------------------------------------------------- */
+.io2-vf { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.io2-vf-tabs { display: flex; flex-wrap: wrap; gap: 1px; background: var(--cx-line); border: 1px solid var(--cx-line); }
+.io2-vf-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border: none;
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-dim);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.io2-vf-tab:hover { color: var(--cx-text); }
+.io2-vf-tab.is-active { background: var(--cx-text); color: var(--cx-bg); }
+.io2-vf-tab:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+.io2-vf-dot { width: 6px; height: 6px; border-radius: 50%; }
+.io2-vf-dot--ok { background: var(--cx-safe, #34c76f); }
+.io2-vf-dot--down { background: var(--cx-danger, #ff4d4f); }
+
+.io2-vf-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.io2-vf-body .dl-feed { border: 1px solid var(--cx-line); }
+
+/* The cap still exists — an uncapped feed pushes the analysis band off a 1080p
+   screen — but Phase A3.1 raised it from 380px to 520px with the removed tables'
+   space, and A3.1.1 keeps it there while giving the feed the width to actually
+   reach it. What the operator is looking at is the one thing on this screen
+   worth spending pixels on.
+
+   `object-fit: contain` is what makes the cap safe: a wider panel scales the
+   picture up to its own aspect ratio and stops, so nothing is ever stretched. */
+.c-industrial .io2-vf-body .dl-feed { max-height: 520px; overflow: hidden; }
+.c-industrial .io2-vf-body .dl-feed-img,
+.c-industrial .io2-vf-body .dl-feed-demo-svg {
+  max-height: 520px;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* The unavailable state is not a small print notice: on a live wall this is the
+   screen an operator sees when a camera drops, and it has to read from a step
+   back. */
+.io2-vf-state { display: flex; flex-direction: column; gap: 8px; padding: 18px 12px; border: 1px dashed var(--cx-line); }
+.io2-vf-state--down { border-color: var(--cx-danger, #ff4d4f); }
+.io2-vf-state-title { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: 0.14em; }
+.io2-vf-state--down .io2-vf-state-title { color: var(--cx-danger, #ff4d4f); }
+.io2-vf-state-note { margin: 0; font-size: 12px; color: var(--cx-dim); }
+.io2-vf-state-err {
+  margin: 0;
+  font-size: 11px;
+  color: var(--cx-alert, #ffa53d);
+  overflow-wrap: anywhere;
+}
+
+.io2-vf-facts { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.io2-vf-facts > div { display: flex; flex-direction: column; gap: 1px; }
+.io2-vf-facts dt { font-size: 11px; letter-spacing: 0.12em; color: var(--cx-dim); }
+.io2-vf-facts dd { margin: 0; font-size: 14px; }
+
+.io2-vf-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.io2-vf-action {
+  padding: 5px 11px;
+  border: 1px solid var(--cx-line);
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-text);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.io2-vf-action:hover { border-color: var(--cx-text); }
+.io2-vf-action:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+
+/* The visible camera is a display choice, not the alert's source. */
+.io2-vf-fallback {
+  margin: 0;
+  padding: 4px 8px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--cx-alert, #ffa53d);
+  border: 1px dashed var(--cx-alert, #ffa53d);
+}
+
+.io2-vf-radar-down { display: flex; flex-direction: column; gap: 5px; padding: 8px 10px; border: 1px dashed var(--cx-danger, #ff4d4f); }
+.io2-vf-radar-down .io2-vf-state-title { color: var(--cx-danger, #ff4d4f); }
+
+.io2-allcams { display: flex; flex-direction: column; gap: 6px; }
+.io2-allcams-table { min-width: 0; }
+.io2-allcams-err { margin-inline-start: 5px; color: var(--cx-alert, #ffa53d); }
+.io2-allcams-open {
+  padding: 2px 8px;
+  border: 1px solid var(--cx-line);
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-text);
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.io2-allcams-open:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+
+/* New DANGER notice ----------------------------------------------------------- */
+.io2-danger-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 7px 12px;
+  border: 1px solid var(--cx-danger, #ff4d4f);
+  border-top: none;
+  background: rgba(255, 77, 79, 0.1);
+}
+.io2-danger-tag { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: var(--cx-danger, #ff4d4f); }
+.io2-danger-body { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; font-size: 13px; min-width: 0; }
+.io2-danger-sep { color: var(--cx-line); }
+.io2-danger-area { font-weight: 700; }
+.io2-danger-more { font-size: 11px; color: var(--cx-dim); }
+.io2-danger-go {
+  margin-inline-start: auto;
+  padding: 5px 12px;
+  border: 1px solid var(--cx-danger, #ff4d4f);
+  border-radius: 0;
+  background: transparent;
+  color: var(--cx-danger, #ff4d4f);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.io2-danger-go:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 2px; }
+
+/* Selected context in the decision block ---------------------------------------- */
+.io2-sd-selected {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--cx-dim);
+}
+.io2-sd-sel-label { letter-spacing: 0.12em; }
+.io2-sd-sel-val { color: var(--cx-text); overflow-wrap: anywhere; }
+
+.io2-ev-row--other .io2-ev-source { color: var(--cx-alert, #ffa53d); }
+.io2-ev-notassoc { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--cx-alert, #ffa53d); }
+.io2-ev-other { display: inline-flex; align-items: baseline; gap: 5px; }
+
+.io2-rf-context {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--cx-alert, #ffa53d);
+}
+
+/* Notes dialog (Phase A3.2) ------------------------------------------------------ */
+/* The reason is read-only and says so. The tag is dim rather than accent: it is a
+   property of the field, not a warning about it. */
+.io2-notes-ro {
+  margin-inline-start: 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--cx-dim);
+  border: 1px solid var(--cx-line);
+  padding: 1px 6px;
+}
+
+.io2-notes-field { display: flex; flex-direction: column; gap: 6px; }
+
+.io2-notes-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* A real button with a real hit area — 28px square, not a glyph an operator has
+   to aim at. Its accessible name is on the button; the glyph is aria-hidden. */
+.io2-notes-edit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  color: var(--cx-text);
+  background: var(--cx-bg);
+  border: 1px solid var(--cx-line);
+  cursor: pointer;
+}
+.io2-notes-edit:hover { border-color: var(--cx-text); }
+.io2-notes-edit:focus-visible { outline: 2px solid var(--cx-text); outline-offset: 1px; }
+
+/* The stored note, read mode. Pre-wrap so the operator's own line breaks survive
+   the round trip instead of collapsing into one paragraph. */
+.io2-notes-body {
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--cx-text);
+  white-space: pre-wrap;
+  background: var(--cx-bg);
+  border: 1px solid var(--cx-line);
+  min-height: 44px;
+}
+
+/* OPT alert context band (Phase A3.2) --------------------------------------------- */
+.io2-optctx {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 9px 12px;
+  margin-bottom: 1px;
+  font-size: 13px;
+  background: var(--cx-surface);
+  border: 1px solid var(--cx-line);
+}
+
+.io2-optctx-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--cx-accent);
+}
+
+.io2-optctx-item { display: inline-flex; align-items: baseline; gap: 7px; min-width: 0; }
+.io2-optctx-item bdi { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 34ch; }
+.io2-optctx-k { font-size: 11px; letter-spacing: 0.14em; color: var(--cx-dim); }
+
+/* An unresolvable context is a statement about the link, not an error state of
+   the station, so it is marked but not alarming. */
+.io2-optctx--bad { border-style: dashed; }
+.io2-optctx--bad .io2-optctx-tag { color: #ffb020; }
+
+/* The honesty label beside the plot. It has to be read before the plot is, so it
+   sits above it and is not a footnote. */
+.io2-optctx-noassoc {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  border: 1px dashed var(--cx-line);
+}
+.io2-optctx-noassoc strong { font-size: 12px; letter-spacing: 0.14em; }
+.io2-optctx-noassoc span { font-size: 12px; letter-spacing: 0.1em; color: var(--cx-dim); }
+.io2-optctx-noassoc-why { line-height: 1.5; letter-spacing: 0 !important; }
+
+.io2-optctx-track {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--cx-dim);
+}
+
+/* Session log scope ------------------------------------------------------------- */
+.io2-log-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.io2-log-modes { display: inline-flex; gap: 1px; background: var(--cx-line); border: 1px solid var(--cx-line); }
+.io2-log-modes button {
+  padding: 3px 9px;
+  border: none;
+  border-radius: 0;
+  background: var(--cx-surface);
+  color: var(--cx-dim);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.io2-log-modes button.is-active { background: var(--cx-text); color: var(--cx-bg); }
+.io2-log-modes button:focus-visible { outline: 2px solid var(--cx-text); outline-offset: -2px; }
+
+.io2-log-unassigned { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--cx-line); }
+.io2-log-unassigned-title { margin: 0 0 4px; font-size: 11px; letter-spacing: 0.1em; color: var(--cx-dim); }
+
+/* Density: spacing only, never type size. */
+.c-industrial[data-density='comfort'] .io2-alert-row { padding: 10px 12px; }
+.c-industrial[data-density='comfort'] .io2-area-row { padding: 11px 12px; }
+/* Comfort rows are taller, so the same 5-6 rows need a taller window. Retuned
+   in Phase A2: rows no longer grow when selected, so the same window now shows
+   one more of them and the cap comes down to hold the approved count. */
+.c-industrial[data-density='comfort'] .io2-alerts-scroll { max-height: 440px; }
+.c-industrial[data-density='comfort'] .io2-vf-tab { padding: 7px 13px; }
+
+/* --- Responsive ---------------------------------------------------------------------------------------- */
+/* 1366x768 and other narrow desktops: two columns, panels reordered by operational
+   priority. Structural only — no type is scaled anywhere in this file. */
+@media (max-width: 1500px) {
+  /* Two balanced rows of seven instead of an uncontrolled flex wrap that strands
+     a single cell across the full width. Mode and the trailing cell each span
+     two columns so the twelve readouts fill both rows exactly. */
+  .io2-strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+  /* Here the mode cluster is a fixed two-column cell rather than a cell that can
+     grow, so in demo — where the DEMO DATA badge is also present — its contents
+     wrap. Tightening the gaps keeps that wrap to a single extra line and makes
+     English cost exactly what Hebrew costs. Spacing only: no type is touched. */
+  .io2-strip-mode { row-gap: 2px; column-gap: 10px; }
+  .io2-strip-mode { grid-column: span 2; }
+  .io2-strip-cell:last-child { grid-column: span 2; }
+  .io2-strip-cell--gstart { margin-inline-start: 0; }
+
+  /* Two columns, ordered by what a shift actually needs first: the alert list
+     and the feed, then the area board and the analysis, then the log.
+
+     Phase A3.1 rebuilt this rather than shrinking the desktop grid into the
+     width. With three panels gone the feed no longer has to span two rows to
+     earn its height, so Areas sits beside Risk Factors and both get a full half
+     instead of a third. Structural only — nothing here scales type.
+
+     Phase A3.2 (§73) keeps that hierarchy exactly — alerts and feed first, then
+     areas and risk factors — and applies the same two moves as the desktop grid
+     inside it: Risk/Time drops under the feed in the right column, and the
+     session log takes the half cell beside Risk Factors instead of a full-width
+     strip. Alerts and Areas each span their two bands, so both lists get real
+     height at a width where height is what they are short of. This is a grid
+     specific to the breakpoint rather than a copy of the desktop composition,
+     which §73 explicitly allows. */
+  .io2-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-areas:
+      'alerts alerts alerts alerts alerts alerts feed feed feed feed feed feed'
+      'alerts alerts alerts alerts alerts alerts timeline timeline timeline timeline timeline timeline'
+      'areas areas areas areas areas areas factors factors factors factors factors factors'
+      'areas areas areas areas areas areas log log log log log log';
+  }
+
+  .io2-decision { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .io2-log-scroll { height: 210px; }
+  .c-industrial .io2-grid .dm-table-scroll { max-height: 210px; }
+  /* Phase A3.1 target: 3–4 rows here. The rows themselves are taller and easier
+     to read than in A3, so the same window shows fewer of them — deliberately.
+     The rest are one short scroll away inside the list. */
+  .io2-alerts-scroll { max-height: 300px; }
+  .c-industrial[data-density='comfort'] .io2-alerts-scroll { max-height: 330px; }
+  /* No area-list cap at this breakpoint either (A3.2 §6): the list is sized by
+     the panel, and here the panel is a half-width cell that has plenty of it. */
+  .io2-a-feed .dm-radarplot { max-height: 40vh; }
+  .c-industrial .io2-vf-body .dl-feed,
+  .c-industrial .io2-vf-body .dl-feed-img,
+  .c-industrial .io2-vf-body .dl-feed-demo-svg { max-height: 400px; }
+}
+
+@media (max-width: 1200px) {
+  /* Phase A3.2 §74 offered two orders and asked for the choice to be made after
+     QA. This is the first of them: Risk/Time follows the feed rather than being
+     separated from it by the area board. In one column the two panels are read
+     as a pair — what the camera shows, then how the risk has moved — and putting
+     Areas between them would break the only adjacency this phase created.
+     Alerts and Feed lead, as §74 requires in either order. */
+  .io2-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'alerts'
+      'feed'
+      'timeline'
+      'areas'
+      'factors'
+      'log';
+  }
+
+  .io2-decision { grid-template-columns: minmax(0, 1fr); }
+  .io2-rf-sum { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .io2-filter-row { flex-wrap: wrap; }
+
+  /* The one place the area list needs an upper bound. Here the panel is
+     content-sized, so a long area list would push every panel below it off the
+     screen and the scrolling would land on the page instead of in the list.
+     Viewport-relative and generous on purpose: it is not the arbitrary small cap
+     §6 removed — with the declared areas it never engages at all, and when it
+     does the list has already taken most of the screen. */
+  .io2-area-list { max-height: 60vh; }
+}
+
+@media (max-height: 820px) {
+  .io2-log-scroll { height: 180px; }
+  .c-industrial .io2-grid .dm-table-scroll { max-height: 180px; }
+  /* Short viewports keep the alert list as the operational focus, but at the
+     A1.1 count: 4–5 rows, so the decision band, the list and the feed all sit
+     at or near the fold instead of pushing the feed a screen down. */
+  .io2-alerts-scroll { max-height: 310px; }
+  .c-industrial[data-density='comfort'] .io2-alerts-scroll { max-height: 344px; }
+  /* The 170px cap is gone for the same reason as the others (A3.2 §6). A short
+     viewport gives the panel less height, so the list gets less — which is the
+     panel deciding, not a number that ignores it. */
+}
+
+/* Short viewports (1366x768 and laptop docks): reclaim rail height through
+   spacing only — no type scaling. */
+@media (max-height: 820px) {
+  .io2-rail { gap: 8px; padding: 10px 0; }
+  .io2-rail-link { padding: 7px 16px; }
+}
+
+@media (max-width: 1023px) {
+  .io2-frame { grid-template-columns: 1fr; }
+
+  .io2-rail {
+    position: static;
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .io2-rail-brand { flex-direction: row; align-items: baseline; gap: 8px; padding: 0; }
+  .io2-rail-nav { flex-direction: row; }
+  .io2-rail-link { padding: 8px 10px; border-inline-start: none; border-bottom: 2px solid transparent; }
+  .io2-rail-link.is-active { border-inline-start: none; border-bottom-color: var(--cx-accent); }
+  .io2-rail-link kbd { display: none; }
+  .io2-rail-foot { display: none; }
+
+  .io2-camera-grid,
+  .io2-invest-grid,
+  .io2-settings-grid { grid-template-columns: 1fr; }
+
+  /* Rail is a horizontal strip below 1024px — the bar spans the full width. */
+  .c-industrial[dir='rtl'] .io2-bar,
+  .c-industrial[dir='ltr'] .io2-bar { left: 0; right: 0; }
+}
+
+@media (max-width: 767px) {
+  .io2-page { padding: 8px; }
+  .io2-grid { grid-template-columns: 1fr; }
+  .io2-strip-mode { min-width: 0; }
+}

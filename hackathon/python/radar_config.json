@@ -1,0 +1,20 @@
+{
+  "LD2450_ENABLED": true,
+  "LD2450_PORT": "COM14",
+  "LD2450_BAUD": 115200,
+  "RADAR_USE_MOCK": false,
+  "show_debug_overlay_on_camera": true,
+  "scenario": "approaching_gate",
+  "update_rate_hz": 10,
+  "noise_enabled": true,
+  "max_targets": 3,
+  "gate_distance_alert_mm": 3000,
+  "fence_distance_alert_mm": 2006,
+  "min_distance_mm": 80,
+  "max_distance_mm": 10000,
+  "max_speed_cm_s": 1200,
+  "alert_speed_cm_s": 60,
+  "danger_speed_cm_s": 120,
+  "max_lateral_mm": 6000,
+  "max_forward_mm": 10000
+}

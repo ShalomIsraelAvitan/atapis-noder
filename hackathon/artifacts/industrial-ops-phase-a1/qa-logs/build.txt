@@ -1,0 +1,108 @@
+﻿
+> hackathon@0.0.0 build
+> vite build
+
+vite v7.2.2 building client environment for production...
+transforming...
+✓ 766 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                      0.46 kB │ gzip:   0.29 kB
+dist/assets/CompareCenter-DFdoEOXr.css               3.93 kB │ gzip:   1.20 kB
+dist/assets/design-lab-base-QkIcPGyM.css             4.35 kB │ gzip:   1.44 kB
+dist/assets/DesignLabHome-BswkqfYW.css               4.95 kB │ gzip:   1.48 kB
+dist/assets/MinimalShell-De3Ga98L.css                4.96 kB │ gzip:   1.48 kB
+dist/assets/Sentinel3D-BnvJPcKj.css                  5.17 kB │ gzip:   1.53 kB
+dist/assets/MinimalCommand-D6AvkFvl.css              5.35 kB │ gzip:   1.57 kB
+dist/assets/IndustrialOps-B5g8zb2f.css               5.91 kB │ gzip:   1.79 kB
+dist/assets/NeuralFusion-BnvYut-y.css                8.10 kB │ gzip:   2.32 kB
+dist/assets/SentinelShell-BAtgm0x0.css               8.37 kB │ gzip:   2.25 kB
+dist/assets/NeuralShell-CiFeApkN.css                12.10 kB │ gzip:   3.07 kB
+dist/assets/PrimeShell-BMRwzw3H.css                 21.81 kB │ gzip:   4.39 kB
+dist/assets/ConceptsApp-DnGQNxBB.css                21.89 kB │ gzip:   4.36 kB
+dist/assets/IndustrialShell-BqC8_oBS.css            32.27 kB │ gzip:   5.73 kB
+dist/assets/index-B-RJ1J2j.css                      62.65 kB │ gzip:  10.22 kB
+dist/assets/DemoModeBadge-DrM39N7V.js                0.24 kB │ gzip:   0.23 kB
+dist/assets/shortcuts-CsLuFWs1.js                    0.43 kB │ gzip:   0.30 kB
+dist/assets/useLab-BcXUrwjY.js                       0.57 kB │ gzip:   0.36 kB
+dist/assets/SystemMode-BFZYf14u.js                   0.59 kB │ gzip:   0.37 kB
+dist/assets/MinimalAbout-Dhc8bOpK.js                 0.65 kB │ gzip:   0.37 kB
+dist/assets/OpenAlerts-CJzDJHaF.js                   0.76 kB │ gzip:   0.46 kB
+dist/assets/RiskSummary-B8jYTQWs.js                  0.93 kB │ gzip:   0.43 kB
+dist/assets/useReducedMotion-DGh3OiG-.js             0.99 kB │ gzip:   0.53 kB
+dist/assets/PrimeAbout-CDbu0puj.js                   1.00 kB │ gzip:   0.44 kB
+dist/assets/MinimalAdmin-Bapzk45Y.js                 1.09 kB │ gzip:   0.60 kB
+dist/assets/ConceptSwitcher-DnuD6HZZ.js              1.09 kB │ gzip:   0.67 kB
+dist/assets/status-primitives-cFpXcbM4.js            1.10 kB │ gzip:   0.60 kB
+dist/assets/NeuralAbout-BhPY8F-K.js                  1.17 kB │ gzip:   0.60 kB
+dist/assets/StatusBoard-DtWYivb-.js                  1.21 kB │ gzip:   0.63 kB
+dist/assets/MinimalSettings-C6q4D_1V.js              1.21 kB │ gzip:   0.56 kB
+dist/assets/NeuralSettings-BnxTbpYq.js               1.22 kB │ gzip:   0.54 kB
+dist/assets/SentinelSettings-C7jcq62c.js             1.22 kB │ gzip:   0.54 kB
+dist/assets/NeuralAdmin-BBbHwUPt.js                  1.24 kB │ gzip:   0.61 kB
+dist/assets/SentinelAdmin-DbySCFrd.js                1.24 kB │ gzip:   0.62 kB
+dist/assets/PrimeAdmin-DJRnvXGo.js                   1.28 kB │ gzip:   0.65 kB
+dist/assets/SentinelShell-D-oeACvj.js                1.34 kB │ gzip:   0.80 kB
+dist/assets/WhyThisRisk-B-P0Drs8.js                  1.35 kB │ gzip:   0.66 kB
+dist/assets/MinimalShell-BM6_h0XG.js                 1.44 kB │ gzip:   0.81 kB
+dist/assets/DesignLabLayout-BeFShnP5.js              1.48 kB │ gzip:   0.82 kB
+dist/assets/TracksTable-C6Jw0xOC.js                  1.50 kB │ gzip:   0.74 kB
+dist/assets/NeuralShell-Dx5UBJMA.js                  1.51 kB │ gzip:   0.81 kB
+dist/assets/ConfirmDialog-7fmrPkMu.js                1.69 kB │ gzip:   0.80 kB
+dist/assets/SentinelAbout-C1YeHSXs.js                1.71 kB │ gzip:   0.76 kB
+dist/assets/IndustrialAdmin-DHttZwGX.js              1.92 kB │ gzip:   0.73 kB
+dist/assets/AboutSections-CfUXbJo1.js                1.96 kB │ gzip:   0.74 kB
+dist/assets/SentinelInvestigation-DYGazxX3.js        2.14 kB │ gzip:   0.98 kB
+dist/assets/IndustrialAbout-6FuxrZkH.js              2.15 kB │ gzip:   0.81 kB
+dist/assets/IndustrialSettings-5D4V26b_.js           2.16 kB │ gzip:   0.98 kB
+dist/assets/MinimalInvestigation-zk1pwyLy.js         2.19 kB │ gzip:   1.01 kB
+dist/assets/NeuralInvestigation-DJqz1LUb.js          2.33 kB │ gzip:   1.09 kB
+dist/assets/CameraFeed-uK9d73Ao.js                   2.33 kB │ gzip:   1.09 kB
+dist/assets/EventList-CI9CfWrx.js                    2.35 kB │ gzip:   0.92 kB
+dist/assets/PrimeShell-DIBYIu_Z.js                   2.53 kB │ gzip:   1.18 kB
+dist/assets/TargetsTable-Bgv1ZJ6v.js                 2.56 kB │ gzip:   1.09 kB
+dist/assets/IndustrialInvestigation-BwGZhIfj.js      2.63 kB │ gzip:   0.83 kB
+dist/assets/IndustrialCamera-DFav7hfO.js             2.74 kB │ gzip:   0.99 kB
+dist/assets/ContactPairCard-Rcz0xQb1.js              2.82 kB │ gzip:   1.08 kB
+dist/assets/MinimalCamera-CG4Nyz3r.js                3.14 kB │ gzip:   1.19 kB
+dist/assets/IndustrialShell-Bw3aq7KM.js              3.18 kB │ gzip:   1.57 kB
+dist/assets/RiskTimelineChart-B5tD8Z4R.js            3.64 kB │ gzip:   1.61 kB
+dist/assets/SentinelCamera-BY09PWZH.js               3.67 kB │ gzip:   1.49 kB
+dist/assets/NeuralCamera-DNMY5zr_.js                 3.76 kB │ gzip:   1.48 kB
+dist/assets/FusionArchitecture-BsZ4_GC7.js           3.86 kB │ gzip:   1.71 kB
+dist/assets/MinimalDashboard-hABRa5sa.js             4.10 kB │ gzip:   1.51 kB
+dist/assets/RadarPlot-BEeRROut.js                    4.23 kB │ gzip:   1.67 kB
+dist/assets/ActivitySummary-LNYc2l3e.js              4.24 kB │ gzip:   1.80 kB
+dist/assets/NeuralDashboard-DeENdSOA.js              4.43 kB │ gzip:   1.76 kB
+dist/assets/SentinelDashboard-FJi5GOuu.js            4.67 kB │ gzip:   1.81 kB
+dist/assets/PrimeInvestigation-BEkbJp9J.js           4.79 kB │ gzip:   2.09 kB
+dist/assets/PrimeCamera-CEXkaT8W.js                  5.36 kB │ gzip:   2.07 kB
+dist/assets/MinimalCommand-Cr1_4345.js               5.78 kB │ gzip:   2.17 kB
+dist/assets/PrimeSettings-R-PRzF8h.js                5.88 kB │ gzip:   2.58 kB
+dist/assets/Sentinel3D-CouUSIxS.js                   6.43 kB │ gzip:   2.65 kB
+dist/assets/PrimeDashboard-j1hkemOu.js               6.74 kB │ gzip:   2.46 kB
+dist/assets/UserDetailsPane-CuDmYMr-.js              7.92 kB │ gzip:   2.57 kB
+dist/assets/NeuralFusion-C4l_WNrG.js                 8.11 kB │ gzip:   2.82 kB
+dist/assets/IndustrialOps-CQgIiEJf.js                8.19 kB │ gzip:   2.64 kB
+dist/assets/EventDetails-D6EEY6WG.js                 8.81 kB │ gzip:   2.07 kB
+dist/assets/useAtapisData-rEXvO94V.js                9.49 kB │ gzip:   3.85 kB
+dist/assets/SettingsForms-B9mufd77.js                9.76 kB │ gzip:   3.46 kB
+dist/assets/DesignLabHome-CzKvQwrf.js               12.07 kB │ gzip:   4.43 kB
+dist/assets/CompareCenter-BW3KvYh4.js               15.49 kB │ gzip:   5.67 kB
+dist/assets/ConceptsApp-ChPgr-NW.js                 39.63 kB │ gzip:  13.70 kB
+dist/assets/IndustrialDashboard-C52r4p3-.js         80.26 kB │ gzip:  23.33 kB
+dist/assets/index-D_BLZkq0.js                      300.28 kB │ gzip:  89.46 kB
+dist/assets/Scene-DEltNGmX.js                    1,016.24 kB │ gzip: 285.60 kB
+node.exe : 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: 
+https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 3.93s

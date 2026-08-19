@@ -1,0 +1,857 @@
+/* Fusion Prime — the mature blend. Graphite surfaces, restrained gold accent,
+   Minimal-grade calm with Industrial-grade data tables. Cinematic motion is
+   confined to the digital twin (dashboard); everything else stays subtle. */
+
+.c-prime {
+  --cx-bg: #0c0c10;
+  --cx-surface: #15151b;
+  --cx-line: rgba(255, 255, 255, 0.11);
+  --cx-text: #f2f2f5;
+  --cx-dim: #91919c;
+  --cx-accent: #c9a24b;
+  --cx-radius: 14px;
+  --cx-pad: 18px;
+
+  /* Measured heights of the two fixed elements. Every clearance below is derived
+     from these, so moving one cannot leave content stranded under the other. */
+  --pp-strip-h: 42px;
+  --pp-switcher-h: 46px;
+  --pp-bottom-reserve: calc(var(--pp-strip-h) + var(--pp-switcher-h) + 20px);
+
+  /* Density knobs. Comfort is the readable baseline; compact trades whitespace,
+     never legibility — no text below 12px in either mode. */
+  --pp-gap: 18px;
+  --pp-page-top: 26px;
+  --pp-card-pad: var(--cx-pad);
+  --pp-row-y: 9px;
+  --pp-chart-h: 300px;
+  --pp-twin-h: 300px;
+
+  background:
+    radial-gradient(50rem 26rem at 50% -8%, rgba(201, 162, 75, 0.05), transparent 60%),
+    var(--cx-bg);
+  padding-bottom: var(--pp-bottom-reserve);
+}
+
+/* --- Density (scoped to this concept only) ---------------------------------------
+   Other concepts keep whatever their own stylesheet declares; nothing here
+   leaks past .c-prime. */
+.c-prime[data-density='comfort'] {
+  --pp-gap: 18px;
+  --pp-page-top: 26px;
+  --pp-card-pad: 18px;
+  --pp-row-y: 9px;
+  --pp-chart-h: 300px;
+  --pp-twin-h: 300px;
+}
+
+.c-prime[data-density='compact'] {
+  --pp-gap: 10px;
+  --pp-page-top: 14px;
+  --pp-card-pad: 11px;
+  --pp-row-y: 5px;
+  --pp-chart-h: 210px;
+  --pp-twin-h: 208px;
+  --cx-pad: 11px;
+}
+
+.c-prime[data-density='compact'] .pp-title { font-size: clamp(1.15rem, 2vw, 1.6rem); }
+.c-prime[data-density='compact'] .pp-head { padding-block: 0; }
+.c-prime[data-density='compact'] .pp-eyebrow { margin-bottom: 4px; }
+.c-prime[data-density='compact'] .dm-table th,
+.c-prime[data-density='compact'] .dm-table td { padding-block: var(--pp-row-y); }
+.c-prime[data-density='compact'] .pp-decision { padding: 8px 12px; }
+.c-prime[data-density='compact'] .dm-cp { padding: 9px 11px; gap: 7px; }
+.c-prime[data-density='compact'] .dm-cp-metrics { gap: 7px; }
+.c-prime[data-density='compact'] .dm-why-item { padding-block: 5px; }
+.c-prime[data-density='compact'] .dm-timeline { gap: 9px; }
+.c-prime[data-density='compact'] .dm-timeline-node { padding-block: 4px; }
+.c-prime[data-density='compact'] .pp-about { gap: 16px; }
+
+/* --- Top bar ------------------------------------------------------------------ */
+.pp-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 24px;
+  height: 56px;
+  border-bottom: 1px solid var(--cx-line);
+  background: color-mix(in srgb, var(--cx-bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.pp-brand {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--cx-text);
+  white-space: nowrap;
+}
+
+.pp-brand em {
+  font-style: normal;
+  color: var(--cx-accent);
+  font-weight: 700;
+}
+
+.pp-nav-links { display: flex; gap: 2px; overflow-x: auto; }
+
+.pp-nav-link {
+  position: relative;
+  padding: 17px 14px;
+  color: var(--cx-dim);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+.pp-nav-link:hover { color: var(--cx-text); }
+
+.pp-nav-link.is-active { color: var(--cx-text); }
+
+.pp-nav-link.is-active::after {
+  content: '';
+  position: absolute;
+  inset-inline: 12px;
+  bottom: 0;
+  height: 2px;
+  background: var(--cx-accent);
+}
+
+.pp-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* --- Bottom command strip ------------------------------------------------------- */
+.pp-strip {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 70;
+  border-top: 1px solid var(--cx-line);
+  background: color-mix(in srgb, var(--cx-bg) 92%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.pp-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 9px 24px;
+  overflow-x: auto;
+}
+
+.pp-strip-risk { display: inline-flex; align-items: baseline; gap: 6px; }
+
+.pp-strip-num {
+  font-size: 20px;
+  font-weight: 350;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.pp-strip-label {
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  color: var(--cx-dim);
+  font-family: var(--cx-font-mono);
+}
+
+.pp-strip-kv {
+  font-size: 11px;
+  font-family: var(--cx-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--cx-dim);
+  white-space: nowrap;
+}
+
+.pp-strip-dots {
+  display: inline-flex;
+  gap: 14px;
+  margin-inline-start: auto;
+  font-size: 11px;
+  color: var(--cx-dim);
+  white-space: nowrap;
+}
+
+/* the concept switcher floats above the strip in this concept */
+.c-prime .cs-bar { bottom: var(--pp-strip-h); }
+
+/* Short viewports: the switcher is Design-Lab chrome, not product UI, so it
+   shrinks out of the way rather than eating operational rows. */
+@media (max-height: 820px) {
+  .c-prime[data-density] { --pp-switcher-h: 34px; }
+  .c-prime .cs-bar { padding: 2px; }
+  .c-prime .cs-home,
+  .c-prime .cs-link,
+  .c-prime .cs-lang { padding: 4px 9px; font-size: 11px; }
+}
+
+/* --- Page scaffolding ------------------------------------------------------------ */
+.pp-page {
+  width: min(1240px, 100% - 40px);
+  margin: 0 auto;
+  padding-block: var(--pp-page-top) 12px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pp-gap);
+}
+
+.pp-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+.pp-eyebrow {
+  margin: 0 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--cx-accent);
+  font-family: var(--cx-font-mono);
+}
+
+.pp-title { margin: 0; font-size: clamp(1.4rem, 2.8vw, 2.1rem); font-weight: 650; letter-spacing: -0.02em; }
+
+.pp-muted { color: var(--cx-dim); font-size: 11.5px; font-family: var(--cx-font-mono); }
+
+.pp-card {
+  padding: var(--pp-card-pad);
+  border-radius: var(--cx-radius);
+  border: 1px solid var(--cx-line);
+  background: color-mix(in srgb, var(--cx-surface) 82%, transparent);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.pp-cta {
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--cx-accent) 55%, transparent);
+  color: var(--cx-accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+.pp-cta:hover { background: color-mix(in srgb, var(--cx-accent) 14%, transparent); color: var(--cx-accent); }
+
+.pp-actions { display: flex; gap: 10px; }
+
+/* --- Dashboard -------------------------------------------------------------------- */
+.pp-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-block: 6px 4px;
+}
+
+/* Command header: the decision sentence leads, risk summary + view toggle sit
+   to the side so the operator reads "what is happening" before any number. */
+.pp-command-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--pp-gap);
+  align-items: stretch;
+}
+/* Scoped to this concept on purpose: .dm-decision carries no base styling, so
+   styling it globally would restyle every other concept's header too. */
+.c-prime .pp-decision {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 16px;
+  border: 1px solid var(--cx-line);
+  background: color-mix(in srgb, var(--cx-surface) 60%, transparent);
+  border-radius: var(--cx-radius);
+}
+.c-prime .pp-decision .dm-decision-headline {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.9vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.c-prime .pp-decision .dm-decision-sub {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--cx-dim);
+  font-family: var(--cx-font-mono);
+}
+.c-prime .pp-decision .dm-decision-assoc {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--cx-dim);
+  font-family: var(--cx-font-mono);
+  letter-spacing: 0.04em;
+}
+.c-prime .pp-decision.dm-decision--alert {
+  border-color: color-mix(in srgb, var(--dl-alert) 40%, var(--cx-line));
+  background: color-mix(in srgb, var(--dl-alert) 7%, var(--cx-surface));
+}
+.c-prime .pp-decision.dm-decision--danger {
+  border-color: color-mix(in srgb, var(--dl-danger) 45%, var(--cx-line));
+  background: color-mix(in srgb, var(--dl-danger) 9%, var(--cx-surface));
+}
+.pp-command-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pp-viewtoggle {
+  display: inline-flex;
+  border: 1px solid var(--cx-line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.pp-viewtoggle button {
+  padding: 5px 14px;
+  border: 0;
+  background: transparent;
+  color: var(--cx-dim);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.pp-viewtoggle button.is-active { background: color-mix(in srgb, var(--cx-accent) 18%, transparent); color: var(--cx-text); }
+.pp-viewtoggle button:focus-visible { outline: 2px solid var(--cx-accent); outline-offset: -2px; }
+
+.pp-command-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--pp-gap);
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .pp-command-head { grid-template-columns: 1fr; }
+  .pp-command-aside { align-items: stretch; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+  .pp-command-row { grid-template-columns: 1fr; }
+}
+
+/* 1366x768 and other short screens: Command must show the decision, both stage
+   cards AND the two command-row panels above the fixed chrome. Whitespace and
+   the twin's height give way; type sizes do not. */
+/* NOTE: these selectors must match the specificity of the [data-density] blocks
+   above — a media query adds none, so a plain `.c-prime` here would lose to
+   `.c-prime[data-density='comfort']` and silently do nothing. */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .c-prime[data-density='comfort'],
+  .c-prime[data-density] {
+    --pp-gap: 10px;
+    --pp-page-top: 10px;
+    --pp-card-pad: 11px;
+    --pp-twin-h: 186px;
+  }
+  .c-prime .pp-page { padding-block: var(--pp-page-top) 6px; }
+  .c-prime .pp-decision { padding: 8px 14px; gap: 2px; }
+  .c-prime .pp-decision .dm-decision-headline { font-size: 1.05rem; }
+  .c-prime .pp-card { gap: 7px; }
+  .c-prime .pp-hero { padding-block: 0; }
+  /* The feed's 16/9 ratio alone is taller than the budget at this height, and it
+     would drag the twin up with it (the stage row stretches). Both are pinned to
+     the same height so the reasoning panels below stay on the first screen. */
+  .c-prime .pp-feed .dl-feed,
+  .c-prime .pp-feed-large .dl-feed { aspect-ratio: auto; height: var(--pp-twin-h); }
+  .c-prime .pp-command-row .dm-why-list { gap: 4px; }
+  .c-prime .pp-command-row .dm-why-item { padding-block: 5px; }
+  /* Risk numbers stay legible but stop reserving hero-sized space. */
+  .c-prime .pp-hero-risks .dm-risk--primary .dm-risk-value { font-size: 2.1rem; }
+}
+
+/* Compact at the same height buys back roughly another card of vertical space.
+   Declared after the block above so it wins at equal specificity. */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .c-prime[data-density='compact'] { --pp-gap: 7px; --pp-page-top: 7px; --pp-card-pad: 9px; --pp-twin-h: 156px; }
+  .c-prime[data-density='compact'] .pp-decision { padding: 6px 12px; }
+  .c-prime[data-density='compact'] .pp-hero-risks .dm-risk--primary .dm-risk-value { font-size: 1.7rem; }
+}
+
+.pp-stage-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--pp-gap);
+  align-items: stretch;
+}
+
+.pp-twin { position: relative; }
+
+.pp-twin-stage {
+  position: relative;
+  flex: 1;
+  min-height: var(--pp-twin-h);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #08080c;
+  border: 1px solid var(--cx-line);
+}
+
+.pp-twin-stage canvas { position: absolute; inset: 0; }
+
+.pp-twin-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: var(--cx-dim);
+  font-family: var(--cx-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.pp-twin-fallback { padding: 18px; }
+
+.pp-twin-note {
+  margin: 0;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--cx-dim);
+  font-family: var(--cx-font-mono);
+  text-align: center;
+}
+
+.pp-feed .dl-feed { border-radius: 10px; aspect-ratio: 16 / 9; }
+
+.pp-kv { display: flex; gap: 26px; flex-wrap: wrap; margin: 0; }
+.pp-kv dt {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cx-dim);
+  margin-bottom: 2px;
+}
+.pp-kv dd { margin: 0; font-size: 13.5px; font-weight: 600; }
+
+.pp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--pp-gap); }
+.pp-span2 { grid-column: span 2; }
+
+/* --- Camera ------------------------------------------------------------------------- */
+.pp-source-tabs { display: inline-flex; gap: 4px; }
+
+.pp-source-tabs button {
+  padding: 6px 14px;
+  border: 1px solid var(--cx-line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cx-dim);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-family: var(--cx-font-mono);
+  cursor: pointer;
+  transition: background var(--dl-dur-fast) var(--dl-ease-out), color var(--dl-dur-fast) var(--dl-ease-out);
+}
+
+.pp-source-tabs button.is-active { background: var(--cx-accent); color: #16120a; border-color: transparent; }
+
+.pp-camera-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(280px, 1fr);
+  gap: var(--pp-gap);
+  align-items: start;
+}
+
+.pp-camera-main { display: flex; flex-direction: column; gap: var(--pp-gap); min-width: 0; }
+.pp-feed-large { padding: 10px; }
+.pp-feed-large .dl-feed { border-radius: 10px; aspect-ratio: 16 / 9; }
+
+.pp-feed-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pp-feed-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pp-feed-notice { font-size: 11.5px; color: var(--cx-dim); font-family: var(--cx-font-mono); }
+/* The fullscreen target must fill the screen itself, not sit letterboxed inside it. */
+.pp-feed-frame:fullscreen { display: flex; align-items: center; justify-content: center; background: #000; }
+.pp-feed-frame:fullscreen .dl-feed { width: 100%; height: 100%; border-radius: 0; aspect-ratio: auto; }
+
+.pp-camera-rail { display: flex; flex-direction: column; gap: var(--pp-gap); min-width: 0; }
+
+.pp-camera-tables { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--pp-gap); }
+
+/* --- Investigation --------------------------------------------------------------------- */
+.pp-invest-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--pp-gap);
+  align-items: start;
+}
+
+/* The chart's 560x160 viewBox is 3.5:1, so at full page width it renders ~340px
+   tall and pushes the events out of the first screen. Pinning its height keeps
+   the proportions and hands the space back to the evidence. */
+.c-prime .pp-invest .dm-chart-svg {
+  height: var(--pp-chart-h);
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+@media (max-height: 820px) {
+  .c-prime[data-density] { --pp-chart-h: 260px; }
+  .c-prime[data-density='compact'] { --pp-chart-h: 196px; }
+  /* Filters collapse to a single quiet row so the timeline starts on screen 1. */
+  .c-prime .pp-invest .dm-filters { gap: 8px 12px; }
+  .c-prime .pp-invest .dm-filter { font-size: 10.5px; }
+  .c-prime .pp-invest .dm-filter input,
+  .c-prime .pp-invest .dm-filter select { padding: 4px 8px; font-size: 12px; }
+  .c-prime .pp-invest .dm-filter--risk input[type='range'] { min-width: 110px; }
+}
+
+/* The page scrolls, not the panel: a scroller here would nest inside the page
+   scroller and trap the wheel over the list. */
+.pp-invest-list { min-width: 0; }
+
+/* Wide screens read as three columns — events, evidence media, record fields —
+   without splitting EventDetails across components. */
+.pp-invest-detail { min-width: 0; }
+@media (min-width: 1200px) {
+  .pp-invest-layout { grid-template-columns: minmax(240px, 0.8fr) minmax(0, 2fr); }
+  .c-prime .pp-invest-detail .dm-eventdetails--tabbed {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: var(--pp-gap);
+    align-items: start;
+  }
+  .c-prime .pp-invest-detail .dm-eventdetails--tabbed > .dm-evidence { grid-row: 1 / -1; }
+  .c-prime .pp-invest-detail .dm-eventdetails--tabbed > .dm-evtabs { grid-column: 2; }
+  /* Evidence is the point of an investigation screen — give it real size. */
+  .c-prime .pp-invest-detail .dm-evidence-img { max-height: 520px; }
+}
+
+/* Selection is gold here, matching every other affirmative accent in Prime. */
+.c-prime .dm-timeline-item.is-selected .dm-timeline-node,
+.c-prime .dm-event.is-selected,
+.c-prime .dm-table tbody tr.is-selected {
+  border-color: color-mix(in srgb, var(--cx-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--cx-accent) 12%, transparent);
+}
+
+/* --- About -------------------------------------------------------------------------------- */
+.pp-about { gap: 26px; }
+.pp-about-hero { padding-block: 14px 0; }
+
+.pp-divider {
+  border: none;
+  height: 1px;
+  margin: 4px 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--cx-accent) 50%, transparent), transparent);
+}
+
+.pp-about-section h2 { color: var(--cx-text); }
+.pp-about-flow { margin-top: -8px; }
+.pp-about-tail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--pp-gap); }
+
+/* --- Settings ------------------------------------------------------------------------------- */
+.pp-settings-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--pp-gap); align-items: start; }
+.pp-settings-main, .pp-settings-side { display: flex; flex-direction: column; gap: var(--pp-gap); min-width: 0; }
+
+.pp-admin-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: var(--pp-gap); align-items: start; }
+.pp-admin-side { display: flex; flex-direction: column; gap: var(--pp-gap); min-width: 0; position: sticky; top: 76px; }
+.pp-rail-hint { margin-top: 10px; }
+
+.pp-checks-note { margin: 0; font-size: 11.5px; color: var(--cx-dim); }
+
+.pp-checks-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+.pp-check {
+  position: relative;
+  padding: 8px 12px;
+  padding-inline-start: 26px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pp-check::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 10px;
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cx-dim);
+}
+
+.pp-conncheck { display: flex; flex-direction: column; gap: 10px; }
+.pp-conncheck-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 0; background: none; }
+.pp-conncheck-result { font-size: 11.5px; font-family: var(--cx-font-mono); color: var(--cx-dim); }
+.pp-conncheck-result.is-ok { color: var(--dl-safe); }
+.pp-conncheck-result.is-err { color: var(--dl-alert); }
+
+.pp-check--warn::before { background: var(--dl-alert); }
+.pp-check--warn { color: color-mix(in srgb, var(--dl-alert) 55%, var(--cx-text)); }
+.pp-check--info::before { background: var(--cx-accent); }
+
+/* --- Shared domain components, skinned for this concept -----------------------------------------
+   These .dm-* components carry no styling of their own. Everything below is
+   scoped to .c-prime so the concepts that render the same components keep the
+   appearance they have today. */
+
+/* Demo indicator — neutral on purpose. Amber is the ALERT hue; a permanent amber
+   chip on every preview screen teaches operators to tune out the alert color.
+   Two appear per demo page: one page-level, one beside the FC-nn claim. */
+.c-prime .dm-demo-tag {
+  padding: 3px 9px;
+  border: 1px solid var(--cx-line);
+  border-radius: 999px;
+  color: var(--cx-dim);
+  background: transparent;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+}
+/* The feed's own tag is redundant beside the page-level indicator. */
+.c-prime .dl-feed-demo-tag { display: none; }
+
+/* Contact pair */
+.c-prime .dm-cp {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--cx-line);
+  border-radius: var(--cx-radius);
+  background: color-mix(in srgb, var(--cx-surface) 70%, transparent);
+  color: var(--cx-text);
+  font: inherit;
+  text-align: start;
+}
+.c-prime button.dm-cp { cursor: pointer; }
+.c-prime .dm-cp.is-selected { border-color: color-mix(in srgb, var(--cx-accent) 55%, transparent); }
+.c-prime .dm-cp-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.c-prime .dm-cp-id { font-family: var(--cx-font-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--cx-accent); }
+.c-prime .dm-cp-unverified {
+  padding: 2px 7px;
+  border: 1px solid var(--cx-line);
+  border-radius: 999px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cx-dim);
+}
+.c-prime .dm-cp-sources { display: flex; gap: 14px; font-size: 11.5px; font-family: var(--cx-font-mono); color: var(--cx-dim); }
+.c-prime .dm-cp-sources .is-off { opacity: 0.45; }
+.c-prime .dm-cp-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)); gap: 10px; margin: 0; }
+.c-prime .dm-cp-metric dt { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cx-dim); }
+.c-prime .dm-cp-metric dd { margin: 2px 0 0; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.c-prime .dm-cp-basis { display: block; font-size: 9px; font-weight: 400; letter-spacing: 0.06em; color: var(--cx-dim); font-family: var(--cx-font-mono); }
+.c-prime .dm-cp-assoc { margin: 0; font-size: 11.5px; color: var(--cx-dim); }
+.c-prime .dm-cp-assoc-label { font-weight: 600; }
+.c-prime .dm-cp-assoc-basis { display: block; margin-top: 2px; font-size: 10.5px; opacity: 0.8; }
+.c-prime .dm-cp-list { display: flex; flex-direction: column; gap: 10px; }
+
+/* Fusion architecture — the centrepiece of the System page, sized to read from
+   a projector rather than to sit as a footnote under the prose. */
+.c-prime .dm-arch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 30px 24px;
+  border: 1px solid var(--cx-line);
+  border-radius: var(--cx-radius);
+  background:
+    radial-gradient(40rem 18rem at 50% 0%, color-mix(in srgb, var(--cx-accent) 6%, transparent), transparent 70%),
+    color-mix(in srgb, var(--cx-surface) 55%, transparent);
+}
+.c-prime .dm-arch-sources { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.c-prime .dm-arch-path { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.c-prime .dm-arch-cell { display: inline-flex; align-items: center; gap: 8px; }
+.c-prime .dm-arch-node {
+  padding: 11px 20px;
+  border: 1px solid var(--cx-line);
+  border-radius: 999px;
+  font-size: 15px;
+  font-family: var(--cx-font-mono);
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--cx-bg) 60%, transparent);
+}
+/* The two sources are told apart by their leading node, not by color alone. */
+.c-prime .dm-arch-node--camera,
+.c-prime .dm-arch-node--radar {
+  border-color: color-mix(in srgb, var(--cx-accent) 55%, transparent);
+  color: var(--cx-accent);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.c-prime .dm-arch-node--fusion {
+  border-color: color-mix(in srgb, var(--cx-accent) 70%, transparent);
+  background: color-mix(in srgb, var(--cx-accent) 16%, transparent);
+  font-size: 17px;
+  font-weight: 700;
+  padding: 13px 26px;
+}
+.c-prime .dm-arch-node--risk {
+  border-color: var(--cx-text);
+  font-size: 17px;
+  font-weight: 700;
+  padding: 13px 26px;
+}
+.c-prime .dm-arch-arrow { color: var(--cx-accent); font-size: 17px; }
+.c-prime .dm-arch-join { display: flex; justify-content: center; width: 100%; }
+.c-prime .dm-arch-brace {
+  display: block;
+  width: 2px;
+  height: 26px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--cx-accent) 60%, transparent), transparent);
+}
+.c-prime .dm-arch-out { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+/* Worked example: four stages, read in the same order as the diagram. */
+.c-prime .dm-arch-example { width: 100%; margin-top: 10px; }
+.c-prime .dm-arch-example-title {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cx-dim);
+  text-align: center;
+}
+.c-prime .dm-arch-seq {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.c-prime .dm-arch-seq-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 13px 14px;
+  border: 1px solid var(--cx-line);
+  border-radius: calc(var(--cx-radius) * 0.7);
+  background: color-mix(in srgb, var(--cx-bg) 55%, transparent);
+}
+/* Chevron between stages, so the four cards read as one sequence. It sits on the
+   trailing edge and points the way the text runs, in either direction. */
+.c-prime .dm-arch-seq-step:not(:last-child)::after {
+  content: '›';
+  position: absolute;
+  inset-inline-end: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cx-accent);
+  font-size: 18px;
+  line-height: 1;
+}
+.c-prime [dir='rtl'] .dm-arch-seq-step:not(:last-child)::after,
+.c-prime .dm-arch-seq[dir='rtl'] .dm-arch-seq-step:not(:last-child)::after {
+  transform: translateY(-50%) scaleX(-1);
+}
+.c-prime .dm-arch-seq-stage {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cx-dim);
+}
+.c-prime .dm-arch-seq-value { font-size: 14px; font-weight: 650; }
+.c-prime .dm-arch-seq-step--fusion .dm-arch-seq-value,
+.c-prime .dm-arch-seq-step--risk .dm-arch-seq-value { color: var(--cx-accent); }
+.c-prime .dm-arch-seq-body { font-size: 12px; line-height: 1.55; color: var(--cx-dim); }
+.c-prime .dm-arch-example-note {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--cx-dim);
+  max-width: 88ch;
+  margin-inline: auto;
+  text-align: center;
+}
+
+@media (max-width: 1023px) {
+  .c-prime .dm-arch-seq { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .c-prime .dm-arch-seq-step:not(:last-child)::after { content: none; }
+  .c-prime .dm-arch-node { font-size: 13px; padding: 8px 14px; }
+}
+/* Signal moving left to right along the source paths. Reduced-motion users get
+   the same diagram, still. */
+@media (prefers-reduced-motion: no-preference) {
+  .c-prime .dm-arch--flow .dm-arch-arrow { animation: pp-arch-pulse 2.6s ease-in-out infinite; }
+  .c-prime .dm-arch--flow .dm-arch-cell:nth-child(2) .dm-arch-arrow { animation-delay: 0.2s; }
+  .c-prime .dm-arch--flow .dm-arch-cell:nth-child(3) .dm-arch-arrow { animation-delay: 0.4s; }
+}
+@keyframes pp-arch-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+/* User details */
+.c-prime .dm-userdetails { display: flex; flex-direction: column; gap: 14px; }
+.c-prime .dm-userdetails-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.c-prime .dm-userdetails-name { display: block; font-size: 15px; font-weight: 600; }
+.c-prime .dm-you-badge { margin-inline-start: 8px; font-size: 10px; color: var(--cx-dim); }
+/* Wider columns and a real column gap: two LTR values (email, username) sitting
+   side by side in an RTL grid otherwise read as one run-on string. */
+.c-prime .dm-userdetails-kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px 22px; margin: 0; }
+.c-prime .dm-userdetails-kv dt { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cx-dim); }
+.c-prime .dm-userdetails-kv dd { margin: 2px 0 0; font-size: 12.5px; overflow-wrap: anywhere; }
+.c-prime .dm-userdetails-note { padding: 10px 12px; border: 1px dashed var(--cx-line); border-radius: var(--cx-radius); }
+.c-prime .dm-userdetails-note-label { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cx-dim); }
+.c-prime .dm-userdetails-note-list { display: block; margin-top: 4px; font-size: 11.5px; color: var(--cx-dim); }
+.c-prime .dm-userdetails-actions { display: flex; gap: 8px; }
+
+/* Settings advisories + engineering disclosure */
+.c-prime .dm-advisories { display: flex; flex-direction: column; gap: 10px; margin-block: 10px; }
+.c-prime .dm-advisory { padding: 10px 12px; border: 1px solid var(--cx-line); border-radius: var(--cx-radius); background: rgba(255, 255, 255, 0.03); }
+.c-prime .dm-advisory--warn { border-color: color-mix(in srgb, var(--dl-alert) 40%, var(--cx-line)); }
+.c-prime .dm-advisory-title { margin: 0 0 4px; font-size: 12px; font-weight: 700; }
+.c-prime .dm-advisory-body { margin: 0 0 8px; font-size: 12px; line-height: 1.55; color: var(--cx-dim); }
+.c-prime .dm-advisory-foot { margin: 0; font-size: 11px; color: var(--cx-dim); }
+.c-prime .dm-eng-summary { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 600; }
+.c-prime .dm-eng-tag {
+  padding: 2px 8px;
+  border: 1px solid color-mix(in srgb, var(--cx-accent) 45%, transparent);
+  border-radius: 999px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cx-accent);
+}
+.c-prime .dm-key { margin-inline-start: 8px; font-size: 10px; color: var(--cx-dim); font-family: var(--cx-font-mono); }
+
+/* --- Responsive -------------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .pp-stage-row { grid-template-columns: 1fr; }
+  .pp-grid { grid-template-columns: 1fr; }
+  .pp-span2 { grid-column: span 1; }
+  .pp-camera-layout { grid-template-columns: 1fr; }
+  .pp-camera-tables { grid-template-columns: 1fr; }
+  .pp-invest-layout { grid-template-columns: 1fr; }
+  .pp-about-tail { grid-template-columns: 1fr; }
+  .pp-settings-grid { grid-template-columns: 1fr; }
+  .pp-admin-layout { grid-template-columns: 1fr; }
+  .pp-admin-side { position: static; }
+}
+
+@media (max-width: 767px) {
+  .pp-page { width: calc(100% - 24px); }
+  .pp-nav { gap: 14px; padding: 0 14px; }
+  /* matrix: on mobile the twin hides; hero + cards remain */
+  .pp-twin { display: none; }
+  .pp-strip-inner { gap: 12px; padding: 8px 14px; }
+  .c-prime .cs-bar { bottom: 52px; }
+}

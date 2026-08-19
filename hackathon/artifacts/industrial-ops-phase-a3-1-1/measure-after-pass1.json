@@ -1,0 +1,634 @@
+[
+  {
+    "name": "1920 he demo",
+    "width": 1920,
+    "height": 1080,
+    "lang": "he",
+    "mode": "demo",
+    "doc": 1632,
+    "pageScroll": 552,
+    "hOverflow": 0,
+    "stripH": 58,
+    "gridTop": 73,
+    "feedTop": 73,
+    "areasTop": 73,
+    "alertsTop": 73,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 422,
+      "h": 742
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 742
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 483
+    },
+    "feedMedia": {
+      "w": 820,
+      "h": 483
+    },
+    "alerts": {
+      "w": 422,
+      "h": 742
+    },
+    "factors": {
+      "w": 844,
+      "h": 374
+    },
+    "timeline": {
+      "w": 844,
+      "h": 374
+    },
+    "log": {
+      "w": 1689,
+      "h": 315
+    },
+    "alertRowH": 94,
+    "selectedRowH": 94,
+    "alertRows": 10,
+    "visibleAlerts": 4,
+    "alertsScrollH": 408,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 398,
+      "h": 121
+    },
+    "logScrollH": 236,
+    "logClientH": 236,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": "14px"
+    }
+  },
+  {
+    "name": "1920 he live",
+    "width": 1920,
+    "height": 1080,
+    "lang": "he",
+    "mode": "live",
+    "doc": 1281,
+    "pageScroll": 201,
+    "hOverflow": 0,
+    "stripH": 58,
+    "gridTop": 73,
+    "feedTop": 73,
+    "areasTop": 73,
+    "alertsTop": 73,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 422,
+      "h": 391
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 391
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 194
+    },
+    "feedMedia": {
+      "w": 820,
+      "h": 194
+    },
+    "alerts": {
+      "w": 422,
+      "h": 391
+    },
+    "factors": {
+      "w": 844,
+      "h": 374
+    },
+    "timeline": {
+      "w": 844,
+      "h": 374
+    },
+    "log": {
+      "w": 1689,
+      "h": 315
+    },
+    "alertRowH": 65,
+    "selectedRowH": 65,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 65,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 398,
+      "h": 117
+    },
+    "logScrollH": 236,
+    "logClientH": 236,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": null
+    }
+  },
+  {
+    "name": "1920 en demo",
+    "width": 1920,
+    "height": 1080,
+    "lang": "en",
+    "mode": "demo",
+    "doc": 1681,
+    "pageScroll": 601,
+    "hOverflow": 0,
+    "stripH": 58,
+    "gridTop": 73,
+    "feedTop": 73,
+    "areasTop": 73,
+    "alertsTop": 73,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 422,
+      "h": 791
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 791
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 483
+    },
+    "feedMedia": {
+      "w": 820,
+      "h": 483
+    },
+    "alerts": {
+      "w": 422,
+      "h": 791
+    },
+    "factors": {
+      "w": 844,
+      "h": 374
+    },
+    "timeline": {
+      "w": 844,
+      "h": 374
+    },
+    "log": {
+      "w": 1689,
+      "h": 315
+    },
+    "alertRowH": 120,
+    "selectedRowH": 120,
+    "alertRows": 10,
+    "visibleAlerts": 3,
+    "alertsScrollH": 408,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 398,
+      "h": 121
+    },
+    "logScrollH": 236,
+    "logClientH": 236,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": "14px"
+    }
+  },
+  {
+    "name": "1920 en live",
+    "width": 1920,
+    "height": 1080,
+    "lang": "en",
+    "mode": "live",
+    "doc": 1299,
+    "pageScroll": 219,
+    "hOverflow": 0,
+    "stripH": 58,
+    "gridTop": 73,
+    "feedTop": 73,
+    "areasTop": 73,
+    "alertsTop": 73,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 422,
+      "h": 409
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 409
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 194
+    },
+    "feedMedia": {
+      "w": 820,
+      "h": 194
+    },
+    "alerts": {
+      "w": 422,
+      "h": 409
+    },
+    "factors": {
+      "w": 844,
+      "h": 374
+    },
+    "timeline": {
+      "w": 844,
+      "h": 374
+    },
+    "log": {
+      "w": 1689,
+      "h": 315
+    },
+    "alertRowH": 65,
+    "selectedRowH": 65,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 65,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 398,
+      "h": 117
+    },
+    "logScrollH": 236,
+    "logClientH": 236,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": null
+    }
+  },
+  {
+    "name": "1366 he demo",
+    "width": 1366,
+    "height": 768,
+    "lang": "he",
+    "mode": "demo",
+    "doc": 1843,
+    "pageScroll": 1075,
+    "hOverflow": 0,
+    "stripH": 130,
+    "gridTop": 145,
+    "feedTop": 145,
+    "areasTop": 729,
+    "alertsTop": 145,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 567,
+      "h": 284
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 583
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 327
+    },
+    "feedMedia": {
+      "w": 543,
+      "h": 327
+    },
+    "alerts": {
+      "w": 567,
+      "h": 583
+    },
+    "factors": {
+      "w": 567,
+      "h": 284
+    },
+    "timeline": {
+      "w": 1135,
+      "h": 457
+    },
+    "log": {
+      "w": 1135,
+      "h": 259
+    },
+    "alertRowH": 65,
+    "selectedRowH": 65,
+    "alertRows": 10,
+    "visibleAlerts": 4,
+    "alertsScrollH": 310,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 543,
+      "h": 94
+    },
+    "logScrollH": 180,
+    "logClientH": 180,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": "14px"
+    }
+  },
+  {
+    "name": "1366 he live",
+    "width": 1366,
+    "height": 768,
+    "lang": "he",
+    "mode": "live",
+    "doc": 1471,
+    "pageScroll": 703,
+    "hOverflow": 0,
+    "stripH": 114,
+    "gridTop": 129,
+    "feedTop": 129,
+    "areasTop": 466,
+    "alertsTop": 129,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 567,
+      "h": 175
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 336
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 210
+    },
+    "feedMedia": {
+      "w": 543,
+      "h": 210
+    },
+    "alerts": {
+      "w": 567,
+      "h": 336
+    },
+    "factors": {
+      "w": 567,
+      "h": 175
+    },
+    "timeline": {
+      "w": 1135,
+      "h": 457
+    },
+    "log": {
+      "w": 1135,
+      "h": 259
+    },
+    "alertRowH": 65,
+    "selectedRowH": 65,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 65,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 543,
+      "h": 94
+    },
+    "logScrollH": 180,
+    "logClientH": 180,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": null
+    }
+  },
+  {
+    "name": "1366 en demo",
+    "width": 1366,
+    "height": 768,
+    "lang": "en",
+    "mode": "demo",
+    "doc": 1911,
+    "pageScroll": 1143,
+    "hOverflow": 0,
+    "stripH": 147,
+    "gridTop": 162,
+    "feedTop": 162,
+    "areasTop": 777,
+    "alertsTop": 162,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 567,
+      "h": 304
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 614
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 327
+    },
+    "feedMedia": {
+      "w": 543,
+      "h": 327
+    },
+    "alerts": {
+      "w": 567,
+      "h": 614
+    },
+    "factors": {
+      "w": 567,
+      "h": 304
+    },
+    "timeline": {
+      "w": 1135,
+      "h": 457
+    },
+    "log": {
+      "w": 1135,
+      "h": 259
+    },
+    "alertRowH": 94,
+    "selectedRowH": 94,
+    "alertRows": 10,
+    "visibleAlerts": 3,
+    "alertsScrollH": 310,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 543,
+      "h": 94
+    },
+    "logScrollH": 180,
+    "logClientH": 180,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": "14px"
+    }
+  },
+  {
+    "name": "1366 en live",
+    "width": 1366,
+    "height": 768,
+    "lang": "en",
+    "mode": "live",
+    "doc": 1497,
+    "pageScroll": 729,
+    "hOverflow": 0,
+    "stripH": 114,
+    "gridTop": 129,
+    "feedTop": 129,
+    "areasTop": 493,
+    "alertsTop": 129,
+    "decision": null,
+    "actionBar": null,
+    "dangerNotice": null,
+    "areas": {
+      "w": 567,
+      "h": 174
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 363
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 228
+    },
+    "feedMedia": {
+      "w": 543,
+      "h": 228
+    },
+    "alerts": {
+      "w": 567,
+      "h": 363
+    },
+    "factors": {
+      "w": 567,
+      "h": 174
+    },
+    "timeline": {
+      "w": 1135,
+      "h": 457
+    },
+    "log": {
+      "w": 1135,
+      "h": 259
+    },
+    "alertRowH": 65,
+    "selectedRowH": 65,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 65,
+    "worstRowOverflow": 0,
+    "selectedActions": {
+      "w": 543,
+      "h": 121
+    },
+    "logScrollH": 180,
+    "logClientH": 180,
+    "logMaxH": "none",
+    "panelCount": 6,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "16px",
+      "alertLine1": "14px",
+      "alertLine2": "12px",
+      "areaName": "15px",
+      "logMsg": null
+    }
+  }
+]

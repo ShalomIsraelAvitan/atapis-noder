@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <title>סטרים מצלמה - Smart Sentry</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      direction: rtl;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    #video {
+      border: 2px solid #444;
+      border-radius: 8px;
+      max-width: 100%;
+    }
+    #info {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>עמדת מעקב חכמה - סטרים מצלמה</h1>
+
+  <!-- כאן הסטרים מגיע מהשרת -->
+  <img id="video" src="/video_feed" alt="Video stream" />
+
+  <div id="info">
+    אם אתה רואה וידאו – הסטרים עובד 🙂<br />
+    אפשר בהמשך להוסיף כאן מצב מערכת, זיהוי תנועה וכו' דרך /status.
+  </div>
+</body>
+</html>

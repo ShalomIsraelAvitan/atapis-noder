@@ -1,0 +1,44 @@
+/* Design Lab shared motion + state tokens.
+   Every concept builds its own visual tokens on top of these. */
+
+.design-lab-scope {
+  /* Strong custom curves (built-in CSS easings are too weak) */
+  --dl-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dl-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dl-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --dl-dur-press: 140ms;
+  --dl-dur-fast: 180ms;
+  --dl-dur-med: 240ms;
+  --dl-dur-slow: 420ms;
+
+  /* Semantic risk colors shared across concepts (each concept may re-tint) */
+  --dl-safe: #34c76f;
+  --dl-alert: #f5a623;
+  --dl-danger: #f0402e;
+  --dl-muted: #8a8a92;
+}
+
+.design-lab-scope :focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.design-lab-scope button {
+  transition: transform var(--dl-dur-press) var(--dl-ease-out);
+}
+
+.design-lab-scope button:active {
+  transform: scale(0.97);
+}
+
+/* Reduced motion: keep opacity/color feedback, remove movement */
+@media (prefers-reduced-motion: reduce) {
+  .design-lab-scope *,
+  .design-lab-scope *::before,
+  .design-lab-scope *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

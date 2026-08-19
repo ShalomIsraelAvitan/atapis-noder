@@ -1,0 +1,399 @@
+/* Industrial Ops — tactical telemetry command center.
+   Substrate: dark CRT (#0a0a0a). Accent: hazard red. Mono everything.
+   Zero border-radius by design. */
+
+.io-page {
+  --io-bg: #0a0a0a;
+  --io-panel: #101010;
+  --io-line: #262626;
+  --io-text: #eaeaea;
+  --io-dim: #7a7a7a;
+  --io-red: #e61919;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--io-bg);
+  box-shadow: 0 0 0 100vmax var(--io-bg);
+  clip-path: inset(0 -100vmax);
+  color: var(--io-text);
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  padding-block: 14px 4px;
+  width: min(1500px, 100% - 40px);
+  margin: 0 auto;
+}
+
+.io-tone-safe { color: var(--dl-safe); }
+.io-tone-alert { color: var(--dl-alert); }
+.io-tone-danger { color: var(--io-red); }
+.io-fill-safe { fill: var(--dl-safe); }
+.io-fill-alert { fill: var(--dl-alert); }
+.io-fill-danger { fill: var(--io-red); }
+
+/* --- Top status bar ------------------------------------------------------- */
+.io-topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 1px;
+  background: var(--io-line);
+  border: 1px solid var(--io-line);
+}
+
+.io-topbar-cell,
+.io-mode-block {
+  background: var(--io-panel);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.io-mode-block {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 150px;
+  transition: background var(--dl-dur-fast) linear;
+}
+
+.io-mode-label {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--io-dim);
+}
+
+.io-mode-value {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.io-mode-block--safe .io-mode-value { color: var(--io-text); }
+.io-mode-block--alert { background: #241a05; }
+.io-mode-block--alert .io-mode-value { color: var(--dl-alert); }
+.io-mode-block--danger {
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 12px, rgba(230, 25, 25, 0.16) 12px 24px),
+    #230808;
+}
+.io-mode-block--danger .io-mode-value { color: var(--io-red); }
+
+.io-topbar-risks {
+  gap: 22px;
+  font-size: 11px;
+  color: var(--io-dim);
+  flex-wrap: wrap;
+}
+
+.io-topbar-risks b {
+  font-size: 15px;
+  font-weight: 700;
+  margin-inline-start: 4px;
+}
+
+.io-topbar-links {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.io-link {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.io-link-state {
+  padding: 1px 5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.io-link-state.is-ok {
+  color: #0a0a0a;
+  background: var(--dl-safe);
+}
+
+.io-link-state.is-down {
+  color: var(--io-text);
+  background: var(--io-red);
+}
+
+.io-link-label { color: var(--io-text); letter-spacing: 0.1em; }
+.io-link-detail { color: var(--io-dim); }
+
+.io-topbar-meta {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--io-dim);
+  letter-spacing: 0.06em;
+}
+
+/* --- Main grid --------------------------------------------------------------- */
+.io-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    'radar camera'
+    'events events';
+  gap: 1px;
+  background: var(--io-line);
+  border: 1px solid var(--io-line);
+  border-top: none;
+}
+
+.io-panel {
+  background: var(--io-panel);
+  padding: 12px 14px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.io-panel-radar { grid-area: radar; }
+.io-panel-camera { grid-area: camera; }
+.io-panel-events { grid-area: events; }
+
+.io-panel-title {
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--io-dim);
+}
+
+.io-panel-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.io-source-switch {
+  display: inline-flex;
+  gap: 1px;
+  background: var(--io-line);
+  border: 1px solid var(--io-line);
+}
+
+.io-source-switch button {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 0;
+  background: var(--io-panel);
+  color: var(--io-dim);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: background 120ms linear, color 120ms linear;
+}
+
+.io-source-switch button.is-active {
+  background: var(--io-text);
+  color: var(--io-bg);
+}
+
+.io-panel-camera .dl-feed {
+  border: 1px solid var(--io-line);
+  aspect-ratio: 16 / 9;
+}
+
+/* --- Radar map ---------------------------------------------------------------- */
+.io-map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--io-line);
+}
+
+.io-map-target {
+  cursor: pointer;
+}
+
+.io-map-dot {
+  transition: x 900ms linear, y 900ms linear;
+}
+
+/* --- Tables --------------------------------------------------------------------- */
+.io-table-scroll {
+  overflow-x: auto;
+  max-height: 190px;
+  overflow-y: auto;
+  border: 1px solid var(--io-line);
+}
+
+.io-table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.io-table th {
+  position: sticky;
+  top: 0;
+  background: #161616;
+  color: var(--io-dim);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--io-line);
+  white-space: nowrap;
+}
+
+.io-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #1b1b1b;
+  white-space: nowrap;
+}
+
+.io-table tbody tr {
+  cursor: default;
+  transition: background 120ms linear;
+}
+
+.io-panel-radar .io-table tbody tr { cursor: pointer; }
+
+.io-table tbody tr:hover { background: #161616; }
+.io-table tbody tr.is-selected { background: #1d1d1d; outline: 1px dashed #4a4a4a; }
+
+.io-table-empty {
+  color: var(--io-dim);
+  letter-spacing: 0.12em;
+  text-align: center;
+  padding-block: 14px;
+}
+
+/* --- Event log -------------------------------------------------------------------- */
+.io-events {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 24px;
+  max-height: 170px;
+  overflow-y: auto;
+}
+
+.io-event {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 10.5px;
+  padding: 3px 4px;
+  border-inline-start: 2px solid transparent;
+}
+
+.io-event--alert { border-inline-start-color: var(--dl-alert); }
+.io-event--danger { border-inline-start-color: var(--io-red); color: #ffb3ab; }
+.io-event--empty { color: var(--io-dim); }
+
+.io-event-time {
+  flex: 0 0 auto;
+  color: var(--io-dim);
+}
+
+.io-event-msg {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Ticker --------------------------------------------------------------------------- */
+.io-ticker {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--io-line);
+  border-top: none;
+  background: var(--io-panel);
+  overflow: hidden;
+}
+
+.io-ticker-tag {
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  background: var(--io-red);
+  color: var(--io-text);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  display: flex;
+  align-items: center;
+}
+
+.io-ticker-track {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.io-ticker-text {
+  display: inline-block;
+  padding-inline-start: 100%;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--io-dim);
+  animation: io-ticker 26s linear infinite;
+}
+
+@keyframes io-ticker {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .io-ticker-text {
+    animation: none;
+    padding-inline-start: 12px;
+  }
+}
+
+/* --- Responsive -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .io-main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'camera'
+      'radar'
+      'events';
+  }
+
+  .io-topbar {
+    grid-template-columns: auto 1fr;
+  }
+
+  .io-topbar-meta {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .io-page {
+    width: calc(100% - 16px);
+  }
+
+  .io-topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .io-events {
+    grid-template-columns: 1fr;
+  }
+}

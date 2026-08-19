@@ -1,0 +1,29 @@
+﻿FINAL — live degraded:
+  ops-patch-he-live-degraded-1920x1080.png  (h-overflow 0px)
+  ops-patch-he-live-degraded-1366x768.png  (h-overflow 0px)
+  ops-patch-en-live-degraded-1920x1080.png  (h-overflow 0px)
+STATES — demo alert/danger:
+  ops-patch-he-alert-demo-1920x1080.png  (h-overflow 0px)
+  ops-patch-he-danger-demo-1920x1080.png  (h-overflow 0px)
+STATES — bottom bar during scroll @1366:
+  ops-patch-bottom-bar-scroll-top-1366x768.png  (h-overflow 0px)
+  ops-patch-bottom-bar-scroll-middle-1366x768.png  (h-overflow 0px)
+  ops-patch-bottom-bar-scroll-bottom-1366x768.png  (h-overflow 0px)
+STATES — switcher @1366:
+  ops-patch-switcher-default-collapsed-1366x768.png  (h-overflow 0px)
+  ops-patch-switcher-open-1366x768.png  (h-overflow 0px)
+STATES — system health error:
+  ops-patch-system-health-short-error.png  (h-overflow 0px)
+  ops-patch-system-health-error-details.png  (h-overflow 0px)
+STATES — wording / labels:
+  ops-patch-risk-factors-hebrew.png  (h-overflow 0px)
+  ops-patch-camera-reference-uncalibrated.png  (h-overflow 0px)
+  ops-patch-risk-threshold-labels.png  (h-overflow 0px)
+  ops-patch-radar-columns.png  (h-overflow 0px)
+REGRESSION (after patch):
+  fusion-prime-regression-after-patch01.png  (h-overflow 0px)
+  minimal-regression-after-patch01.png  (h-overflow 0px)
+  sentinel-regression-after-patch01.png  (h-overflow 0px)
+  neural-regression-after-patch01.png  (h-overflow 0px)
+
+unexpected console errors: 0

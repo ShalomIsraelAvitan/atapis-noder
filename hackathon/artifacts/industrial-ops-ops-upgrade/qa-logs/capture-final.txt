@@ -1,0 +1,35 @@
+﻿FINAL (demo):
+  ops-he-demo-1920x1080.png  (h-overflow 0px)
+  ops-en-demo-1920x1080.png  (h-overflow 0px)
+  ops-he-demo-1366x768.png  (h-overflow 0px)
+  ops-en-demo-1366x768.png  (h-overflow 0px)
+FINAL (live):
+  ops-he-live-1920x1080.png  (h-overflow 0px)
+  ops-he-live-1366x768.png  (h-overflow 0px)
+STATES (demo phases — no fabricated live data):
+  ops-safe-idle-demo-1920x1080.png  (h-overflow 0px)
+  ops-safe-detected-demo-1920x1080.png  (h-overflow 0px)
+  ops-alert-approach-demo-1920x1080.png  (h-overflow 0px)
+  ops-danger-armed-demo-1920x1080.png  (h-overflow 0px)
+  ops-radar-disconnected-live-1920x1080.png  (h-overflow 0px)
+  ops-radar-disconnected-live-1366x768.png  (h-overflow 0px)
+  ops-density-compact-demo-1920x1080.png  (h-overflow 0px)
+  ops-density-comfort-demo-1920x1080.png  (h-overflow 0px)
+  ops-concept-switcher-open.png  (h-overflow 0px)
+  ops-concept-switcher-collapsed.png  (h-overflow 0px)
+KEYBOARD FOCUS:
+   Alt+7 -> focus on [log]
+  ops-session-log-focus.png  (h-overflow 0px)
+   Alt+8 -> focus on [radar-targets]
+  ops-radar-targets-focus.png  (h-overflow 0px)
+   Alt+9 -> focus on [camera-tracks]
+  ops-camera-tracks-focus.png  (h-overflow 0px)
+  ops-rail-nav-focus.png  (h-overflow 0px)
+   shortcut guard: PASS — Alt+1 ignored while typing in a field
+REGRESSION (other concepts, after):
+  fusion-prime-regression-after.png  (h-overflow 0px)
+  minimal-regression-after.png  (h-overflow 0px)
+  sentinel-regression-after.png  (h-overflow 0px)
+  neural-regression-after.png  (h-overflow 0px)
+
+unexpected console errors: 0

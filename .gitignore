@@ -1,0 +1,51 @@
+# Python virtual environments (multiple copies exist; see CLAUDE.md C2)
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Frontend build output (regenerated via `npm run build` / run-prod.ps1)
+dist/
+dist-ssr/
+
+# Logs
+logs/
+run-logs/
+*.log
+
+# Secrets / local env (see CLAUDE.md C4 — never commit real credentials)
+.env
+!.env.example
+
+# Runtime data (users.json holds plaintext passwords — see CLAUDE.md C4)
+**/data/users.json
+**/data/monitoring.json
+**/data/images/
+**/outputs/
+*.partial
+status.json
+
+# Editor / local tooling state (not project source)
+.vscode/*
+!.vscode/extensions.json
+.idea
+.impeccable/
+.claude/settings.local.json
+
+# Root-level stray leftovers from wrong-CWD runs (see CLAUDE.md section 3)
+/data/
+/yolov8n.pt
+/yolov8n-pose.pt
+/yolov8m.pt
+/annotated_out.mp4
+/test_output.jsonl
+
+# hackathon/-level stray broken/duplicate artifacts (see CLAUDE.md section 3, L2)
+/hackathon/yolov8n.pt
+/hackathon/yolov8n-pose.pt
+/hackathon/python/video.bin
+/hackathon/python/annotated_out.mp4
+/hackathon/python/test_output.jsonl

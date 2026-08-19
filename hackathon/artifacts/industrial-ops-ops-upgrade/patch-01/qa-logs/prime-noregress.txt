@@ -1,0 +1,22 @@
+﻿PASS  minimal/settings: no calibration group (legacy layout kept)
+PASS  minimal/settings: thresholds still in the Operation fieldset
+PASS  minimal/settings: no topology advisory
+PASS  minimal/settings: legacy raw-key behaviour unchanged  — 6 keys
+PASS  sentinel/settings: no calibration group (legacy layout kept)
+PASS  sentinel/settings: thresholds still in the Operation fieldset
+PASS  sentinel/settings: no topology advisory
+PASS  sentinel/settings: legacy raw-key behaviour unchanged  — 6 keys
+PASS  industrial/settings: no calibration group (legacy layout kept)
+PASS  industrial/settings: thresholds still in the Operation fieldset
+PASS  industrial/settings: no topology advisory
+PASS  industrial/settings: legacy raw-key behaviour unchanged  — 6 keys
+PASS  neural/settings: no calibration group (legacy layout kept)
+PASS  neural/settings: thresholds still in the Operation fieldset
+PASS  neural/settings: no topology advisory
+PASS  neural/settings: legacy raw-key behaviour unchanged  — 6 keys
+PASS  minimal/dashboard: switcher demo badge still present
+PASS  neural/dashboard: switcher demo badge still present
+PASS  industrial/about: no worked example
+PASS  neural/about: no worked example
+
+no regressions

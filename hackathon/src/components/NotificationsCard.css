@@ -1,0 +1,45 @@
+.notifications-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f7fafc;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.notification-item:hover {
+  background: #edf2f7;
+}
+
+.notification-item.unread {
+  background: #eef2ff;
+  border-left: 4px solid #667eea;
+}
+
+.notification-badge {
+  width: 8px;
+  height: 8px;
+  background: #667eea;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+.notification-title {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.notification-desc {
+  font-size: 0.85rem;
+  color: #718096;
+}
+

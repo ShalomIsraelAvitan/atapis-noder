@@ -1,0 +1,58 @@
+﻿errors=4 warnings=0 (baseline: errors=4 warnings=0)
+  src\concepts\data\useArduinoSensor.js:12  react-hooks/set-state-in-effect  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  10 |   useEffect(() => {
+  11 |     if (demo === 'forced') {
+> 12 |       setState({ connected: true, port: 'DEMO', message: 'Demo sensor link' })
+     |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |       return undefined
+  14 |     }
+  15 |     let cancelled = false
+  src\concepts\data\useDetections.js:71  react-hooks/set-state-in-effect  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  69 |
+  70 |   useEffect(() => {
+> 71 |     load()
+     |     ^^^^ Avoid calling setState() directly within an effect
+  72 |     const timer = setInterval(load, POLL_MS)
+  73 |     return () => clearInterval(timer)
+  74 |   }, [load])
+  src\concepts\data\useInvestigationViewModel.js:61  react-hooks/purity  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  59 |   const filtered = useMemo(() => {
+  60 |     const rangeMs = RANGE_OPTIONS.find((r) => r.id === range)?.ms ?? null
+> 61 |     const cutoff = rangeMs ? Date.now() - rangeMs : null
+     |                              ^^^^^^^^^^ Cannot call impure function
+  62 |     const q = search.trim().toLowerCase()
+  63 |     return detectionsApi.detections.filter((event) => {
+  64 |       if (mode !== 'ALL' && event.mode !== mode) return false
+  src\concepts\data\useSettingsViewModel.js:177  react-hooks/set-state-in-effect  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  175 |
+  176 |   useEffect(() => {
+> 177 |     load()
+      |     ^^^^ Avoid calling setState() directly within an effect
+  178 |   }, [load])
+  179 |
+  180 |   const setField = useCallback((key, value) => {
+OK: at baseline

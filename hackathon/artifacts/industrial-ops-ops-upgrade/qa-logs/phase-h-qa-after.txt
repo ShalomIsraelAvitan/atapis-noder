@@ -1,0 +1,103 @@
+﻿PASS  auth: /concepts redirects to /login when logged out
+[login] ok as admin
+PASS  route /concepts/minimal/dashboard
+PASS  route /concepts/minimal/camera/1
+PASS  route /concepts/minimal/history
+PASS  route /concepts/minimal/about
+PASS  route /concepts/minimal/settings
+PASS  route /concepts/minimal/admin
+PASS  route /concepts/sentinel/dashboard
+PASS  route /concepts/sentinel/camera/1
+PASS  route /concepts/sentinel/history
+PASS  route /concepts/sentinel/about
+PASS  route /concepts/sentinel/settings
+PASS  route /concepts/sentinel/admin
+PASS  route /concepts/industrial/dashboard
+PASS  route /concepts/industrial/camera/1
+PASS  route /concepts/industrial/history
+PASS  route /concepts/industrial/about
+PASS  route /concepts/industrial/settings
+PASS  route /concepts/industrial/admin
+PASS  route /concepts/neural/dashboard
+PASS  route /concepts/neural/camera/1
+PASS  route /concepts/neural/history
+PASS  route /concepts/neural/about
+PASS  route /concepts/neural/settings
+PASS  route /concepts/neural/admin
+PASS  route /concepts/fusion-prime/dashboard
+PASS  route /concepts/fusion-prime/camera/1
+PASS  route /concepts/fusion-prime/history
+PASS  route /concepts/fusion-prime/about
+PASS  route /concepts/fusion-prime/settings
+PASS  route /concepts/fusion-prime/admin
+PASS  switcher preserves page + query params
+PASS  switcher preserves camera roomId
+PASS  3D chunk absent on /concepts/fusion-prime/settings
+PASS  3D chunk absent on /concepts/sentinel/settings
+PASS  3D chunk loads on /concepts/fusion-prime/dashboard
+PASS  3D chunk absent on /design-lab/compare
+PASS  no h-overflow concepts/fusion-prime/dashboard @1920x1080
+PASS  no h-overflow concepts/fusion-prime/dashboard @1600x900
+PASS  no h-overflow concepts/fusion-prime/dashboard @1440x900
+PASS  no h-overflow concepts/fusion-prime/dashboard @1366x768
+PASS  no h-overflow concepts/fusion-prime/dashboard @1280x720
+PASS  no h-overflow concepts/fusion-prime/dashboard @1024x768
+PASS  no h-overflow concepts/fusion-prime/dashboard @768x1024
+PASS  no h-overflow concepts/fusion-prime/dashboard @390x844
+PASS  no h-overflow concepts/fusion-prime/settings @1920x1080
+PASS  no h-overflow concepts/fusion-prime/settings @1600x900
+PASS  no h-overflow concepts/fusion-prime/settings @1440x900
+PASS  no h-overflow concepts/fusion-prime/settings @1366x768
+PASS  no h-overflow concepts/fusion-prime/settings @1280x720
+PASS  no h-overflow concepts/fusion-prime/settings @1024x768
+PASS  no h-overflow concepts/fusion-prime/settings @768x1024
+PASS  no h-overflow concepts/fusion-prime/settings @390x844
+PASS  no h-overflow concepts/industrial/dashboard @1920x1080
+PASS  no h-overflow concepts/industrial/dashboard @1600x900
+PASS  no h-overflow concepts/industrial/dashboard @1440x900
+PASS  no h-overflow concepts/industrial/dashboard @1366x768
+PASS  no h-overflow concepts/industrial/dashboard @1280x720
+PASS  no h-overflow concepts/industrial/dashboard @1024x768
+PASS  no h-overflow concepts/industrial/dashboard @768x1024
+PASS  no h-overflow concepts/industrial/dashboard @390x844
+PASS  no h-overflow concepts/neural/camera/1 @1920x1080
+PASS  no h-overflow concepts/neural/camera/1 @1600x900
+PASS  no h-overflow concepts/neural/camera/1 @1440x900
+PASS  no h-overflow concepts/neural/camera/1 @1366x768
+PASS  no h-overflow concepts/neural/camera/1 @1280x720
+PASS  no h-overflow concepts/neural/camera/1 @1024x768
+PASS  no h-overflow concepts/neural/camera/1 @768x1024
+PASS  no h-overflow concepts/neural/camera/1 @390x844
+PASS  no h-overflow concepts/minimal/history @1920x1080
+PASS  no h-overflow concepts/minimal/history @1600x900
+PASS  no h-overflow concepts/minimal/history @1440x900
+PASS  no h-overflow concepts/minimal/history @1366x768
+PASS  no h-overflow concepts/minimal/history @1280x720
+PASS  no h-overflow concepts/minimal/history @1024x768
+PASS  no h-overflow concepts/minimal/history @768x1024
+PASS  no h-overflow concepts/minimal/history @390x844
+PASS  no h-overflow concepts/sentinel/dashboard @1920x1080
+PASS  no h-overflow concepts/sentinel/dashboard @1600x900
+PASS  no h-overflow concepts/sentinel/dashboard @1440x900
+PASS  no h-overflow concepts/sentinel/dashboard @1366x768
+PASS  no h-overflow concepts/sentinel/dashboard @1280x720
+PASS  no h-overflow concepts/sentinel/dashboard @1024x768
+PASS  no h-overflow concepts/sentinel/dashboard @768x1024
+PASS  no h-overflow concepts/sentinel/dashboard @390x844
+PASS  original /(landing)
+PASS  original /rooms
+PASS  original /camera/1
+PASS  original /history
+PASS  original /settings
+PASS  original /admin
+FAIL  original /design-lab :: Error fetching users: TypeError: Failed to fetch
+    at fetchUsers (http://localhost:5174/src/context/AuthContext.jsx:34:30)
+    at http://localhost:5174/src/pages/Admin.jsx:12:5
+    at Object.react_stack_bottom_frame (http://localhost:5174/node_modules/.vite/deps/chunk-6UCKA3E2.js?v=e0643151:18299:
+PASS  original /design-lab/minimal-command
+
+=== QA SUMMARY: 92 passed, 1 failed ===
+  FAIL original /design-lab :: Error fetching users: TypeError: Failed to fetch
+    at fetchUsers (http://localhost:5174/src/context/AuthContext.jsx:34:30)
+    at http://localhost:5174/src/pages/Admin.jsx:12:5
+    at Object.react_stack_bottom_frame (http://localhost:5174/node_modules/.vite/deps/chunk-6UCKA3E2.js?v=e0643151:18299:

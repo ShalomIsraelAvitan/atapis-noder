@@ -1,0 +1,452 @@
+[
+  {
+    "shot": "1920-he-blocked-initial.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "BLOCKED",
+    "soundText": "SND חסום",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 459,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "suspended"
+    }
+  },
+  {
+    "shot": "1920-he-control-closeup-blocked.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "note": "mode cluster only"
+  },
+  {
+    "shot": "1920-he-ready.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND פעיל",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 459,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1920-he-control-closeup-ready.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "note": "mode cluster only"
+  },
+  {
+    "shot": "1920-he-muted.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "MUTED",
+    "soundText": "SND מושתק",
+    "ariaPressed": "true",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 459,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1920-he-control-closeup-muted.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "note": "mode cluster only"
+  },
+  {
+    "shot": "1920-he-muted-persists-after-reload.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "MUTED",
+    "soundText": "SND מושתק",
+    "ariaPressed": "true",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 459,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "suspended"
+    }
+  },
+  {
+    "shot": "1920-he-alert-selected-ready.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND פעיל",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 408,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1920-he-resolve-dialog-with-sound-control.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND פעיל",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 408,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1920-he-live-blocked.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "live",
+    "soundState": "BLOCKED",
+    "soundText": "SND חסום",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 143,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "suspended"
+    }
+  },
+  {
+    "shot": "1920-he-live-ready.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "live",
+    "soundState": "READY",
+    "soundText": "SND פעיל",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 143,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1920-he-error-no-webaudio.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "ERROR",
+    "soundText": "SND שגיאה",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 459,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 0,
+      "engine": "unsupported"
+    }
+  },
+  {
+    "shot": "1920-he-control-closeup-error.png",
+    "viewport": "1920x1080",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "note": "mode cluster only"
+  },
+  {
+    "shot": "1920-en-blocked-initial.png",
+    "viewport": "1920x1080",
+    "lang": "en",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "BLOCKED",
+    "soundText": "SND BLOCKED",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 530,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "suspended"
+    }
+  },
+  {
+    "shot": "1920-en-ready.png",
+    "viewport": "1920x1080",
+    "lang": "en",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND READY",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 530,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1920-en-muted.png",
+    "viewport": "1920x1080",
+    "lang": "en",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "MUTED",
+    "soundText": "SND MUTED",
+    "ariaPressed": "true",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 530,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1920-en-error-no-webaudio.png",
+    "viewport": "1920x1080",
+    "lang": "en",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "ERROR",
+    "soundText": "SND ERROR",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 530,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 0,
+      "engine": "unsupported"
+    }
+  },
+  {
+    "shot": "1920-en-comfort-ready.png",
+    "viewport": "1920x1080",
+    "lang": "en",
+    "density": "comfort",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND READY",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 44,
+    "pageScroll": 640,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1366-he-blocked-initial.png",
+    "viewport": "1366x768",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "BLOCKED",
+    "soundText": "SND חסום",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 1178,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "suspended"
+    }
+  },
+  {
+    "shot": "1366-he-ready.png",
+    "viewport": "1366x768",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND פעיל",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 1178,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1366-he-muted.png",
+    "viewport": "1366x768",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "MUTED",
+    "soundText": "SND מושתק",
+    "ariaPressed": "true",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 1178,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1366-he-resolve-dialog-with-sound-control.png",
+    "viewport": "1366x768",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND פעיל",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 1139,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1366-en-ready.png",
+    "viewport": "1366x768",
+    "lang": "en",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "READY",
+    "soundText": "SND READY",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 1287,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1366-en-muted.png",
+    "viewport": "1366x768",
+    "lang": "en",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "MUTED",
+    "soundText": "SND MUTED",
+    "ariaPressed": "true",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 1287,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "running"
+    }
+  },
+  {
+    "shot": "1366-en-error-no-webaudio.png",
+    "viewport": "1366x768",
+    "lang": "en",
+    "density": "compact",
+    "mode": "demo",
+    "soundState": "ERROR",
+    "soundText": "SND ERROR",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 1287,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 0,
+      "engine": "unsupported"
+    }
+  },
+  {
+    "shot": "1366-he-live-blocked.png",
+    "viewport": "1366x768",
+    "lang": "he",
+    "density": "compact",
+    "mode": "live",
+    "soundState": "BLOCKED",
+    "soundText": "SND חסום",
+    "ariaPressed": "false",
+    "stripChildren": 12,
+    "barHeight": 60,
+    "pageScroll": 789,
+    "cues": {
+      "alert": 0,
+      "danger": 0,
+      "contexts": 1,
+      "engine": "suspended"
+    }
+  }
+]

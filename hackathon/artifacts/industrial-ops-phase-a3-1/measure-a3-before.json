@@ -1,0 +1,682 @@
+[
+  {
+    "name": "1920 he demo",
+    "width": 1920,
+    "height": 1080,
+    "lang": "he",
+    "mode": "demo",
+    "doc": 1539,
+    "pageScroll": 459,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1691,
+      "h": 55
+    },
+    "decision": {
+      "w": 1691,
+      "h": 189
+    },
+    "actionBar": {
+      "w": 1691,
+      "h": 44
+    },
+    "areas": {
+      "w": 281,
+      "h": 536
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 536
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 401
+    },
+    "alerts": {
+      "w": 562,
+      "h": 536
+    },
+    "factors": {
+      "w": 421,
+      "h": 266
+    },
+    "timeline": {
+      "w": 422,
+      "h": 266
+    },
+    "log": {
+      "w": 1126,
+      "h": 261
+    },
+    "targets": {
+      "w": 421,
+      "h": 266
+    },
+    "tracks": {
+      "w": 422,
+      "h": 266
+    },
+    "health": {
+      "w": 562,
+      "h": 261
+    },
+    "alertRowH": 53,
+    "alertRows": 10,
+    "visibleAlerts": 6,
+    "alertsScrollH": 368,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": "13px"
+    }
+  },
+  {
+    "name": "1920 he live",
+    "width": 1920,
+    "height": 1080,
+    "lang": "he",
+    "mode": "live",
+    "doc": 1223,
+    "pageScroll": 143,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1691,
+      "h": 55
+    },
+    "decision": {
+      "w": 1691,
+      "h": 180
+    },
+    "actionBar": {
+      "w": 1691,
+      "h": 44
+    },
+    "areas": {
+      "w": 281,
+      "h": 259
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 259
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 175
+    },
+    "alerts": {
+      "w": 562,
+      "h": 259
+    },
+    "factors": {
+      "w": 421,
+      "h": 251
+    },
+    "timeline": {
+      "w": 422,
+      "h": 251
+    },
+    "log": {
+      "w": 1126,
+      "h": 288
+    },
+    "targets": {
+      "w": 421,
+      "h": 251
+    },
+    "tracks": {
+      "w": 422,
+      "h": 251
+    },
+    "health": {
+      "w": 562,
+      "h": 288
+    },
+    "alertRowH": 53,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 53,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": null
+    }
+  },
+  {
+    "name": "1920 en demo",
+    "width": 1920,
+    "height": 1080,
+    "lang": "en",
+    "mode": "demo",
+    "doc": 1610,
+    "pageScroll": 530,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1691,
+      "h": 55
+    },
+    "decision": {
+      "w": 1691,
+      "h": 210
+    },
+    "actionBar": {
+      "w": 1691,
+      "h": 44
+    },
+    "areas": {
+      "w": 281,
+      "h": 568
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 568
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 401
+    },
+    "alerts": {
+      "w": 562,
+      "h": 568
+    },
+    "factors": {
+      "w": 421,
+      "h": 285
+    },
+    "timeline": {
+      "w": 422,
+      "h": 285
+    },
+    "log": {
+      "w": 1126,
+      "h": 261
+    },
+    "targets": {
+      "w": 421,
+      "h": 285
+    },
+    "tracks": {
+      "w": 422,
+      "h": 285
+    },
+    "health": {
+      "w": 562,
+      "h": 261
+    },
+    "alertRowH": 78,
+    "alertRows": 10,
+    "visibleAlerts": 5,
+    "alertsScrollH": 368,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": "13px"
+    }
+  },
+  {
+    "name": "1920 en live",
+    "width": 1920,
+    "height": 1080,
+    "lang": "en",
+    "mode": "live",
+    "doc": 1222,
+    "pageScroll": 142,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1691,
+      "h": 55
+    },
+    "decision": {
+      "w": 1691,
+      "h": 180
+    },
+    "actionBar": {
+      "w": 1691,
+      "h": 44
+    },
+    "areas": {
+      "w": 281,
+      "h": 258
+    },
+    "feedPanel": {
+      "w": 844,
+      "h": 258
+    },
+    "feedBody": {
+      "w": 820,
+      "h": 175
+    },
+    "alerts": {
+      "w": 562,
+      "h": 258
+    },
+    "factors": {
+      "w": 421,
+      "h": 251
+    },
+    "timeline": {
+      "w": 422,
+      "h": 251
+    },
+    "log": {
+      "w": 1126,
+      "h": 288
+    },
+    "targets": {
+      "w": 421,
+      "h": 251
+    },
+    "tracks": {
+      "w": 422,
+      "h": 251
+    },
+    "health": {
+      "w": 562,
+      "h": 288
+    },
+    "alertRowH": 53,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 53,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": null
+    }
+  },
+  {
+    "name": "1366 he demo",
+    "width": 1366,
+    "height": 768,
+    "lang": "he",
+    "mode": "demo",
+    "doc": 1946,
+    "pageScroll": 1178,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1137,
+      "h": 128
+    },
+    "decision": {
+      "w": 1137,
+      "h": 197
+    },
+    "actionBar": {
+      "w": 1137,
+      "h": 60
+    },
+    "areas": {
+      "w": 567,
+      "h": 219
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 698
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 321
+    },
+    "alerts": {
+      "w": 567,
+      "h": 478
+    },
+    "factors": {
+      "w": 567,
+      "h": 292
+    },
+    "timeline": {
+      "w": 567,
+      "h": 292
+    },
+    "log": {
+      "w": 567,
+      "h": 261
+    },
+    "targets": {
+      "w": 567,
+      "h": 137
+    },
+    "tracks": {
+      "w": 567,
+      "h": 137
+    },
+    "health": {
+      "w": 567,
+      "h": 261
+    },
+    "alertRowH": 53,
+    "alertRows": 10,
+    "visibleAlerts": 5,
+    "alertsScrollH": 310,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": "13px"
+    }
+  },
+  {
+    "name": "1366 he live",
+    "width": 1366,
+    "height": 768,
+    "lang": "he",
+    "mode": "live",
+    "doc": 1557,
+    "pageScroll": 789,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1137,
+      "h": 110
+    },
+    "decision": {
+      "w": 1137,
+      "h": 180
+    },
+    "actionBar": {
+      "w": 1137,
+      "h": 60
+    },
+    "areas": {
+      "w": 567,
+      "h": 157
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 379
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 191
+    },
+    "alerts": {
+      "w": 567,
+      "h": 221
+    },
+    "factors": {
+      "w": 567,
+      "h": 292
+    },
+    "timeline": {
+      "w": 567,
+      "h": 292
+    },
+    "log": {
+      "w": 567,
+      "h": 288
+    },
+    "targets": {
+      "w": 567,
+      "h": 116
+    },
+    "tracks": {
+      "w": 567,
+      "h": 116
+    },
+    "health": {
+      "w": 567,
+      "h": 288
+    },
+    "alertRowH": 53,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 53,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": null
+    }
+  },
+  {
+    "name": "1366 en demo",
+    "width": 1366,
+    "height": 768,
+    "lang": "en",
+    "mode": "demo",
+    "doc": 2055,
+    "pageScroll": 1287,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1137,
+      "h": 128
+    },
+    "decision": {
+      "w": 1137,
+      "h": 273
+    },
+    "actionBar": {
+      "w": 1137,
+      "h": 60
+    },
+    "areas": {
+      "w": 567,
+      "h": 219
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 730
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 321
+    },
+    "alerts": {
+      "w": 567,
+      "h": 510
+    },
+    "factors": {
+      "w": 567,
+      "h": 292
+    },
+    "timeline": {
+      "w": 567,
+      "h": 292
+    },
+    "log": {
+      "w": 567,
+      "h": 261
+    },
+    "targets": {
+      "w": 567,
+      "h": 137
+    },
+    "tracks": {
+      "w": 567,
+      "h": 137
+    },
+    "health": {
+      "w": 567,
+      "h": 261
+    },
+    "alertRowH": 78,
+    "alertRows": 10,
+    "visibleAlerts": 4,
+    "alertsScrollH": 310,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": "13px"
+    }
+  },
+  {
+    "name": "1366 en live",
+    "width": 1366,
+    "height": 768,
+    "lang": "en",
+    "mode": "live",
+    "doc": 1556,
+    "pageScroll": 788,
+    "hOverflow": 0,
+    "strip": {
+      "w": 1137,
+      "h": 110
+    },
+    "decision": {
+      "w": 1137,
+      "h": 180
+    },
+    "actionBar": {
+      "w": 1137,
+      "h": 60
+    },
+    "areas": {
+      "w": 567,
+      "h": 156
+    },
+    "feedPanel": {
+      "w": 567,
+      "h": 378
+    },
+    "feedBody": {
+      "w": 543,
+      "h": 191
+    },
+    "alerts": {
+      "w": 567,
+      "h": 221
+    },
+    "factors": {
+      "w": 567,
+      "h": 292
+    },
+    "timeline": {
+      "w": 567,
+      "h": 292
+    },
+    "log": {
+      "w": 567,
+      "h": 288
+    },
+    "targets": {
+      "w": 567,
+      "h": 116
+    },
+    "tracks": {
+      "w": 567,
+      "h": 116
+    },
+    "health": {
+      "w": 567,
+      "h": 288
+    },
+    "alertRowH": 53,
+    "alertRows": 1,
+    "visibleAlerts": 1,
+    "alertsScrollH": 53,
+    "panelCount": 9,
+    "panelTitles": [
+      "[ AREAS ]",
+      "[ VISUAL FEED ]",
+      "[ OPERATIONAL ALERTS ]",
+      "[ RADAR TARGETS ]",
+      "[ CAMERA TRACKS ]",
+      "[ RISK FACTORS ]",
+      "[ RISK / TIME ]",
+      "[ SYSTEM HEALTH ]",
+      "[ SESSION LOG ]"
+    ],
+    "type": {
+      "panelTitle": "15px",
+      "alertLine1": "13px",
+      "alertLine2": "11px",
+      "areaName": "13px",
+      "logMsg": null
+    }
+  }
+]

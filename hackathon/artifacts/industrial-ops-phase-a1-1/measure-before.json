@@ -1,0 +1,276 @@
+[
+  {
+    "name": "1920 he demo comfort",
+    "lang": "he",
+    "density": "comfort",
+    "mode": "demo",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    },
+    "documentHeight": 1700,
+    "pageScroll": 620,
+    "hOverflow": 0,
+    "alertRowsRendered": 10,
+    "visibleRows": 7,
+    "alertsScrollHeight": 460,
+    "alertsScrollContent": 620,
+    "alertsPanelHeight": 654,
+    "feedBodyHeight": 401,
+    "feedInner": {
+      "top": 401,
+      "bottom": 781,
+      "height": 380
+    },
+    "lowerPanelsStartAt": 965,
+    "areasFullyVisible": true,
+    "alertsFullyVisible": true,
+    "feedFullyVisible": true,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 40,
+    "verticalScrollers": [
+      "io2-area-list",
+      "io2-alerts-scroll"
+    ],
+    "nestedScrollersInsideAlerts": 0
+  },
+  {
+    "name": "1920 he demo compact",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    },
+    "documentHeight": 1672,
+    "pageScroll": 592,
+    "hOverflow": 0,
+    "alertRowsRendered": 10,
+    "visibleRows": 9,
+    "alertsScrollHeight": 512,
+    "alertsScrollContent": 560,
+    "alertsPanelHeight": 692,
+    "feedBodyHeight": 401,
+    "feedInner": {
+      "top": 387,
+      "bottom": 767,
+      "height": 380
+    },
+    "lowerPanelsStartAt": 999,
+    "areasFullyVisible": true,
+    "alertsFullyVisible": true,
+    "feedFullyVisible": true,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 40,
+    "verticalScrollers": [
+      "io2-area-list",
+      "io2-alerts-scroll"
+    ],
+    "nestedScrollersInsideAlerts": 0
+  },
+  {
+    "name": "1920 en demo comfort",
+    "lang": "en",
+    "density": "comfort",
+    "mode": "demo",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    },
+    "documentHeight": 1771,
+    "pageScroll": 691,
+    "hOverflow": 0,
+    "alertRowsRendered": 10,
+    "visibleRows": 5,
+    "alertsScrollHeight": 460,
+    "alertsScrollContent": 760,
+    "alertsPanelHeight": 686,
+    "feedBodyHeight": 401,
+    "feedInner": {
+      "top": 420,
+      "bottom": 800,
+      "height": 380
+    },
+    "lowerPanelsStartAt": 1018,
+    "areasFullyVisible": true,
+    "alertsFullyVisible": true,
+    "feedFullyVisible": true,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 40,
+    "verticalScrollers": [
+      "io2-area-list",
+      "io2-alerts-scroll"
+    ],
+    "nestedScrollersInsideAlerts": 0
+  },
+  {
+    "name": "1920 he live comfort",
+    "lang": "he",
+    "density": "comfort",
+    "mode": "live",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    },
+    "documentHeight": 1250,
+    "pageScroll": 170,
+    "hOverflow": 0,
+    "alertRowsRendered": 1,
+    "visibleRows": 1,
+    "alertsScrollHeight": 59,
+    "alertsScrollContent": 59,
+    "alertsPanelHeight": 258,
+    "feedBodyHeight": 151,
+    "feedInner": {
+      "top": 350,
+      "bottom": 502,
+      "height": 151
+    },
+    "lowerPanelsStartAt": 519,
+    "areasFullyVisible": true,
+    "alertsFullyVisible": true,
+    "feedFullyVisible": true,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 0,
+    "verticalScrollers": [],
+    "nestedScrollersInsideAlerts": 0
+  },
+  {
+    "name": "1366 he demo comfort",
+    "lang": "he",
+    "density": "comfort",
+    "mode": "demo",
+    "viewport": {
+      "w": 1366,
+      "h": 768
+    },
+    "documentHeight": 2163,
+    "pageScroll": 1395,
+    "hOverflow": 0,
+    "alertRowsRendered": 10,
+    "visibleRows": 7,
+    "alertsScrollHeight": 460,
+    "alertsScrollContent": 620,
+    "alertsPanelHeight": 654,
+    "feedBodyHeight": 321,
+    "feedInner": {
+      "top": 469,
+      "bottom": 769,
+      "height": 300
+    },
+    "lowerPanelsStartAt": 1271,
+    "areasFullyVisible": false,
+    "alertsFullyVisible": false,
+    "feedFullyVisible": false,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 40,
+    "verticalScrollers": [
+      "io2-area-list",
+      "io2-alerts-scroll"
+    ],
+    "nestedScrollersInsideAlerts": 0
+  },
+  {
+    "name": "1366 he demo compact",
+    "lang": "he",
+    "density": "compact",
+    "mode": "demo",
+    "viewport": {
+      "w": 1366,
+      "h": 768
+    },
+    "documentHeight": 2011,
+    "pageScroll": 1243,
+    "hOverflow": 0,
+    "alertRowsRendered": 10,
+    "visibleRows": 7,
+    "alertsScrollHeight": 400,
+    "alertsScrollContent": 560,
+    "alertsPanelHeight": 580,
+    "feedBodyHeight": 321,
+    "feedInner": {
+      "top": 451,
+      "bottom": 751,
+      "height": 300
+    },
+    "lowerPanelsStartAt": 1179,
+    "areasFullyVisible": false,
+    "alertsFullyVisible": false,
+    "feedFullyVisible": false,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 40,
+    "verticalScrollers": [
+      "io2-area-list",
+      "io2-alerts-scroll"
+    ],
+    "nestedScrollersInsideAlerts": 0
+  },
+  {
+    "name": "1366 en demo comfort",
+    "lang": "en",
+    "density": "comfort",
+    "mode": "demo",
+    "viewport": {
+      "w": 1366,
+      "h": 768
+    },
+    "documentHeight": 2278,
+    "pageScroll": 1510,
+    "hOverflow": 0,
+    "alertRowsRendered": 10,
+    "visibleRows": 5,
+    "alertsScrollHeight": 460,
+    "alertsScrollContent": 739,
+    "alertsPanelHeight": 686,
+    "feedBodyHeight": 321,
+    "feedInner": {
+      "top": 544,
+      "bottom": 844,
+      "height": 300
+    },
+    "lowerPanelsStartAt": 1379,
+    "areasFullyVisible": false,
+    "alertsFullyVisible": false,
+    "feedFullyVisible": false,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 40,
+    "verticalScrollers": [
+      "io2-area-list",
+      "io2-alerts-scroll"
+    ],
+    "nestedScrollersInsideAlerts": 0
+  },
+  {
+    "name": "1366 he live comfort",
+    "lang": "he",
+    "density": "comfort",
+    "mode": "live",
+    "viewport": {
+      "w": 1366,
+      "h": 768
+    },
+    "documentHeight": 1652,
+    "pageScroll": 884,
+    "hOverflow": 0,
+    "alertRowsRendered": 1,
+    "visibleRows": 1,
+    "alertsScrollHeight": 59,
+    "alertsScrollContent": 59,
+    "alertsPanelHeight": 253,
+    "feedBodyHeight": 151,
+    "feedInner": {
+      "top": 409,
+      "bottom": 560,
+      "height": 151
+    },
+    "lowerPanelsStartAt": 754,
+    "areasFullyVisible": true,
+    "alertsFullyVisible": true,
+    "feedFullyVisible": true,
+    "decisionFullyVisible": true,
+    "dangerNoticeHeight": 0,
+    "verticalScrollers": [],
+    "nestedScrollersInsideAlerts": 0
+  }
+]

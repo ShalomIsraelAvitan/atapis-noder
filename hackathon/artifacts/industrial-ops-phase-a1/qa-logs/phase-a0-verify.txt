@@ -1,0 +1,82 @@
+﻿
+=== 1-4 · identity, deduplication, clearing, reactivation ===
+PASS  01 · 20 polls of the same condition produce exactly one alert  — got 1
+PASS  02 · lastSeenAt advances, firstSeenAt is pinned to first sighting  — first=0 last=19000
+PASS  03 · a condition that stops holding is cleared and keeps its lifecycle  — active=false lifecycle=NEW
+PASS  04a · return inside the reactivation window reuses the same instance  — count=1 reactivations=1
+PASS  04b · return after the window opens a new instance at NEW  — instances=1:ACKNOWLEDGED,2:NEW
+
+=== 5-6 · unknown camera source, no cross-sensor grouping ===
+PASS  05 · camera alerts carry sourceId:null and cameraSourceKnown:false  — camera alerts=1 violating=0
+PASS  05b · no CAM-01/CAM-02 is ever attached to a camera alert
+PASS  06 · camera and radar in one area remain separate alerts with single-source evidence  — sameArea=true distinct=true singleSourceEvidence=true
+PASS  06b · otherActiveEvidenceInArea holds ids only, as unassociated context  — entries=2
+
+=== 7-9 · selection and ordering ===
+PASS  07 · a new DANGER does not steal the selection  — before=AREA-01|camera|behavior|track:7:running#1 after=AREA-01|camera|behavior|track:7:running#1
+PASS  07b · the new DANGER raises hasUnseenDanger instead  — id=AREA-01|camera|weapon|track:8#1
+PASS  08 · DANGER pins to the top of the ordering  — top=danger
+PASS  09 · NEW > ACKNOWLEDGED > IN_REVIEW at equal severity  — a,b,c
+PASS  09b · newest first within the same severity and stage
+PASS  09c · RESOLVED is never chosen as the default selection
+
+=== 10 · lifecycle transitions ===
+PASS  10a · acknowledge moves NEW -> ACKNOWLEDGED
+PASS  10b · start review takes session-local ownership
+PASS  10c · resolve records a reason
+PASS  10d · reopen with a known owner returns to IN_REVIEW
+PASS  10e · reopen without an owner returns to ACKNOWLEDGED
+PASS  10f · acknowledging twice is a no-op
+PASS  10g · an unknown resolve reason is rejected
+PASS  10h · lifecycle helpers tolerate a missing alert
+PASS  10i · acting on an unknown id leaves the state untouched
+
+=== 11-14 · persistence ===
+PASS  11 · a simulated refresh preserves lifecycle and ownership  — lifecycle=IN_REVIEW
+PASS  11b · selection and last camera choice survive the round trip
+PASS  11c · restored alerts still declare themselves session-local and unpersisted
+PASS  12 · corrupt or malformed stored state falls back to null instead of throwing
+PASS  12b · loadState survives unparseable storage
+PASS  12c · unusable entries are dropped without failing the restore  — kept=1
+PASS  13 · a stored state from an older schema version is discarded, not migrated blindly
+PASS  13b · loadState returns null for the old schema
+PASS  14 · demo state is never restored into a live session
+PASS  14b · demo state restores inside a demo session
+PASS  14c · serialized state records its mode and schema version
+
+=== 15-17 · honesty constraints ===
+PASS  15 · live alert data contains no association vocabulary
+PASS  15d · every "fused risk" mention carries its backend attribution
+PASS  15b · no alert carries pair, association or fused fields
+PASS  15c · demo alert data contains no association vocabulary either
+PASS  15e · demo data holds the same attribution rule
+PASS  16 · live is a single declared area  — areas=1
+PASS  16b · the live area maps exactly the two real camera sources  — webcam,dahua -> CAM-01,CAM-02
+PASS  16c · the live area declares exactly one radar
+PASS  16d · no primary camera is invented where no source of truth exists
+PASS  16e · camera id lookup is a declared mapping, not a guess
+PASS  17 · no speculative area names exist in the live configuration
+PASS  17b · every area declares its own provenance
+PASS  17c · multiple areas exist only in demo  — demo areas=3
+
+=== 18-19 · selectors, counts and search ===
+PASS  18 · lifecycle counts match the underlying data  — {"counts":{"N":5,"A":3,"R":2,"D":2},"manual":{"NEW":5,"ACKNOWLEDGED":3,"IN_REVIEW":2,"RESOLVED":2}}
+PASS  18b · ALL_ACTIVE = NEW + ACKNOWLEDGED + IN_REVIEW  — 10 vs 10
+PASS  18c · picking a lifecycle tab does not zero the other tabs' counts  — resolved=2 active=10
+PASS  18d · ALL_ACTIVE excludes RESOLVED  — shown=10
+PASS  18e · area filter
+PASS  18f · source-type filter
+PASS  18g · severity filter
+PASS  18h · activity filter separates cleared conditions from lifecycle
+PASS  19 · search finds an Alert ID
+PASS  19b · search finds a Track ID  — hits=1
+PASS  19c · search finds a Target ID  — hits=1
+PASS  19d · search matches an area name, case-insensitively
+PASS  19e · search is case-insensitive
+PASS  19f · a blank query filters nothing
+
+=== 20 · the engine stays private to Industrial Ops ===
+PASS  20 · no module outside industrial-ops imports the alert engine
+PASS  20b · the alert engine takes an injected clock and never reads Date.now()
+
+ALL PASS  —  64 passed, 0 failed

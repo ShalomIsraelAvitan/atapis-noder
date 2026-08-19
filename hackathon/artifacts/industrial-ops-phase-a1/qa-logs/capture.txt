@@ -1,0 +1,42 @@
+﻿1920x1080:
+  final/ops-he-live-1920x1080.png
+  final/ops-he-demo-1920x1080.png
+  final/ops-en-live-1920x1080.png
+  final/ops-en-demo-1920x1080.png
+  states/ops-safe-demo-1920x1080.png
+  states/ops-alert-demo-1920x1080.png
+  states/ops-danger-demo-1920x1080.png
+  states/ops-multizone-demo-1920x1080.png
+  states/ops-many-alerts-demo-1920x1080.png
+  states/ops-lifecycle-filter-new-1920x1080.png
+  states/ops-lifecycle-filter-resolved-1920x1080.png
+  states/ops-search-1920x1080.png
+  states/ops-no-active-alerts-1920x1080.png
+  states/ops-selected-camera-alert-unknown-source-1920x1080.png
+  states/ops-selected-radar-alert-1920x1080.png
+  states/ops-keyboard-focus-1920x1080.png
+  states/ops-new-danger-notice-1920x1080.png
+  proof/ops-all-cameras-zero-feeds-1920x1080.png
+  proof/ops-radar-tab-zero-camera-feeds-1920x1080.png
+  states/ops-camera-unavailable-live-1920x1080.png
+  states/ops-radar-disconnected-live-1920x1080.png
+1366x768:
+  final/ops-he-live-1366x768.png
+  final/ops-he-demo-1366x768.png
+  final/ops-en-live-1366x768.png
+  final/ops-en-demo-1366x768.png
+  states/ops-danger-demo-1366x768.png
+  states/ops-many-alerts-demo-1366x768.png
+  states/ops-no-active-alerts-1366x768.png
+  states/ops-camera-unavailable-live-1366x768.png
+  states/ops-radar-tab-live-1366x768.png
+regression:
+  regression/fusion-prime-regression-after-a1.png
+  regression/minimal-regression-after-a1.png
+  regression/sentinel-regression-after-a1.png
+  regression/neural-regression-after-a1.png
+
+feed accounting:
+  camera streams opened while ALL CAMERAS was shown : 0
+  camera streams opened while RADAR was shown       : 0
+  total /video_feed/ requests during the tab sweep  : 0
