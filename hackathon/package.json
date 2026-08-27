@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "demo": "vite --mode demo --open /concepts/industrial/dashboard?demo=1",
     "build": "vite build",
+    "build:demo": "vite build --mode demo",
     "lint": "eslint .",
     "preview": "vite preview"
   },

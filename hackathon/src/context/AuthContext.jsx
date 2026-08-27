@@ -4,8 +4,25 @@ const AuthContext = createContext(null)
 
 const API_BASE = 'http://localhost:5000/api'
 
+const demoAccessEnabled = import.meta.env.VITE_DEMO_ACCESS === 'true'
+
+function isDemoRequest() {
+  if (!demoAccessEnabled || typeof window === 'undefined') return false
+  const params = new URLSearchParams(window.location.search)
+  return params.get('demo') === '1' || params.get('demo') === 'true'
+}
+
+const DEMO_USER = Object.freeze({
+  id: 'demo-operator',
+  username: 'demo',
+  role: 'operator',
+  email: '',
+  isDemo: true,
+})
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
+    if (isDemoRequest()) return DEMO_USER
     // Try to load from localStorage on mount
     try {
       const savedUser = localStorage.getItem('user')
@@ -19,6 +36,7 @@ export function AuthProvider({ children }) {
     return null
   })
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (isDemoRequest()) return true
     try {
       return localStorage.getItem('isAuthenticated') === 'true'
     } catch (e) {
@@ -30,6 +48,10 @@ export function AuthProvider({ children }) {
 
   // Load users from API on mount
   useEffect(() => {
+    if (isDemoRequest()) {
+      setLoading(false)
+      return
+    }
     fetchUsers()
   }, [])
 
