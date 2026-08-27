@@ -37,9 +37,8 @@ npm run dev
 # פתיחת הדפדפן
 http://localhost:5173/
 
-כניסה (login) עבור בדיקות:
-- Username: admin
-- Password: Aa123456
+כניסה חיה דורשת משתמש שנוצר מקומית ב-Backend. אין לפרסם או לשתף סיסמת
+ברירת-מחדל. להרצת ה-demo ללא Backend וללא פרטי התחברות, ראו README בשורש.
 
 3) בדיקת הזרם וה-API מהרצת הדפדפן
 - וודא שה-Backend רץ (פורט 5000) וה-Frontend רץ (פורט 5173).
@@ -113,13 +112,13 @@ Stop-Process -Id <PID>
 PowerShell network test:
 
 ```powershell
-Test-NetConnection 194.3.195.20 -Port 554
+Test-NetConnection <camera-host> -Port 554
 ```
 
 VLC test URL:
 
 ```text
-rtsp://shalom:shalom123%21@194.3.195.20:554/cam/realmonitor?channel=1&subtype=1
+rtsp://<username>:<password>@<camera-host>:554/cam/realmonitor?channel=1&subtype=1
 ```
 
 Run backend:
